@@ -4,6 +4,11 @@ import java.util.ArrayList;
 public class SubProgramChair implements Serializable {
 
 	/**
+	 * Serial Version ID for persistent storage use.
+	 */
+	private static final long serialVersionUID = -7924787836896189243L;
+
+	/**
 	 * String representation the first name of the Sub Program Chair.
 	 */
 	private String myFirstName;
