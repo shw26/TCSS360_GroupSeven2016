@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  */
 public class User {
-	//public Conference;
+	public Conference theConf;
 	List confList = new List();
 	public String firstName;
 	public String lastName;
