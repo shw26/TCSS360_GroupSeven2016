@@ -54,6 +54,7 @@ public class ProgramChair implements Serializable {
 	/**
 	 * Constructor for the Program Chair Class.
 	 * 
+	 * @author Jeremy Wolf
 	 * @param theFirst string for the First Name.
 	 * @param theLast String for the Last Name.
 	 * @param theID String for the ID
@@ -73,6 +74,7 @@ public class ProgramChair implements Serializable {
 	}
 	/**
 	 * Displays the Menu options for the Program Chair.
+	 * @author Jeremy Wolf
 	 */
 	public void pcMenu() {
 		int selection = -1;
@@ -121,6 +123,7 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * Allows the Program Chair to select SubProgram Chairs
+	 * @author Jeremy Wolf
 	 */
 	private void designateSC() {
 
@@ -158,6 +161,7 @@ public class ProgramChair implements Serializable {
 	}
 	/**
 	 * Allows the Program Chair to make the final decision on a paper.
+	 * @author Jeremy Wolf
 	 */
 	private void makeFinal() {
 		int optionCounter = 1;
@@ -197,6 +201,7 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * Displays the papers assigned to each Sub program Chair.
+	 * @author Jeremy Wolf
 	 */
 	private void viewSCPapers() {
 		for (SubProgramChair temp: mySubList) {
@@ -209,6 +214,7 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * Private helper method that displays all registered users to the console.
+	 * @author Jeremy Wolf
 	 */
 	private void displayUsers() {
 		
