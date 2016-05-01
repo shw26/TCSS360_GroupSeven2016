@@ -1,13 +1,12 @@
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
  *
  */
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Program Chair class.
@@ -72,7 +71,9 @@ public class ProgramChair implements Serializable {
 		mySubList = theSCs;
 		
 	}
-	
+	/**
+	 * Displays the Menu options for the Program Chair.
+	 */
 	public void pcMenu() {
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
@@ -136,8 +137,8 @@ public class ProgramChair implements Serializable {
 			selection = scanner.nextInt();
 		
 			tempUser = myUserList.get(selection - 1);
-			tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(), 
-					tempUser.getID(), myUserList);
+			tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
+										 tempUser.getID(), myUserList);
 		
 
 			while (selection != 0 || paperCounter >= 4) {
@@ -180,8 +181,8 @@ public class ProgramChair implements Serializable {
 		paperTemp = myPaperList.get(selection - 1);
 		
 		// Displays Options
-		System.out.println("Select Recommendation:");
-		System.out.println("1) Recommend");
+		System.out.println("Select Final Decision:");
+		System.out.println("1) Accept");
 		System.out.println("2) Deny");
 		System.out.println("0) Back");
 	
