@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
@@ -8,8 +9,12 @@ import java.util.Scanner;
  * @version 1.0, 05/01/2016
  *
  */
-public class Review {
+public class Review implements Serializable{
 
+	/**
+	 * This is the serialized generated ID.
+	 */
+	private static final long serialVersionUID = -374717804308411534L;
 	/* The name of the paper being reviewed */
 	public String theName;
 	/* A numerical rating that the reviewer will leave for the author. */
@@ -35,22 +40,52 @@ public class Review {
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Reviewer \n");
+			System.out.println("Role: Reviewer");
+			System.out.println("Paper: "+ theName + "\n");
 		
 			System.out.println("Make a Selection: ");
-			System.out.println("1) View Papers");
-			System.out.println("2) Review a Paper");
+			System.out.println("1) Type Review");
+			System.out.println("2) Rate Paper");
 			System.out.println("0) Back\n");
 			System.out.println("___________________________________________________");
 			
 			selection = scanner.nextInt();
 			
 			if(selection == 1) {
-				viewPapers();
+				typeReview();
 			} else if (selection == 2) {
-				submitReview();
-			} 
+				rate();
+			}
+			else {
+				return;
+				//return to the previous menu somehow.
+			}
 		}
+	}
+	/**
+	 * Method to type the review of the paper.
+	 */
+	private void typeReview(){
+		String text = null;
+		Scanner scannerRev = new Scanner(System.in);
+		
+		System.out.println("Enter your review for " + theName);
+		text = scannerRev.nextLine();
+		setComment(text);
+		// return to the previous menu somehow.
+	}
+	/**
+	 * Method to change the rating fo the paper.
+	 */
+	private void rate(){
+		int selection = -1;
+		Scanner scannerRate = new Scanner(System.in);
+		while(selection != 0) {
+			System.out.println("Select your numerical rating for "+ theName);
+			selection = scannerRate.nextInt();
+			setRateing(selection);
+		}
+		//return to the previous menu somehow.
 	}
 	/**
 	 * This method returns the conference name.
@@ -71,7 +106,7 @@ public class Review {
 	 * The Program Chair will use this method to view the rateing. 
 	 * @return theRateing
 	 */
-	public int getRating(){
+	public int getRateing(){
 		return theRateing;
 	}
 	/**
@@ -92,7 +127,7 @@ public class Review {
 	 * When the reviewer desires to set a rating they will call this method.
 	 * @param rateing
 	 */
-	public void setRating(int rateing){
+	public void setRateing(int rateing){
 		theRateing = rateing;
 	}
 	/**
