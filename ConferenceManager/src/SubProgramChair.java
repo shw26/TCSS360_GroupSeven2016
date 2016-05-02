@@ -68,6 +68,7 @@ public class SubProgramChair implements Serializable {
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
+		myUsers = theList;
 		myPaperList = new ArrayList<Paper>();
 		myRevList = new ArrayList<Reviewer>();	
 	}
@@ -76,21 +77,21 @@ public class SubProgramChair implements Serializable {
 	 * Displays the Menu options for the Sub-Program Chair.
 	 * @author Jeremy Wolf
 	 */
-	public void pcMenu() {
+	public void scMenu() {
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Sub-Program Chair \n\n\n");
+			System.out.println("Role: Sub-Program Chair \n");
 		
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit a Recommendation");
 			System.out.println("2) Assign Reviewer to a paper");
-			System.out.println("0) Back\n\n");
-			System.out.println("___________________________________________________");
+			System.out.println("0) Back\n");
+		
 			
 			selection = scanner.nextInt();
-			
+			System.out.println("___________________________________________________ \n");
 			if(selection == 1) {
 				submitRecommendation();
 			} else if (selection == 2) {
@@ -110,13 +111,13 @@ public class SubProgramChair implements Serializable {
 		Paper tempPaper = null;
 		Scanner scanner = new Scanner(System.in);
 		
+		System.out.println("Select a paper to make a recommendation:");
+		
 		for (Paper printPaper: myPaperList ) {
 			System.out.print(optionCounter + ") ");
 			System.out.print(printPaper.getTitle()+ "\n");
 			optionCounter++;
 		}
-		
-		System.out.println("Select a paper to make a recommendation:");
 		
 		selection = scanner.nextInt();
 		if (selection != 0) {
@@ -135,6 +136,7 @@ public class SubProgramChair implements Serializable {
 			} else if (selection == 2) {
 				tempPaper.setRecommendation(false);
 			}
+			System.out.println("___________________________________________________ \n");
 		}
 	}
 	
@@ -152,26 +154,30 @@ public class SubProgramChair implements Serializable {
 		
 		Scanner scanner = new Scanner(System.in);
 		
+		System.out.println("Select a Paper to be Reviewed");
+		
 		for (Paper printPaper: myPaperList ) {
 			System.out.print(optionCounter + ") ");
 			System.out.print(printPaper.getTitle()+ "\n");
 			optionCounter++;
 		}
-		System.out.println("0) Back");
+		System.out.println("0) Back\n");
 		selection = scanner.nextInt();
+		System.out.println("___________________________________________________ \n");
 		
 		if (selection != 0) {
-			tempPaper = myPaperList.get(selection -1);
+			tempPaper = myPaperList.get(selection - 1);
 			authorID = tempPaper.getAuthorID();
 			
-			optionCounter = 1;
+			
 			while(selection != 0) {
-				
+				optionCounter = 1;
 				for (User tempUser: myUsers) {
-					// Will not allow the 
+					// Will not allow the author of a paper to be assigned as the reviewer.
 					if (!tempUser.getID().equals(authorID)) {
 						System.out.print(optionCounter + ") ");
 						System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
+						optionCounter++;
 					}
 				}
 				System.out.println("0) Back"); 
@@ -183,21 +189,31 @@ public class SubProgramChair implements Serializable {
 				if (selection != 0) {
 					//If the list is empty then a reviewer is added.
 					if(myRevList.isEmpty()) {
+						System.out.println(userTemp.getFirst() + " " + 
+											userTemp.getLast() + " has been assigned as a reviewer "
+													+ "and the paper has been assigned");
 						Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
 							           userTemp.myLast, userTemp.getID());
 						myRevList.add(tempRev);
 					//If the list is not empty the contents must be check to avoid duplication.	
 					} else {
 						boolean isPresent = false;
+						System.out.println("Size of list " + myRevList.size());
 						for (Reviewer rev : myRevList) {
 							if (rev.getID().equals(userTemp.getID())) {
-								rev.addPaper();
+								rev.addPaper(tempPaper);
+								System.out.println("The paper has been assigned to " +
+													userTemp.getFirst() + " " + 
+													userTemp.getLast());
 								isPresent = true;
 								break;
 							}
 						}
 						//If the User is not already a reviewer a new reviewer is created.
 						if (!isPresent) {
+							System.out.println(userTemp.getFirst() + " " + 
+									userTemp.getLast() + " has been assigned as a reviewer and teh paper "
+											+ "has been assigned");
 							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
 							           userTemp.myLast, userTemp.getID());
 							myRevList.add(tempRev);
@@ -243,6 +259,19 @@ public class SubProgramChair implements Serializable {
 	 */
 	public String getLast() {
 		return myLastName;
+	}
+	
+	public ArrayList<User> getList() {
+		return myUsers;
+	}
+	
+	/**
+	 * Getter method for the myID field
+	 * @author Jeremy Wolf
+	 * @return the String myID
+	 */
+	public String getID() {
+		return myID;
 	}
 }
 

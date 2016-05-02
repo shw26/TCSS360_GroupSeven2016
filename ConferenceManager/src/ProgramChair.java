@@ -226,4 +226,12 @@ public class ProgramChair implements Serializable {
 		}
 	}
 	
+	/**
+	 * Getter method for the myID field
+	 * @author Jeremy Wolf
+	 * @return the String myID
+	 */
+	public String getID() {
+		return myID;
+	}
 }

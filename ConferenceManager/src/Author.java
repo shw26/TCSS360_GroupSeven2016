@@ -9,18 +9,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Reviewer class. This role can review papers.
+ * Author class. This role can review papers.
  * 
  * @author Jeremy Wolf
  * @version v1 5/1/2016
  */
-
-public class Reviewer implements Serializable{
-
+public class Author implements Serializable{
 	/**
 	 * Serial Version ID for persistent storage use.
 	 */
-	private static final long serialVersionUID = -6833321289334518369L;
+	private static final long serialVersionUID = 4146907723807800178L;
 
 	/**
 	 * String representation the first name of the Sub Program Chair.
@@ -43,15 +41,14 @@ public class Reviewer implements Serializable{
 	private ArrayList<Paper> myPaperList;
 	
 	/**
-	 * Constructor for the Reviewer.
+	 * Constructor for the Author.
 	 * 
 	 * @author Jeremy Wolf
 	 * @param theFirst string for the First Name.
 	 * @param theLast String for the Last Name.
 	 * @param theID String for the ID
 	 */
-	public Reviewer(String theFirst, String theLast, String theID) {
-		
+	public Author(String theFirst, String theLast, String theID) {
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
@@ -59,10 +56,10 @@ public class Reviewer implements Serializable{
 	}
 	
 	/**
-	 * Displays the Menu options for the Reviewer.
+	 * Displays the Menu options for the Author.
 	 * @author Jeremy Wolf
 	 */
-	public void reviewerMenu() {
+	public void authorMenu() {
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -70,83 +67,68 @@ public class Reviewer implements Serializable{
 			System.out.println("Role: Reviewer \n");
 		
 			System.out.println("Make a Selection: ");
-			System.out.println("1) View Papers");
-			System.out.println("2) Review a Paper");
+			System.out.println("1) Submit");
+			System.out.println("2) un-Submit");
+			System.out.println("3) resubmit");
 			System.out.println("0) Back\n");
 			System.out.println("___________________________________________________");
 			
 			selection = scanner.nextInt();
 			
+			
+			
 			if(selection == 1) {
-				viewPapers();
+				// FIX THIS SOOOOOOOON+++++++++++++++++++++++
+			    Paper temp = new Paper("this is the title");
+				submit(temp);
 			} else if (selection == 2) {
-				submitReview();
-			} 
+				// Finish this!!!!
+				Paper temp = myPaperList.get(selection - 1);
+				unsubmit(temp);
+			} else if (selection == 3) {
+				Paper temp = myPaperList.get(selection - 1);
+				edit(temp);
+			}
 		}
 	}
-	
 	/**
-	 * Allows the Reviewer to submit a review
+	 * Allows an author to submit a paper.
 	 * @author Jeremy Wolf
+	 * @param thePaper the Paper that is being submitted.
 	 */
-	private void submitReview() {
-		int optionCounter = 1;
-		int selection = -1;
-		Paper tPaper = null;
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.println("Select a Paper to be Reviewed:");
-		
-		// Displays the papers to the console 
-		for (Paper tempPaper : myPaperList) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(tempPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		
-		// User selects paper to be reviewed.
-		selection = scanner.nextInt();
-		
-		// Creates the Review object.
-		if (selection != 0) {
-			tPaper = myPaperList.get(selection - 1);
-	//		Review currentReview = new Review(myID);
-	//		currentReview.reviewMenu();
-
-		}
+	public void submit(Paper thePaper) {
+	
 	}
 	
 	/**
-	 * Getter method for the myID field
+	 * Allows an author to removed a paper.
 	 * @author Jeremy Wolf
-	 * @return the String myIDs
+	 * @param thePaper the Paper that is being removed.
 	 */
-	public String getID() {
-		return myID;
-	}
-	
-	/**
-	 * Method displays an option number and the title of each paper to be
-	 * displayed to the console.
-	 * @author Jeremy Wolf
-	 */
-	private void viewPapers() {
-		int optionCounter = 1;
+	public void unsubmit(Paper thePaper) {
 		
-		for (Paper printPaper: myPaperList ) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(printPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		System.out.println("0) Back");
 	}
 	
 	/**
-	 * Adds a paper to be reviewed.
+	 * Allows an author to resubmit a paper.
 	 * @author Jeremy Wolf
+	 * @param thePaper the Paper that is being resubmit.
+	 */
+	public void edit(Paper thePaper) {
+		
+	}
+	
+	/**
+	 * Adds the paper to be submitted to the list of papers the author has.
+	 * @author Jeremy Wolf
+	 * @param thePaper the paper to be added.
 	 */
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
-		
-	}
+}
+	
+	
+	
+	
+	
 }
