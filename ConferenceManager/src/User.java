@@ -10,7 +10,36 @@ import java.util.ArrayList;
  * @version 1.0, 05/01/2016
  *
  */
+<<<<<<< HEAD
+=======
+public class User {
+	
+	String myfirst;
+	String myLast;
+	String myID;
+	
+	
+	public User(String firstname, String secondname, String ID) {
+	myfirst = firstname;
+	myLast = secondname;
+	myID = ID;
+	}
+	
+	public String getFirst() {
+		return myfirst;
+	}
+	
+	public String getLast() {
+		return myLast;
+	}
+	
+	public String getID() {
+		return myID;
+	
+	}
+>>>>>>> refs/heads/master2
 
+<<<<<<< HEAD
 public class User implements Serializable{
 	/**
 	 * Serial ID.
@@ -70,3 +99,12 @@ public class User implements Serializable{
 	}
 	
 }
+=======
+	public void addPaper(Paper tempPaper) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+	
+>>>>>>> refs/heads/master2
