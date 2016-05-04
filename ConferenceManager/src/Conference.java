@@ -27,7 +27,7 @@ public class Conference implements Serializable{
 	/**
 	 * the list of subprogram chairs of the conference.
 	 */
-	public ArrayList<SubprogramChair> mySubprogramChairs;
+	public ArrayList<SubProgramChair> mySubProgramChairs;
 	/**
 	 * the list of reviewers of the conference.
 	 */
@@ -48,7 +48,7 @@ public class Conference implements Serializable{
 	/**
 	 * if the user is a SC, then this will hold the info.
 	 */
-	public SubprogramChair myCurrentSC;
+	public SubProgramChair myCurrentSC;
 	/**
 	 * if the user is a Reviewer, then this will hold the info.
 	 */
@@ -63,7 +63,7 @@ public class Conference implements Serializable{
 	 * @param theUser
 	 */
 	public Conference(User theUser) {
-		mySubprogramChairs = new ArrayList<SubprogramChair>();
+		mySubProgramChairs = new ArrayList<SubProgramChair>();
 		myPapers = new ArrayList<Paper>();
 		myReviewers = new ArrayList<Reviewer>();
 		myAuthors = new ArrayList<Author>();
@@ -86,12 +86,12 @@ public class Conference implements Serializable{
 	 * @param theAuthors  the list of Authors
 	 * @param thePapers  the list of Papers
 	 */
-	public Conference(ProgramChair theProgramChair, ArrayList<SubprogramChair> theSubprogramChairs,
+	public Conference(ProgramChair theProgramChair, ArrayList<SubProgramChair> theSubprogramChairs,
 			ArrayList<Reviewer> theReviewers, ArrayList<Author> theAuthors,
 			ArrayList<Paper> thePapers){
 		
 		myProgramChair = theProgramChair;
-		mySubprogramChairs = theSubprogramChairs;
+		mySubProgramChairs = theSubprogramChairs;
 		myPapers = thePapers;
 		myReviewers = theReviewers;
 		myAuthors = theAuthors;
@@ -113,15 +113,15 @@ public class Conference implements Serializable{
 			myCurrentPC = myProgramChair;
 		}
 		
-		for(int i = 0; i < mySubprogramChairs.size(); i++){
-			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
-				myCurrentSC = mySubprogramChairs.get(i);
+		for(int i = 0; i < mySubProgramChairs.size(); i++){
+			if(mySubProgramChairs.get(i).getID() == theUser.getID()){
+				myCurrentSC = mySubProgramChairs.get(i);
 			}
 		}
 		
-		for(int i = 0; i < mySubprogramChairs.size(); i++){
-			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
-				myCurrentSC = mySubprogramChairs.get(i);
+		for(int i = 0; i < mySubProgramChairs.size(); i++){
+			if(mySubProgramChairs.get(i).getID() == theUser.getID()){
+				myCurrentSC = mySubProgramChairs.get(i);
 				break;
 			}
 		}
@@ -184,7 +184,7 @@ public class Conference implements Serializable{
 			myCurrentReviewer.reviewerMenu();
 		}
 		if(selection == 4){
-			myCurrentAuthor.AuthorMenu();
+			myCurrentAuthor.authorMenu();
 		}
 		if(selection == 5){
 			submitPaper();
@@ -229,7 +229,7 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-	public SubprogramChair getSC(){
+	public SubProgramChair getSC(){
 		return myCurrentSC;
 	}
 	/**
@@ -266,8 +266,8 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-	public void setSCList(ArrayList<SubprogramChair> theSCList){
-		mySubprogramChairs = theSCList;
+	public void setSCList(ArrayList<SubProgramChair> theSCList){
+		mySubProgramChairs = theSCList;
 	}
 	/**
 	 * setter for Reviewer list.
@@ -312,8 +312,8 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-	public ArrayList<SubprogramChair> getSCList(){
-		return mySubprogramChairs;	
+	public ArrayList<SubProgramChair> getSCList(){
+		return mySubProgramChairs;	
 	}
 	/**
 	 * getter for Reviewer List.
