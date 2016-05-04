@@ -3,9 +3,6 @@
 
 public class Paper {
 
-	
-	
-	
 	public boolean getRecommendation() {
 		return true;
 	}
