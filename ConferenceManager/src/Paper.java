@@ -8,6 +8,7 @@ import java.util.List;
  * @version 1 : 5/1/16
  */
 public class Paper {
+<<<<<<< HEAD
 	// -- Fields --
 	
 	/** The contact author of the paper. **/
@@ -113,4 +114,26 @@ public class Paper {
 	public boolean getFinal() {
 		return this.myFinal;
 	}
+=======
+
+	public boolean getRecommendation() {
+		return true;
+	}
+	
+	public String getTitle() {
+		return "This is the book name";
+	}
+	
+	public void setFinal(boolean theD) {
+		
+	}
+	
+	public void setRecommendation(boolean theD) {}
+
+	public String getAuthorID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+>>>>>>> refs/heads/Jeremy
 }
