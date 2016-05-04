@@ -113,4 +113,5 @@ public class Paper {
 	public boolean getFinal() {
 		return this.myFinal;
 	}
+
 }
