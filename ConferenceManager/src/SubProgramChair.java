@@ -167,7 +167,7 @@ public class SubProgramChair implements Serializable {
 		
 		if (selection != 0) {
 			tempPaper = myPaperList.get(selection - 1);
-			authorID = tempPaper.getAuthorID();
+			authorID = tempPaper.getAuthor();
 			
 			
 			while(selection != 0) {
@@ -193,7 +193,7 @@ public class SubProgramChair implements Serializable {
 											userTemp.getLast() + " has been assigned as a reviewer "
 													+ "and the paper has been assigned");
 						Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.myLast, userTemp.getID());
+							           userTemp.getLast(), userTemp.getID());
 						myRevList.add(tempRev);
 					//If the list is not empty the contents must be check to avoid duplication.	
 					} else {
@@ -215,7 +215,7 @@ public class SubProgramChair implements Serializable {
 									userTemp.getLast() + " has been assigned as a reviewer and teh paper "
 											+ "has been assigned");
 							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.myLast, userTemp.getID());
+							           userTemp.getLast(), userTemp.getID());
 							myRevList.add(tempRev);
 						}
 					}

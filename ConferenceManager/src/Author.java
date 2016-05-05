@@ -40,6 +40,8 @@ public class Author implements Serializable{
 	 */
 	private ArrayList<Paper> myPaperList;
 	
+	private Conference myConference;
+	
 	/**
 	 * Constructor for the Author.
 	 * 
@@ -48,11 +50,12 @@ public class Author implements Serializable{
 	 * @param theLast String for the Last Name.
 	 * @param theID String for the ID
 	 */
-	public Author(String theFirst, String theLast, String theID) {
+	public Author(String theFirst, String theLast, String theID, Conference theConference) {
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
 		myPaperList = new ArrayList<Paper>();
+		myConference = theConference;
 	}
 	
 	/**
@@ -64,7 +67,7 @@ public class Author implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Reviewer \n");
+			System.out.println("Role: Author \n");
 		
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit");
@@ -75,47 +78,32 @@ public class Author implements Serializable{
 			
 			selection = scanner.nextInt();
 			
-			
-			
 			if(selection == 1) {
-				// FIX THIS SOOOOOOOON+++++++++++++++++++++++
-			    Paper temp = new Paper("this is the title");
-				submit(temp);
+			    Paper temp = new Paper(myID);
 			} else if (selection == 2) {
-				// Finish this!!!!
-				Paper temp = myPaperList.get(selection - 1);
-				unsubmit(temp);
+				unsubmit();
 			} else if (selection == 3) {
-				Paper temp = myPaperList.get(selection - 1);
-				edit(temp);
+				edit();
 			}
 		}
-	}
-	/**
-	 * Allows an author to submit a paper.
-	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being submitted.
-	 */
-	public void submit(Paper thePaper) {
-	
 	}
 	
 	/**
 	 * Allows an author to removed a paper.
 	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being removed.
 	 */
-	public void unsubmit(Paper thePaper) {
-		
+	public void unsubmit() {
+		Paper tempPaper = myPaperList.get(displayPapers());
+		myPaperList.remove(tempPaper);
 	}
 	
 	/**
 	 * Allows an author to resubmit a paper.
 	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being resubmit.
-	 */
-	public void edit(Paper thePaper) {
-		
+	 */ 
+	public void edit() {
+		Paper tempPaper = myPaperList.get(displayPapers());
+		tempPaper.edit();
 	}
 	
 	/**
@@ -126,6 +114,32 @@ public class Author implements Serializable{
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
 }
+
+	/**
+	 * Getter method for myID	
+	 * @author Jeremy Wolf	
+	 * @return myID
+	 */
+	public String getID() {
+		return myID;
+	}
+	
+	private int displayPapers() {
+		
+		
+		Scanner scanner = new Scanner(System.in);
+		int optionCounter = 1;
+		int selection = -1;
+		
+		System.out.println("Role: Author \n");
+		for (Paper tempPaper: myPaperList) {
+			System.out.print(optionCounter + ") ");
+			System.out.println(tempPaper.getTitle());	
+		}
+		System.out.println("0) Back");
+		return selection = scanner.nextInt();
+	}
+
 	
 	
 	
