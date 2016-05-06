@@ -113,23 +113,6 @@ public class User implements Serializable{
 	public String getLast(){
 		return myLast;
 	}
-	/**
-	 * Getter method for the last name field.
-	 * 
-	 * @return theLastName
-	 */
-	public String getLast(){
-		return theLastName;
-	}
-	
-	/**
-	 * Getter Method for the last name.
-	 * 
-	 * @return theFirstName
-	 */
-	public String getFirst(){
-		return theFirstName;
-	}
 	
 	/**
 	 * 
