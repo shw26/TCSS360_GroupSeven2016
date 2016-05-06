@@ -1,6 +1,6 @@
-import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * 
@@ -17,9 +17,9 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = -7767643624559317435L;
 	public Conference theConf;
-	List confList = new List();
-	public String theFirstName;
-	public String theLastName;
+	ArrayList<Conference> confList = new ArrayList<Conference>();
+	public String myFirst;
+	public String myLast;
 	public String myID;
 	
 	/**
@@ -29,16 +29,62 @@ public class User implements Serializable{
 	 * @param id
 	 */
 	public User(String firstName, String lastName, String id){
-		theFirstName = firstName;
-		theLastName = lastName;
+		myFirst = firstName;
+		myLast = lastName;
 		myID = id;
 	}
 	/**
 	 * The menu that the user will see to log in.
 	 */
 	public void userMenu() {
-		// TODO Auto-generated method stub
+		int selection = -1;
+		Scanner scanner = new Scanner(System.in);
 		
+		while(selection != 0) {
+			System.out.println("Welcome! Please sign in. \n");
+		
+			System.out.println("Make a Selection: ");
+			System.out.println("1) Log In");
+			System.out.println("2) Register");
+			
+			selection = scanner.nextInt();
+			System.out.println("___________________________________________________ \n");
+			if(selection == 1) {
+				logIn();
+			} else if (selection == 2) {
+				register();
+			}
+		}
+		
+	}
+	private void logIn(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter your system ID: \n");
+		
+		myID = scanner.nextLine();
+		
+		System.out.println("___________________________________________________ \n");
+		
+	
+
+	}
+	private void register(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter your First Name. \n");
+		
+		myFirst = scanner.nextLine();
+		
+		System.out.println("Enter your Last Name. \n");
+		
+		myLast = scanner.nextLine();
+		
+		System.out.println("Enter your email. \n");
+		
+		myID = scanner.nextLine();
+		
+		System.out.println("___________________________________________________ \n");
+		
+	
 	}
 	/**
 	 * method is called when user chooses a conference.
@@ -51,7 +97,21 @@ public class User implements Serializable{
 	 * This method is called to logout a user from the system.
 	 */
 	public void logout(){
-		
+		System.exit(0);
+	}
+	/**
+	 * 
+	 * @return theFirstName
+	 */
+	public String getFirst(){
+		return myFirst;
+	}
+	/**
+	 * 
+	 * @return theLastName
+	 */
+	public String getLast(){
+		return myLast;
 	}
 	/**
 	 * 
@@ -65,8 +125,9 @@ public class User implements Serializable{
 	 */
 	public String toString(){
 		StringBuilder myString = new StringBuilder();
-		myString.append(theLastName + ", " + theFirstName + ", " + myID);
+		myString.append(myLast + ", " + myFirst + ", " + myID);
 		return myString.toString();
 	}
+
 	
 }
