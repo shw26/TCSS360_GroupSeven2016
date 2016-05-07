@@ -40,6 +40,8 @@ public class Author implements Serializable{
 	 */
 	private ArrayList<Paper> myPaperList;
 	
+	private Conference myConference;
+	
 	/**
 	 * Constructor for the Author.
 	 * 
@@ -48,11 +50,12 @@ public class Author implements Serializable{
 	 * @param theLast String for the Last Name.
 	 * @param theID String for the ID
 	 */
-	public Author(String theFirst, String theLast, String theID) {
+	public Author(String theFirst, String theLast, String theID, Conference theConference) {
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
 		myPaperList = new ArrayList<Paper>();
+		myConference = theConference;
 	}
 	
 	/**
@@ -63,59 +66,65 @@ public class Author implements Serializable{
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
-		while(selection != 0) {
-			System.out.println("Role: Reviewer \n");
 		
+		while(selection != 0) {
+			printDetails();
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit");
 			System.out.println("2) un-Submit");
 			System.out.println("3) resubmit");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________");
 			
 			selection = scanner.nextInt();
-			
-			
-			
+			System.out.println("___________________________________________________\n");
+
 			if(selection == 1) {
-				// FIX THIS SOOOOOOOON+++++++++++++++++++++++
-			    Paper temp = new Paper("this is the title");
-				submit(temp);
+			    Paper temp = new Paper(myID);
+			    temp.paperMenu();
+			    addPaper(temp);
 			} else if (selection == 2) {
-				// Finish this!!!!
-				Paper temp = myPaperList.get(selection - 1);
-				unsubmit(temp);
+				unsubmit();
 			} else if (selection == 3) {
-				Paper temp = myPaperList.get(selection - 1);
-				edit(temp);
+				edit();
 			}
 		}
-	}
-	/**
-	 * Allows an author to submit a paper.
-	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being submitted.
-	 */
-	public void submit(Paper thePaper) {
-	
 	}
 	
 	/**
 	 * Allows an author to removed a paper.
 	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being removed.
 	 */
-	public void unsubmit(Paper thePaper) {
+	public void unsubmit() {
 		
+		int selection = displayPapers();
+		if (selection != 0) {
+			Paper tempPaper = myPaperList.get(selection - 1);
+			myPaperList.remove(tempPaper);
+			myConference.removePaper(tempPaper);
+			System.out.println("Paper has been removed");
+			System.out.println("___________________________________________________ \n");
+		}
 	}
 	
 	/**
 	 * Allows an author to resubmit a paper.
 	 * @author Jeremy Wolf
-	 * @param thePaper the Paper that is being resubmit.
-	 */
-	public void edit(Paper thePaper) {
+	 */ 
+	public void edit() {
+
+		int selection = displayPapers();
 		
+		if(selection != 0) {
+			Paper tempPaper = myPaperList.get(selection - 1);
+			myPaperList.remove(selection -1);
+			myConference.removePaper(tempPaper);
+		    Paper temp = new Paper(myID);
+			temp.paperMenu();
+			addPaper(temp);
+			System.out.println("Paper has been updated");
+			System.out.println("___________________________________________________ \n");
+
+		}
 	}
 	
 	/**
@@ -125,7 +134,41 @@ public class Author implements Serializable{
 	 */
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
+		myConference.addPaper(thePaper);
 }
+
+	/**
+	 * Getter method for myID	
+	 * @author Jeremy Wolf	
+	 * @return myID
+	 */
+	public String getID() {
+		return myID;
+	}
+	
+	private int displayPapers() {
+		
+		
+		Scanner scanner = new Scanner(System.in);
+		int optionCounter = 1;
+		int selection = -1;
+		
+		printDetails();
+		for (Paper tempPaper: myPaperList) {
+			System.out.print(optionCounter + ") ");
+			System.out.println(tempPaper.getTitle());	
+			optionCounter++;
+		}
+		System.out.println("0) Back");
+		selection = scanner.nextInt();
+		return selection;
+	}
+
+	private void printDetails() {
+		System.out.println("MSEE Syystem");
+		System.out.println("User: " + myID);
+		System.out.println("Role: Author");
+	}
 	
 	
 	

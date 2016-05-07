@@ -81,18 +81,18 @@ public class ProgramChair implements Serializable {
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Program Chair \n\n\n");
-		
+			System.out.println("User: " + myID);
+			System.out.println("Role: Program Chair");
 			System.out.println("Make a Selection: ");
 			System.out.println("1) View Papers");
 			System.out.println("2) Designate Sub-Program Chair(s)");
 			System.out.println("3) View Sub-Program Chair(s) assigned papers");
 			System.out.println("4) Make final decision");
-			System.out.println("0) Back\n\n");
-			System.out.println("___________________________________________________");
+			System.out.println("0) Back\n");
+			
 			
 			selection = scanner.nextInt();
-			
+			System.out.println("___________________________________________________\n");
 			if(selection == 1) {
 				viewPapers();
 			} else if (selection == 2) {
@@ -100,9 +100,28 @@ public class ProgramChair implements Serializable {
 			} else if (selection == 3) {
 				viewSCPapers();
 			} else if (selection == 4) {
+				
 				makeFinal();
 			}
 		}
+	}
+	
+	/**
+	 * Method displays title of each paper to be
+	 * displayed to the console.
+	 * @author Jeremy Wolf
+	 */
+	private void viewPapers() {
+		int selection = -1;
+		Scanner scanner = new Scanner(System.in);
+		printDetails();
+		System.out.println("Currently Assigned Papers:");
+		for (Paper printPaper: myPaperList ) {
+			System.out.print( "\t" + printPaper.getTitle()+ "\n");
+		}
+		System.out.println("Press 0 to go back");
+		selection = scanner.nextInt();
+		System.out.println("___________________________________________________\n");
 	}
 	
 	/**
@@ -110,15 +129,15 @@ public class ProgramChair implements Serializable {
 	 * displayed to the console.
 	 * @author Jeremy Wolf
 	 */
-	private void viewPapers() {
+	private void viewPapersWithOptions() {
 		int optionCounter = 1;
-		
 		for (Paper printPaper: myPaperList ) {
 			System.out.print(optionCounter + ") ");
 			System.out.print(printPaper.getTitle()+ "\n");
 			optionCounter++;
 		}
 		System.out.println("0) Back");
+
 	}
 	
 	/**
@@ -135,28 +154,38 @@ public class ProgramChair implements Serializable {
 		Scanner scanner = new Scanner(System.in);
 		
 		while (selection != 0) {
+			printDetails();
+			System.out.println("Current Registered Users:\n");
 			displayUsers();
+			System.out.println("0) Back");
 			System.out.println("Select a User: (1 - " + myUserList.size() + ")");
+			
 			selection = scanner.nextInt();
 		
-			tempUser = myUserList.get(selection - 1);
-			tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
-										 tempUser.getID(), myUserList);
-		
-
-			while (selection != 0 || paperCounter >= 4) {
-				paperCounter++;
+			if(selection != 0) {
+				tempUser = myUserList.get(selection - 1);
+				// Creates a new subprogram Chair
+				tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
+											 tempUser.getID(), myUserList);
 			
-				// Will display the paper to be assigned.
-				viewPapers();
-		
-				System.out.println("Select a Paper to be Assigned to " + tempUser.getFirst() 
-								+ " " + tempUser.getLast() + ":");
-				selection = scanner.nextInt();
-		
-				tempSC.addPaper(myPaperList.get(selection - 1));
+				printDetails();
+				while (selection != 0 && paperCounter <= 4) {
+					paperCounter++;
+				
+					System.out.println("Select a Paper to be Assigned to " + tempUser.getFirst() 
+									+ " " + tempUser.getLast() + ":");
+					
+					// Will display the paper to be assigned.
+					viewPapersWithOptions(); 
+					selection = scanner.nextInt();
+					if (selection != 0) {
+							tempSC.addPaper(myPaperList.get(selection - 1));
+							System.out.println("Paper has been assigned");
+							System.out.println("_________________________________________________\n");
+					}
+				}
+				mySubList.add(tempSC);
 			}
-			mySubList.add(tempSC);
 		}
 	}
 	/**
@@ -170,33 +199,45 @@ public class ProgramChair implements Serializable {
 		Paper paperTemp = null;
 		
 		Scanner scanner = new Scanner(System.in);
-		
-		
+		printDetails();
+		System.out.println("Select a Paper:");
 		//Displays papers that have been given a true recommendation.
+		boolean none = true;
 		for (Paper tempPaper : myPaperList) {
 			if (tempPaper.getRecommendation() == true) {
+				none = false;
 				System.out.print(optionCounter + ") ");
 				System.out.print(tempPaper.getTitle() + "\n");
 			}
 			optionCounter++;
 		}
-		//Scans for input for paper selection.
-		selection = scanner.nextInt();
-		paperTemp = myPaperList.get(selection - 1);
+		if (none) {
+			System.out.println("No papers are ready for final decsion.");
+			System.out.println("_________________________________________________\n");
+
+		} else {
+			//Scans for input for paper selection.
+			selection = scanner.nextInt();
+			paperTemp = myPaperList.get(selection - 1);
 		
-		// Displays Options
-		System.out.println("Select Final Decision:");
-		System.out.println("1) Accept");
-		System.out.println("2) Deny");
-		System.out.println("0) Back");
+			System.out.println("_________________________________________________\n");
+			printDetails();
+			System.out.println("Paper: " + paperTemp.getTitle());
+			// Displays Options
+			System.out.println("Select Final Decision:\n");
+			System.out.println("1) Accept");
+			System.out.println("2) Deny");
+			System.out.println("0) Back");
 	
-		//Final Decision selection is made.
-		selection = scanner.nextInt();
-		if (selection == 1) {
-			paperTemp.setFinal(true);
-		} else if (selection == 2) {
-			paperTemp.setFinal(false);
-		}	
+			//Final Decision selection is made.
+			selection = scanner.nextInt();
+			System.out.println("_________________________________________________\n");
+			if (selection == 1) {
+				paperTemp.setFinal(true);
+			} else if (selection == 2) {
+				paperTemp.setFinal(false);
+			}
+		}
 	}
 	
 	/**
@@ -204,12 +245,14 @@ public class ProgramChair implements Serializable {
 	 * @author Jeremy Wolf
 	 */
 	private void viewSCPapers() {
+		printDetails();
 		for (SubProgramChair temp: mySubList) {
 			System.out.println(temp.getFirst() + " " + temp.getLast() + ":");
 			for (Paper tempPaper : temp.getPaperList()){
 				System.out.println("\t" + tempPaper.getTitle());
 			}
 		}
+		System.out.println("_________________________________________________\n");
 	}
 	
 	/**
@@ -217,7 +260,6 @@ public class ProgramChair implements Serializable {
 	 * @author Jeremy Wolf
 	 */
 	private void displayUsers() {
-		
 		int optionCounter = 1;
 		for (User u: myUserList) {
 			System.out.print(optionCounter + ") ");
@@ -234,4 +276,9 @@ public class ProgramChair implements Serializable {
 	public String getID() {
 		return myID;
 	}
-}
+	
+	private void printDetails(){
+		System.out.println("User: " + myID);
+		System.out.println("Role: Program Chair");	
+	}
+	}

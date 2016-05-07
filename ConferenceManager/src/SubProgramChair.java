@@ -82,7 +82,7 @@ public class SubProgramChair implements Serializable {
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Sub-Program Chair \n");
+			displayDetails();
 		
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit a Recommendation");
@@ -110,7 +110,7 @@ public class SubProgramChair implements Serializable {
 		int selection = -1;
 		Paper tempPaper = null;
 		Scanner scanner = new Scanner(System.in);
-		
+		displayDetails();
 		System.out.println("Select a paper to make a recommendation:");
 		
 		for (Paper printPaper: myPaperList ) {
@@ -120,6 +120,11 @@ public class SubProgramChair implements Serializable {
 		}
 		
 		selection = scanner.nextInt();
+		System.out.println("___________________________________________________ \n");
+		displayDetails();
+		tempPaper = myPaperList.get(selection - 1);
+		System.out.println("Paper: " + tempPaper.getTitle());
+		
 		if (selection != 0) {
 			tempPaper = myPaperList.get(selection - 1);
 			
@@ -153,7 +158,7 @@ public class SubProgramChair implements Serializable {
 		String authorID = "";
 		
 		Scanner scanner = new Scanner(System.in);
-		
+		displayDetails();
 		System.out.println("Select a Paper to be Reviewed");
 		
 		for (Paper printPaper: myPaperList ) {
@@ -164,41 +169,43 @@ public class SubProgramChair implements Serializable {
 		System.out.println("0) Back\n");
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________ \n");
+		displayDetails();
 		
+		
+		// Gets the paper the user selected.
 		if (selection != 0) {
+			
 			tempPaper = myPaperList.get(selection - 1);
-			authorID = tempPaper.getAuthorID();
+			authorID = tempPaper.getAuthor();
 			
 			
+			//Displays the users for review.
 			while(selection != 0) {
+				displayDetails();
+				System.out.println("Paper: " + tempPaper.getTitle() + "\n");
 				optionCounter = 1;
 				for (User tempUser: myUsers) {
-					// Will not allow the author of a paper to be assigned as the reviewer.
-					if (!tempUser.getID().equals(authorID)) {
-						System.out.print(optionCounter + ") ");
-						System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
-						optionCounter++;
+					System.out.print(optionCounter + ") ");
+					System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
+					optionCounter++;
 					}
-				}
+				
 				System.out.println("0) Back"); 
-				
 				selection = scanner.nextInt();
-				userTemp = myUsers.get(selection - 1);
-				
 				// Creates a Reviewer object and places into the Reviewer list.
 				if (selection != 0) {
+					
+					userTemp = myUsers.get(selection - 1);
 					//If the list is empty then a reviewer is added.
 					if(myRevList.isEmpty()) {
 						System.out.println(userTemp.getFirst() + " " + 
-											userTemp.getLast() + " has been assigned as a reviewer "
-													+ "and the paper has been assigned");
+								userTemp.getLast() + " has been assigned as the reviewer on the paper.");
 						Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.myLast, userTemp.getID());
+							           userTemp.getLast(), userTemp.getID());
 						myRevList.add(tempRev);
 					//If the list is not empty the contents must be check to avoid duplication.	
 					} else {
 						boolean isPresent = false;
-						System.out.println("Size of list " + myRevList.size());
 						for (Reviewer rev : myRevList) {
 							if (rev.getID().equals(userTemp.getID())) {
 								rev.addPaper(tempPaper);
@@ -212,17 +219,20 @@ public class SubProgramChair implements Serializable {
 						//If the User is not already a reviewer a new reviewer is created.
 						if (!isPresent) {
 							System.out.println(userTemp.getFirst() + " " + 
-									userTemp.getLast() + " has been assigned as a reviewer and teh paper "
-											+ "has been assigned");
+									userTemp.getLast() + " has been assigned as the reviewer on the paper.");
 							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.myLast, userTemp.getID());
+							           userTemp.getLast(), userTemp.getID());
 							myRevList.add(tempRev);
 						}
 					}
-				}
+				} 
+				System.out.println("___________________________________________________ \n");
 			}
 		}
+		
 	}
+	
+
 
 	/**
 	 * Adds the Paper to the Sub-Program Chairs list.
@@ -272,6 +282,12 @@ public class SubProgramChair implements Serializable {
 	 */
 	public String getID() {
 		return myID;
+	}
+	
+	private void displayDetails() {
+		System.out.println("MSEE System");
+		System.out.println("User: " + myFirstName);
+		System.out.println("Role: Sub-ProgramChair");
 	}
 }
 

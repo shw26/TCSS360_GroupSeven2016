@@ -1,5 +1,8 @@
+import java.io.File;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Holds the data for a paper used in the conference.
@@ -7,7 +10,12 @@ import java.util.List;
  * @author Trevor N. Lowe
  * @version 1 : 5/1/16
  */
-public class Paper {
+public class Paper implements Serializable {
+	/**
+	 * Serial Version ID.
+	 */
+	private static final long serialVersionUID = -1356721982552780326L;
+
 	// -- Fields --
 	
 	/** The contact author of the paper. **/
@@ -22,6 +30,10 @@ public class Paper {
 	/** True if final decision has been made. **/
 	private boolean myFinal;
 	
+	/** The Title of the Paper*/
+	private String myTitle;
+	
+	private File myFile;
 	
 	// -- Constructors --
 	
@@ -31,17 +43,49 @@ public class Paper {
 	 * @param name the contact author for the paper
 	 */
 	public Paper(String name) {
-		this.myAuthor =  name;
+		
+		myTitle = "";
+		myFile = null;
+		myAuthor =  name;
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;
 	}
 	
+	/**
+	 * Paper menu prints to the console and calls private methods as 
+	 * the user makes selections.
+	 * @author Jeremy Wolf
+	 */
+	public void paperMenu() {
+		Scanner scanner = new Scanner(System.in);
+
+		
+		System.out.println("Enter Title of Paper: ");
+		myTitle = scanner.nextLine(); 
+		uploadFile();
+	}
 	
+	
+	/**
+	 * Uploads the paper file to the system.
+	 * 
+	 * @author Jeremy Wolf
+	 */
+	public void uploadFile() {
+		Scanner scanner = new Scanner(System.in);
+		String pathOfPaper;
+		System.out.println("To submit a paper, Enter desired path: ");
+		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
+		pathOfPaper = scanner.nextLine();
+		myFile = new File(pathOfPaper);
+		System.out.println("Upload Sucessful");
+		System.out.println("___________________________________________________\n");
+	}
 	// -- Methods (Mutator) --
 	
-	public void update() {
-		
+	public void edit() {
+		uploadFile();
 	}
 	
 	/**
@@ -114,4 +158,12 @@ public class Paper {
 		return this.myFinal;
 	}
 
+	/**
+	 * Returns the Title of the paper.
+	 * 
+	 * @return Title of the paper
+	 */
+	public String getTitle() {
+		return myTitle;
+	}
 }
