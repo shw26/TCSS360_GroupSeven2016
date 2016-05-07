@@ -32,17 +32,8 @@ public class Conference implements Serializable{
 	public ProgramChair myProgramChair;
 	/**
 	 * the list of subprogram chairs of the conference.
-<<<<<<< HEAD
-	 */
-	public ArrayList<SubProgramChair> mySubProgramChairs;
-
-=======
 	 */
 	public ArrayList<SubProgramChair> mySubprogramChairs;
-<<<<<<< HEAD
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 	/**
 	 * the list of reviewers of the conference.
 	 */
@@ -72,41 +63,7 @@ public class Conference implements Serializable{
 	 * if the user is a Author, then this will hold the info.
 	 */
 	public Author myCurrentAuthor;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-	/**
-	 * might not be using this constructor.
-	 * @param theUser
-	 * @param theUsers
-	 */
-	public Conference(User theUser) {
-		mySubProgramChairs = new ArrayList<SubProgramChair>();
-	}
-	public Conference(User theUser, ArrayList<User> theUsers) {
-
-		myPapers = new ArrayList<Paper>();
-		myReviewers = new ArrayList<Reviewer>();
-		myAuthors = new ArrayList<Author>();
-=======
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		myCurrentPC = new ProgramChair(theUser.getFirst(), theUser.getLast(), 
-					theUser.getID(), myPapers, mySubProgramChairs, theUsers );
-		myCurrentSC = null;
-		myCurrentReviewer= null;
-		myCurrentAuthor = null;
-
-	}
-	
-=======
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 	/**
 	 * Menu will call this constructor. 
 	 * 
@@ -116,41 +73,14 @@ public class Conference implements Serializable{
 	 * @param theProgramChair the Program Chair
 	 * @param theUsers the list of Users
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public Conference(ProgramChair theProgramChair, ArrayList<SubProgramChair> theSubprogramChairs,
-			ArrayList<Reviewer> theReviewers, ArrayList<Author> theAuthors,
-			ArrayList<Paper> thePapers, ArrayList<User> theUsers){
-=======
 	public Conference(String theName, User thePC, ArrayList<User> theUsers){
->>>>>>> refs/heads/master
-=======
-	public Conference(String theName, User thePC, ArrayList<User> theUsers){
->>>>>>> refs/heads/masterofPupets
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		myProgramChair = theProgramChair;
-		mySubProgramChairs = theSubprogramChairs;
-		myPapers = thePapers;
-		myReviewers = theReviewers;
-		myAuthors = theAuthors;
-=======
 		myName = theName;
 		mySubprogramChairs = new ArrayList<SubProgramChair>();
 		myPapers = new ArrayList<Paper>();
 		myReviewers = new ArrayList<Reviewer>(); 
 		myAuthors = new ArrayList<Author>();
 		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
->>>>>>> refs/heads/master
-=======
-		myName = theName;
-		mySubprogramChairs = new ArrayList<SubProgramChair>();
-		myPapers = new ArrayList<Paper>();
-		myReviewers = new ArrayList<Reviewer>(); 
-		myAuthors = new ArrayList<Author>();
-		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
->>>>>>> refs/heads/masterofPupets
 		
 		myCurrentPC = myProgramChair;
 		myCurrentSC = null;
@@ -169,15 +99,15 @@ public class Conference implements Serializable{
 			myCurrentPC = myProgramChair;
 		}
 		
-		for(int i = 0; i < mySubProgramChairs.size(); i++){
-			if(mySubProgramChairs.get(i).getID() == theUser.getID()){
-				myCurrentSC = mySubProgramChairs.get(i);
+		for(int i = 0; i < mySubprogramChairs.size(); i++){
+			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
+				myCurrentSC = mySubprogramChairs.get(i);
 			}
 		}
 		
-		for(int i = 0; i < mySubProgramChairs.size(); i++){
-			if(mySubProgramChairs.get(i).getID() == theUser.getID()){
-				myCurrentSC = mySubProgramChairs.get(i);
+		for(int i = 0; i < mySubprogramChairs.size(); i++){
+			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
+				myCurrentSC = mySubprogramChairs.get(i);
 				break;
 			}
 		}
@@ -253,68 +183,15 @@ public class Conference implements Serializable{
 				theUser.userMenu();
 			}
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-		if(myCurrentSC != null){
-			System.out.println("2) Subprogram Chair");
-		}
-		if(myCurrentReviewer!= null){
-			System.out.println("3) Reviewer");
-		}
-		if(myCurrentAuthor!= null){
-			System.out.println("4) Author");
-		} else {
-			//Will only show submit a paper when the Author role is not available. 
-			System.out.println("5) Submit Paper");
-		}
-		System.out.println("0) Back");
-		
-		selection = scanner.nextInt();
-		
-		if(selection == 1){
-			myCurrentPC.pcMenu();
-		}
-		if(selection == 2){
-			myCurrentSC.scMenu();
-		}
-		if(selection == 3){
-			myCurrentReviewer.reviewerMenu();
-		}
-		if(selection == 4){
-			myCurrentAuthor.authorMenu();
-		}
-		if(selection == 5){
-			submitPaper(theUser);
-			
-		}
-		if(selection == 0){
-			theUser.userMenu();
-		}
-		
-=======
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 	}
 		
 	private void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		myPapers.add(newPaper);
-		myAuthors.add(newAuthor);
-=======
 		myAuthors.add(newAuthor);
 		newPaper.paperMenu();
 		checkRoles(theUser);
->>>>>>> refs/heads/master
-=======
-		myAuthors.add(newAuthor);
-		newPaper.paperMenu();
-		checkRoles(theUser);
->>>>>>> refs/heads/masterofPupets
 	}
 	
 	/**
@@ -369,17 +246,8 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public void setSCList(ArrayList<SubProgramChair> theSCList){
-		mySubProgramChairs = theSCList;
-
-=======
-=======
->>>>>>> refs/heads/masterofPupets
 	public void setSCList(ArrayList<SubProgramChair> theSCList){
 		mySubprogramChairs = theSCList;
->>>>>>> refs/heads/master
 	}
 	/**
 	 * setter for Reviewer list.
@@ -424,16 +292,8 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public ArrayList<SubProgramChair> getSCList(){
-		return mySubProgramChairs;	
-=======
-=======
->>>>>>> refs/heads/masterofPupets
 	public ArrayList<SubProgramChair> getSCList(){
 		return mySubprogramChairs;	
->>>>>>> refs/heads/master
 	}
 	/**
 	 * getter for Reviewer List.
@@ -488,8 +348,4 @@ public class Conference implements Serializable{
 		myPapers.remove(thePaper);
 	}
 }
-
-
-
-
 

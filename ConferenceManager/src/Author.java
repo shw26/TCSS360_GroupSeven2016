@@ -66,14 +66,6 @@ public class Author implements Serializable{
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		while(selection != 0) {
-			System.out.println("Role: Author \n");
-=======
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 		
 		while(selection != 0) {
 			printDetails();
@@ -84,29 +76,12 @@ public class Author implements Serializable{
 			System.out.println("0) Back\n");
 			
 			selection = scanner.nextInt();
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
-=======
 			System.out.println("___________________________________________________\n");
 
->>>>>>> refs/heads/master
-=======
-			System.out.println("___________________________________________________\n");
-
->>>>>>> refs/heads/masterofPupets
 			if(selection == 1) {
 			    Paper temp = new Paper(myID);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 			    temp.paperMenu();
 			    addPaper(temp);
->>>>>>> refs/heads/master
-=======
-			    temp.paperMenu();
-			    addPaper(temp);
->>>>>>> refs/heads/masterofPupets
 			} else if (selection == 2) {
 				unsubmit();
 			} else if (selection == 3) {
@@ -120,13 +95,6 @@ public class Author implements Serializable{
 	 * @author Jeremy Wolf
 	 */
 	public void unsubmit() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		Paper tempPaper = myPaperList.get(displayPapers());
-		myPaperList.remove(tempPaper);
-=======
-=======
->>>>>>> refs/heads/masterofPupets
 		
 		int selection = displayPapers();
 		if (selection != 0) {
@@ -136,10 +104,6 @@ public class Author implements Serializable{
 			System.out.println("Paper has been removed");
 			System.out.println("___________________________________________________ \n");
 		}
-<<<<<<< HEAD
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 	}
 	
 	/**
@@ -147,13 +111,6 @@ public class Author implements Serializable{
 	 * @author Jeremy Wolf
 	 */ 
 	public void edit() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		Paper tempPaper = myPaperList.get(displayPapers());
-		tempPaper.edit();
-=======
-=======
->>>>>>> refs/heads/masterofPupets
 
 		int selection = displayPapers();
 		
@@ -168,10 +125,6 @@ public class Author implements Serializable{
 			System.out.println("___________________________________________________ \n");
 
 		}
-<<<<<<< HEAD
->>>>>>> refs/heads/master
-=======
->>>>>>> refs/heads/masterofPupets
 	}
 	
 	/**
@@ -200,18 +153,6 @@ public class Author implements Serializable{
 		int optionCounter = 1;
 		int selection = -1;
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		System.out.println("Role: Author \n");
-		for (Paper tempPaper: myPaperList) {
-			System.out.print(optionCounter + ") ");
-			System.out.println(tempPaper.getTitle());	
-		}
-		System.out.println("0) Back");
-		return selection = scanner.nextInt();
-	}
-
-=======
 		printDetails();
 		for (Paper tempPaper: myPaperList) {
 			System.out.print(optionCounter + ") ");
@@ -228,28 +169,10 @@ public class Author implements Serializable{
 		System.out.println("User: " + myID);
 		System.out.println("Role: Author");
 	}
->>>>>>> refs/heads/master
-=======
-		printDetails();
-		for (Paper tempPaper: myPaperList) {
-			System.out.print(optionCounter + ") ");
-			System.out.println(tempPaper.getTitle());	
-			optionCounter++;
-		}
-		System.out.println("0) Back");
-		selection = scanner.nextInt();
-		return selection;
-	}
-
-	private void printDetails() {
-		System.out.println("MSEE Syystem");
-		System.out.println("User: " + myID);
-		System.out.println("Role: Author");
-	}
->>>>>>> refs/heads/masterofPupets
 	
 	
 	
 	
 	
 }
+
