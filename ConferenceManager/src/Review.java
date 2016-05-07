@@ -47,7 +47,7 @@ public class Review implements Serializable{
 			System.out.println("1) Type Review");
 			System.out.println("2) Rate Paper");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________");
+			System.out.println("___________________________________________________\n");
 			
 			selection = scanner.nextInt();
 			
@@ -137,4 +137,5 @@ public class Review implements Serializable{
 		StringBuilder myString = new StringBuilder();
 		return myString.toString();
 	}
+	private void displayDetails(){}
 }

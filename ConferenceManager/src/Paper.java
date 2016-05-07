@@ -40,7 +40,7 @@ public class Paper {
 		
 		myTitle = "";
 		myFile = null;
-		this.myAuthor =  name;
+		myAuthor =  name;
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;
@@ -74,6 +74,7 @@ public class Paper {
 		pathOfPaper = scanner.nextLine();
 		myFile = new File(pathOfPaper);
 		System.out.println("Upload Sucessful");
+		System.out.println("___________________________________________________\n");
 	}
 	// -- Methods (Mutator) --
 	

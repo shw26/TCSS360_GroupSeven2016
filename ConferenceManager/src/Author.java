@@ -66,15 +66,15 @@ public class Author implements Serializable{
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
-		while(selection != 0) {
-			System.out.println("Role: Author \n");
 		
+		while(selection != 0) {
+			printDetails();
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit");
 			System.out.println("2) un-Submit");
 			System.out.println("3) resubmit");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________");
+			System.out.println("___________________________________________________\n");
 			
 			selection = scanner.nextInt();
 			
@@ -131,15 +131,22 @@ public class Author implements Serializable{
 		int optionCounter = 1;
 		int selection = -1;
 		
-		System.out.println("Role: Author \n");
+		printDetails();
 		for (Paper tempPaper: myPaperList) {
 			System.out.print(optionCounter + ") ");
 			System.out.println(tempPaper.getTitle());	
 		}
 		System.out.println("0) Back");
-		return selection = scanner.nextInt();
+		selection = scanner.nextInt();
+		System.out.println("___________________________________________________ \n");
+		return selection;
 	}
 
+	private void printDetails() {
+		System.out.println("MSEE Syystem");
+		System.out.println("User: " + myFirstName);
+		System.out.println("Role: Author");
+	}
 	
 	
 	

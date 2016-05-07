@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class ConferenceTest {
 
-	private Conference myConference;
+	/*private Conference myConference;
 	
 	@Before
 	public void setUp(){

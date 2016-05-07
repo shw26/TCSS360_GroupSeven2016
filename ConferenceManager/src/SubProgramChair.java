@@ -82,7 +82,7 @@ public class SubProgramChair implements Serializable {
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Sub-Program Chair \n");
+			displayDetails();
 		
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Submit a Recommendation");
@@ -110,7 +110,7 @@ public class SubProgramChair implements Serializable {
 		int selection = -1;
 		Paper tempPaper = null;
 		Scanner scanner = new Scanner(System.in);
-		
+		displayDetails();
 		System.out.println("Select a paper to make a recommendation:");
 		
 		for (Paper printPaper: myPaperList ) {
@@ -120,6 +120,10 @@ public class SubProgramChair implements Serializable {
 		}
 		
 		selection = scanner.nextInt();
+		System.out.println("___________________________________________________ \n");
+		displayDetails();
+		System.out.println("Paper: " + tempPaper.getTitle());
+		
 		if (selection != 0) {
 			tempPaper = myPaperList.get(selection - 1);
 			
@@ -153,7 +157,7 @@ public class SubProgramChair implements Serializable {
 		String authorID = "";
 		
 		Scanner scanner = new Scanner(System.in);
-		
+		displayDetails();
 		System.out.println("Select a Paper to be Reviewed");
 		
 		for (Paper printPaper: myPaperList ) {
@@ -164,6 +168,8 @@ public class SubProgramChair implements Serializable {
 		System.out.println("0) Back\n");
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________ \n");
+		displayDetails();
+		System.out.println("Paper: " + tempPaper.getTitle());
 		
 		if (selection != 0) {
 			tempPaper = myPaperList.get(selection - 1);
@@ -173,11 +179,9 @@ public class SubProgramChair implements Serializable {
 			while(selection != 0) {
 				optionCounter = 1;
 				for (User tempUser: myUsers) {
-					// Will not allow the author of a paper to be assigned as the reviewer.
-					if (!tempUser.getID().equals(authorID)) {
-						System.out.print(optionCounter + ") ");
-						System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
-						optionCounter++;
+					System.out.print(optionCounter + ") ");
+					System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
+					optionCounter++;
 					}
 				}
 				System.out.println("0) Back"); 
@@ -198,7 +202,6 @@ public class SubProgramChair implements Serializable {
 					//If the list is not empty the contents must be check to avoid duplication.	
 					} else {
 						boolean isPresent = false;
-						System.out.println("Size of list " + myRevList.size());
 						for (Reviewer rev : myRevList) {
 							if (rev.getID().equals(userTemp.getID())) {
 								rev.addPaper(tempPaper);
@@ -219,10 +222,12 @@ public class SubProgramChair implements Serializable {
 							myRevList.add(tempRev);
 						}
 					}
-				}
-			}
+				} 
+				System.out.println("___________________________________________________ \n");
 		}
 	}
+	
+
 
 	/**
 	 * Adds the Paper to the Sub-Program Chairs list.
@@ -272,6 +277,12 @@ public class SubProgramChair implements Serializable {
 	 */
 	public String getID() {
 		return myID;
+	}
+	
+	private void displayDetails() {
+		System.out.println("MSEE Syystem");
+		System.out.println("User: " + myFirstName);
+		System.out.println("Role: Sub-ProgramChair");
 	}
 }
 
