@@ -39,7 +39,10 @@ public class Conference implements Serializable{
 =======
 	 */
 	public ArrayList<SubProgramChair> mySubprogramChairs;
+<<<<<<< HEAD
 >>>>>>> refs/heads/master
+=======
+>>>>>>> refs/heads/masterofPupets
 	/**
 	 * the list of reviewers of the conference.
 	 */
@@ -70,6 +73,7 @@ public class Conference implements Serializable{
 	 */
 	public Author myCurrentAuthor;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	/**
 	 * might not be using this constructor.
@@ -86,7 +90,10 @@ public class Conference implements Serializable{
 		myAuthors = new ArrayList<Author>();
 =======
 >>>>>>> refs/heads/master
+=======
+>>>>>>> refs/heads/masterofPupets
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		myCurrentPC = new ProgramChair(theUser.getFirst(), theUser.getLast(), 
 					theUser.getID(), myPapers, mySubProgramChairs, theUsers );
@@ -98,6 +105,8 @@ public class Conference implements Serializable{
 	
 =======
 >>>>>>> refs/heads/master
+=======
+>>>>>>> refs/heads/masterofPupets
 	/**
 	 * Menu will call this constructor. 
 	 * 
@@ -108,13 +117,18 @@ public class Conference implements Serializable{
 	 * @param theUsers the list of Users
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public Conference(ProgramChair theProgramChair, ArrayList<SubProgramChair> theSubprogramChairs,
 			ArrayList<Reviewer> theReviewers, ArrayList<Author> theAuthors,
 			ArrayList<Paper> thePapers, ArrayList<User> theUsers){
 =======
 	public Conference(String theName, User thePC, ArrayList<User> theUsers){
 >>>>>>> refs/heads/master
+=======
+	public Conference(String theName, User thePC, ArrayList<User> theUsers){
+>>>>>>> refs/heads/masterofPupets
 		
+<<<<<<< HEAD
 <<<<<<< HEAD
 		myProgramChair = theProgramChair;
 		mySubProgramChairs = theSubprogramChairs;
@@ -129,6 +143,14 @@ public class Conference implements Serializable{
 		myAuthors = new ArrayList<Author>();
 		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
 >>>>>>> refs/heads/master
+=======
+		myName = theName;
+		mySubprogramChairs = new ArrayList<SubProgramChair>();
+		myPapers = new ArrayList<Paper>();
+		myReviewers = new ArrayList<Reviewer>(); 
+		myAuthors = new ArrayList<Author>();
+		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
+>>>>>>> refs/heads/masterofPupets
 		
 		myCurrentPC = myProgramChair;
 		myCurrentSC = null;
@@ -232,6 +254,7 @@ public class Conference implements Serializable{
 			}
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if(myCurrentSC != null){
 			System.out.println("2) Subprogram Chair");
 		}
@@ -270,12 +293,15 @@ public class Conference implements Serializable{
 		
 =======
 >>>>>>> refs/heads/master
+=======
+>>>>>>> refs/heads/masterofPupets
 	}
 		
 	private void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
+<<<<<<< HEAD
 <<<<<<< HEAD
 		myPapers.add(newPaper);
 		myAuthors.add(newAuthor);
@@ -284,6 +310,11 @@ public class Conference implements Serializable{
 		newPaper.paperMenu();
 		checkRoles(theUser);
 >>>>>>> refs/heads/master
+=======
+		myAuthors.add(newAuthor);
+		newPaper.paperMenu();
+		checkRoles(theUser);
+>>>>>>> refs/heads/masterofPupets
 	}
 	
 	/**
@@ -339,10 +370,13 @@ public class Conference implements Serializable{
 	 * @version 5/1/2016
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public void setSCList(ArrayList<SubProgramChair> theSCList){
 		mySubProgramChairs = theSCList;
 
 =======
+=======
+>>>>>>> refs/heads/masterofPupets
 	public void setSCList(ArrayList<SubProgramChair> theSCList){
 		mySubprogramChairs = theSCList;
 >>>>>>> refs/heads/master
@@ -391,9 +425,12 @@ public class Conference implements Serializable{
 	 * @version 5/1/2016
 	 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public ArrayList<SubProgramChair> getSCList(){
 		return mySubProgramChairs;	
 =======
+=======
+>>>>>>> refs/heads/masterofPupets
 	public ArrayList<SubProgramChair> getSCList(){
 		return mySubprogramChairs;	
 >>>>>>> refs/heads/master

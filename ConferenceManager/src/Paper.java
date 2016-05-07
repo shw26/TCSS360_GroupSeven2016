@@ -1,8 +1,12 @@
 import java.io.File;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import java.io.Serializable;
 >>>>>>> refs/heads/master
+=======
+import java.io.Serializable;
+>>>>>>> refs/heads/masterofPupets
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,10 +54,14 @@ public class Paper implements Serializable {
 		myTitle = "";
 		myFile = null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this.myAuthor =  name;
 =======
 		myAuthor =  name;
 >>>>>>> refs/heads/master
+=======
+		myAuthor =  name;
+>>>>>>> refs/heads/masterofPupets
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;
@@ -88,9 +96,13 @@ public class Paper implements Serializable {
 		myFile = new File(pathOfPaper);
 		System.out.println("Upload Sucessful");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		System.out.println("___________________________________________________\n");
 >>>>>>> refs/heads/master
+=======
+		System.out.println("___________________________________________________\n");
+>>>>>>> refs/heads/masterofPupets
 	}
 	// -- Methods (Mutator) --
 	
