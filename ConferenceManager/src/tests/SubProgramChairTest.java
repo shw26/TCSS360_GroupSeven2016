@@ -1,8 +1,13 @@
+package tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import model.Paper;
+import model.SubProgramChair;
+import model.User;
 
 public class SubProgramChairTest {
 	ArrayList<User> myUserList = new ArrayList<User>();

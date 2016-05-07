@@ -1,3 +1,4 @@
+package model;
 import java.io.File;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -82,11 +83,9 @@ public class Paper implements Serializable {
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
 	}
-	// -- Methods (Mutator) --
 	
-	public void edit() {
-		uploadFile();
-	}
+	
+	// -- Methods (Mutator) --
 	
 	/**
 	 * Sets the recommendation status of a paper.

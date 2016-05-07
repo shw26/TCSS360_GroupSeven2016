@@ -1,3 +1,4 @@
+package model;
 import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
