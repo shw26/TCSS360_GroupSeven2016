@@ -28,6 +28,7 @@ public class Conference implements Serializable{
 	 * the list of subprogram chairs of the conference.
 	 */
 	public ArrayList<SubProgramChair> mySubProgramChairs;
+
 	/**
 	 * the list of reviewers of the conference.
 	 */
@@ -61,20 +62,23 @@ public class Conference implements Serializable{
 	/**
 	 * might not be using this constructor.
 	 * @param theUser
+	 * @param theUsers
 	 */
 	public Conference(User theUser) {
 		mySubProgramChairs = new ArrayList<SubProgramChair>();
+	}
+	public Conference(User theUser, ArrayList<User> theUsers) {
+
 		myPapers = new ArrayList<Paper>();
 		myReviewers = new ArrayList<Reviewer>();
 		myAuthors = new ArrayList<Author>();
 		
-		myCurrentPC = null;
+		myCurrentPC = new ProgramChair(theUser.getFirst(), theUser.getLast(), 
+					theUser.getID(), myPapers, mySubProgramChairs, theUsers );
 		myCurrentSC = null;
 		myCurrentReviewer= null;
 		myCurrentAuthor = null;
-		checkRoles(theUser);
-		
-		confMenu(theUser);
+
 	}
 	
 	/**
@@ -88,7 +92,7 @@ public class Conference implements Serializable{
 	 */
 	public Conference(ProgramChair theProgramChair, ArrayList<SubProgramChair> theSubprogramChairs,
 			ArrayList<Reviewer> theReviewers, ArrayList<Author> theAuthors,
-			ArrayList<Paper> thePapers){
+			ArrayList<Paper> thePapers, ArrayList<User> theUsers){
 		
 		myProgramChair = theProgramChair;
 		mySubProgramChairs = theSubprogramChairs;
@@ -109,7 +113,7 @@ public class Conference implements Serializable{
 	 */
 	private void checkRoles(User theUser){
 		
-		if(theUser.getID() == ProgramChair.getID()){
+		if(theUser.getID() == myCurrentPC.getID()){
 			myCurrentPC = myProgramChair;
 		}
 		
@@ -168,8 +172,10 @@ public class Conference implements Serializable{
 		}
 		if(myCurrentAuthor!= null){
 			System.out.println("4) Author");
+		} else {
+			//Will only show submit a paper when the Author role is not available. 
+			System.out.println("5) Submit Paper");
 		}
-		System.out.println("5) Submit Paper");
 		System.out.println("0) Back");
 		
 		selection = scanner.nextInt();
@@ -187,31 +193,21 @@ public class Conference implements Serializable{
 			myCurrentAuthor.authorMenu();
 		}
 		if(selection == 5){
-			submitPaper();
+			submitPaper(theUser);
+			
 		}
 		if(selection == 0){
 			theUser.userMenu();
 		}
 		
 	}
-	
-	/**
-	 * load file and make a new Paper and add it to the list.
-	 * (may need to change the constructor of paper)
-	 * @author Shao-Han Wang 
-	 * @version 5/1/2016
-	 */
-	private void submitPaper(){
-		Scanner scanner = new Scanner(System.in);
-		String pathOfPaper;
-		System.out.println("To submit a paper, Enter desired path: ");
-		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
-		pathOfPaper = scanner.nextLine();
-		File file = new File(pathOfPaper);
 		
-		Paper newPaper = new Paper("new paper");
-		//Paper newPaper = new Paper(file);
+	private void submitPaper(User theUser) {
+		Paper newPaper = new Paper(theUser.myID);
+		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
+		newAuthor.addPaper(newPaper);
 		myPapers.add(newPaper);
+		myAuthors.add(newAuthor);
 	}
 	
 	/**
@@ -268,6 +264,7 @@ public class Conference implements Serializable{
 	 */
 	public void setSCList(ArrayList<SubProgramChair> theSCList){
 		mySubProgramChairs = theSCList;
+
 	}
 	/**
 	 * setter for Reviewer list.
