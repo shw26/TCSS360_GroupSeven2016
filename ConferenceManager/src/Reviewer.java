@@ -67,13 +67,12 @@ public class Reviewer implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Reviewer \n");
-		
+			printDetails();
 			System.out.println("Make a Selection: ");
 			System.out.println("1) View Papers");
 			System.out.println("2) Review a Paper");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________");
+			System.out.println("___________________________________________________\n");
 			
 			selection = scanner.nextInt();
 			
@@ -94,7 +93,7 @@ public class Reviewer implements Serializable{
 		int selection = -1;
 		Paper tPaper = null;
 		Scanner scanner = new Scanner(System.in);
-		
+		printDetails();
 		System.out.println("Select a Paper to be Reviewed:");
 		
 		// Displays the papers to the console 
@@ -110,8 +109,8 @@ public class Reviewer implements Serializable{
 		// Creates the Review object.
 		if (selection != 0) {
 			tPaper = myPaperList.get(selection - 1);
-	//		Review currentReview = new Review(myID);
-	//		currentReview.reviewMenu();
+			Review currentReview = new Review(myID);
+			currentReview.reviewMenu();
 
 		}
 	}
@@ -132,7 +131,8 @@ public class Reviewer implements Serializable{
 	 */
 	private void viewPapers() {
 		int optionCounter = 1;
-		
+		printDetails();
+		System.out.println("Currently Assigned Papers: ");
 		for (Paper printPaper: myPaperList ) {
 			System.out.print(optionCounter + ") ");
 			System.out.print(printPaper.getTitle()+ "\n");
@@ -148,5 +148,10 @@ public class Reviewer implements Serializable{
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
 		
+	}
+	private void printDetails() {
+		System.out.println("MSEE Syystem");
+		System.out.println("User: " + myFirstName);
+		System.out.println("Role: Reviewer");
 	}
 }
