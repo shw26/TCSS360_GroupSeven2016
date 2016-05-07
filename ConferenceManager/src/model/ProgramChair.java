@@ -1,3 +1,4 @@
+package model;
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
