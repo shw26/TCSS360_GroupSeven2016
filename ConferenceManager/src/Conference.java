@@ -147,13 +147,13 @@ public class Conference implements Serializable{
 			if(myCurrentPC.getID().equals(theUser.getID())){
 				System.out.println("1) Program Chair");
 			}
-			if(myCurrentSC != null){
+			if(myCurrentSC != null && myCurrentSC.getID().equals(theUser.getID())){
 				System.out.println("2) Subprogram Chair");
 			}
-			if(myCurrentReviewer!= null){
+			if(myCurrentReviewer != null && myCurrentReviewer.getID().equals(theUser.getID())){
 				System.out.println("3) Reviewer");
 			}
-			if(myCurrentAuthor!= null){
+			if(myCurrentAuthor != null && myCurrentAuthor.getID().equals(theUser.getID())){
 				System.out.println("4) Author");
 			} else {
 				//Will only show submit a paper when the Author role is not available. 
@@ -189,8 +189,6 @@ public class Conference implements Serializable{
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
-		myPapers.add(newPaper);
-		System.out.println("CONF Number of Papers: " + myPapers.size());
 		myAuthors.add(newAuthor);
 		newPaper.paperMenu();
 		checkRoles(theUser);
@@ -334,6 +332,21 @@ public class Conference implements Serializable{
 		return myName;
 	}
 	
+	/**
+	 * Add Papers to the Conference List.
+	 * @param thePaper the paper to be added.
+	 */
+	public void addPaper(Paper thePaper) {
+		myPapers.add(thePaper);
+	}
+	
+	/**
+	 * Remove a paper from the conference.
+	 * @param thePaper to be removed
+	 */
+	public void removePaper(Paper thePaper) {
+		myPapers.remove(thePaper);
+	}
 }
 
 

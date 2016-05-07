@@ -74,12 +74,14 @@ public class Author implements Serializable{
 			System.out.println("2) un-Submit");
 			System.out.println("3) resubmit");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________\n");
 			
 			selection = scanner.nextInt();
-			
+			System.out.println("___________________________________________________\n");
+
 			if(selection == 1) {
 			    Paper temp = new Paper(myID);
+			    temp.paperMenu();
+			    addPaper(temp);
 			} else if (selection == 2) {
 				unsubmit();
 			} else if (selection == 3) {
@@ -93,8 +95,15 @@ public class Author implements Serializable{
 	 * @author Jeremy Wolf
 	 */
 	public void unsubmit() {
-		Paper tempPaper = myPaperList.get(displayPapers());
-		myPaperList.remove(tempPaper);
+		
+		int selection = displayPapers();
+		if (selection != 0) {
+			Paper tempPaper = myPaperList.get(selection - 1);
+			myPaperList.remove(tempPaper);
+			myConference.removePaper(tempPaper);
+			System.out.println("Paper has been removed");
+			System.out.println("___________________________________________________ \n");
+		}
 	}
 	
 	/**
@@ -102,8 +111,20 @@ public class Author implements Serializable{
 	 * @author Jeremy Wolf
 	 */ 
 	public void edit() {
-		Paper tempPaper = myPaperList.get(displayPapers());
-		tempPaper.edit();
+
+		int selection = displayPapers();
+		
+		if(selection != 0) {
+			Paper tempPaper = myPaperList.get(selection - 1);
+			myPaperList.remove(selection -1);
+			myConference.removePaper(tempPaper);
+		    Paper temp = new Paper(myID);
+			temp.paperMenu();
+			addPaper(temp);
+			System.out.println("Paper has been updated");
+			System.out.println("___________________________________________________ \n");
+
+		}
 	}
 	
 	/**
@@ -113,6 +134,7 @@ public class Author implements Serializable{
 	 */
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
+		myConference.addPaper(thePaper);
 }
 
 	/**
@@ -135,16 +157,16 @@ public class Author implements Serializable{
 		for (Paper tempPaper: myPaperList) {
 			System.out.print(optionCounter + ") ");
 			System.out.println(tempPaper.getTitle());	
+			optionCounter++;
 		}
 		System.out.println("0) Back");
 		selection = scanner.nextInt();
-		System.out.println("___________________________________________________ \n");
 		return selection;
 	}
 
 	private void printDetails() {
 		System.out.println("MSEE Syystem");
-		System.out.println("User: " + myFirstName);
+		System.out.println("User: " + myID);
 		System.out.println("Role: Author");
 	}
 	

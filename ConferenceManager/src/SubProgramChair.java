@@ -122,6 +122,7 @@ public class SubProgramChair implements Serializable {
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________ \n");
 		displayDetails();
+		tempPaper = myPaperList.get(selection - 1);
 		System.out.println("Paper: " + tempPaper.getTitle());
 		
 		if (selection != 0) {
@@ -169,33 +170,36 @@ public class SubProgramChair implements Serializable {
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________ \n");
 		displayDetails();
-		System.out.println("Paper: " + tempPaper.getTitle());
 		
+		
+		// Gets the paper the user selected.
 		if (selection != 0) {
+			
 			tempPaper = myPaperList.get(selection - 1);
 			authorID = tempPaper.getAuthor();
 			
 			
+			//Displays the users for review.
 			while(selection != 0) {
+				displayDetails();
+				System.out.println("Paper: " + tempPaper.getTitle() + "\n");
 				optionCounter = 1;
 				for (User tempUser: myUsers) {
 					System.out.print(optionCounter + ") ");
 					System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
 					optionCounter++;
 					}
-				}
+				
 				System.out.println("0) Back"); 
-				
 				selection = scanner.nextInt();
-				userTemp = myUsers.get(selection - 1);
-				
 				// Creates a Reviewer object and places into the Reviewer list.
 				if (selection != 0) {
+					
+					userTemp = myUsers.get(selection - 1);
 					//If the list is empty then a reviewer is added.
 					if(myRevList.isEmpty()) {
 						System.out.println(userTemp.getFirst() + " " + 
-											userTemp.getLast() + " has been assigned as a reviewer "
-													+ "and the paper has been assigned");
+								userTemp.getLast() + " has been assigned as the reviewer on the paper.");
 						Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
 							           userTemp.getLast(), userTemp.getID());
 						myRevList.add(tempRev);
@@ -215,8 +219,7 @@ public class SubProgramChair implements Serializable {
 						//If the User is not already a reviewer a new reviewer is created.
 						if (!isPresent) {
 							System.out.println(userTemp.getFirst() + " " + 
-									userTemp.getLast() + " has been assigned as a reviewer and teh paper "
-											+ "has been assigned");
+									userTemp.getLast() + " has been assigned as the reviewer on the paper.");
 							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
 							           userTemp.getLast(), userTemp.getID());
 							myRevList.add(tempRev);
@@ -224,7 +227,9 @@ public class SubProgramChair implements Serializable {
 					}
 				} 
 				System.out.println("___________________________________________________ \n");
+			}
 		}
+		
 	}
 	
 
@@ -280,7 +285,7 @@ public class SubProgramChair implements Serializable {
 	}
 	
 	private void displayDetails() {
-		System.out.println("MSEE Syystem");
+		System.out.println("MSEE System");
 		System.out.println("User: " + myFirstName);
 		System.out.println("Role: Sub-ProgramChair");
 	}

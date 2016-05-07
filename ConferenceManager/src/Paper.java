@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,12 @@ import java.util.Scanner;
  * @author Trevor N. Lowe
  * @version 1 : 5/1/16
  */
-public class Paper {
+public class Paper implements Serializable {
+	/**
+	 * Serial Version ID.
+	 */
+	private static final long serialVersionUID = -1356721982552780326L;
+
 	// -- Fields --
 	
 	/** The contact author of the paper. **/

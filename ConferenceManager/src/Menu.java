@@ -1,8 +1,14 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu implements Serializable{
 	
+	/**
+	 * Serial Version ID.
+	 */
+	private static final long serialVersionUID = 2219879119428317464L;
+
 	/**
 	 * Collection of all System Users.
 	 */
