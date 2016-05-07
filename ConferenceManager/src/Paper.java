@@ -1,4 +1,8 @@
 import java.io.File;
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+>>>>>>> refs/heads/master
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +13,12 @@ import java.util.Scanner;
  * @author Trevor N. Lowe
  * @version 1 : 5/1/16
  */
-public class Paper {
+public class Paper implements Serializable {
+	/**
+	 * Serial Version ID.
+	 */
+	private static final long serialVersionUID = -1356721982552780326L;
+
 	// -- Fields --
 	
 	/** The contact author of the paper. **/
@@ -40,7 +49,11 @@ public class Paper {
 		
 		myTitle = "";
 		myFile = null;
+<<<<<<< HEAD
 		this.myAuthor =  name;
+=======
+		myAuthor =  name;
+>>>>>>> refs/heads/master
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;
@@ -74,6 +87,10 @@ public class Paper {
 		pathOfPaper = scanner.nextLine();
 		myFile = new File(pathOfPaper);
 		System.out.println("Upload Sucessful");
+<<<<<<< HEAD
+=======
+		System.out.println("___________________________________________________\n");
+>>>>>>> refs/heads/master
 	}
 	// -- Methods (Mutator) --
 	

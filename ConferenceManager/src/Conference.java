@@ -20,15 +20,26 @@ public class Conference implements Serializable{
 	 */
 	private static final long serialVersionUID = -6224113936102614936L;
 	
+	
+	/**
+	 * the name of the conference.
+	 */
+	public String myName;
+	
 	/**
 	 * the program chair of the conference.
 	 */
 	public ProgramChair myProgramChair;
 	/**
 	 * the list of subprogram chairs of the conference.
+<<<<<<< HEAD
 	 */
 	public ArrayList<SubProgramChair> mySubProgramChairs;
 
+=======
+	 */
+	public ArrayList<SubProgramChair> mySubprogramChairs;
+>>>>>>> refs/heads/master
 	/**
 	 * the list of reviewers of the conference.
 	 */
@@ -58,6 +69,7 @@ public class Conference implements Serializable{
 	 * if the user is a Author, then this will hold the info.
 	 */
 	public Author myCurrentAuthor;
+<<<<<<< HEAD
 	
 	/**
 	 * might not be using this constructor.
@@ -72,7 +84,10 @@ public class Conference implements Serializable{
 		myPapers = new ArrayList<Paper>();
 		myReviewers = new ArrayList<Reviewer>();
 		myAuthors = new ArrayList<Author>();
+=======
+>>>>>>> refs/heads/master
 		
+<<<<<<< HEAD
 		myCurrentPC = new ProgramChair(theUser.getFirst(), theUser.getLast(), 
 					theUser.getID(), myPapers, mySubProgramChairs, theUsers );
 		myCurrentSC = null;
@@ -81,26 +96,41 @@ public class Conference implements Serializable{
 
 	}
 	
+=======
+>>>>>>> refs/heads/master
 	/**
-	 * Menu will call this constructor.
+	 * Menu will call this constructor. 
 	 * 
+	 * @author Jeremy Wolf, Made changes to the constructor.
+	 * 
+	 * @param theName is the Title of the Conference.
 	 * @param theProgramChair the Program Chair
-	 * @param theSubprogramChairs the list of Subprogram Chairs
-	 * @param theReviewers the list of Reviewers
-	 * @param theAuthors  the list of Authors
-	 * @param thePapers  the list of Papers
+	 * @param theUsers the list of Users
 	 */
+<<<<<<< HEAD
 	public Conference(ProgramChair theProgramChair, ArrayList<SubProgramChair> theSubprogramChairs,
 			ArrayList<Reviewer> theReviewers, ArrayList<Author> theAuthors,
 			ArrayList<Paper> thePapers, ArrayList<User> theUsers){
+=======
+	public Conference(String theName, User thePC, ArrayList<User> theUsers){
+>>>>>>> refs/heads/master
 		
+<<<<<<< HEAD
 		myProgramChair = theProgramChair;
 		mySubProgramChairs = theSubprogramChairs;
 		myPapers = thePapers;
 		myReviewers = theReviewers;
 		myAuthors = theAuthors;
+=======
+		myName = theName;
+		mySubprogramChairs = new ArrayList<SubProgramChair>();
+		myPapers = new ArrayList<Paper>();
+		myReviewers = new ArrayList<Reviewer>(); 
+		myAuthors = new ArrayList<Author>();
+		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
+>>>>>>> refs/heads/master
 		
-		myCurrentPC = null;
+		myCurrentPC = myProgramChair;
 		myCurrentSC = null;
 		myCurrentReviewer= null;
 	}
@@ -152,18 +182,56 @@ public class Conference implements Serializable{
 	 * @version 5/1/2016
 	 */
 	public void confMenu(User theUser){
+		
 		Scanner scanner = new Scanner(System.in);
 		int selection = -1;
-		
+		System.out.println("User: " + theUser.getID());
 		checkRoles(theUser);
 		
-		while(selection < 0 || selection >5)
+		while(selection != 0) {
 		
-		System.out.println("Select a Role or submit a paper");
-		
-		if(myCurrentPC != null){
-			System.out.println("1) Program Chair");
+			System.out.println("Select a Role or submit a paper");
+			
+			if(myCurrentPC.getID().equals(theUser.getID())){
+				System.out.println("1) Program Chair");
+			}
+			if(myCurrentSC != null && myCurrentSC.getID().equals(theUser.getID())){
+				System.out.println("2) Subprogram Chair");
+			}
+			if(myCurrentReviewer != null && myCurrentReviewer.getID().equals(theUser.getID())){
+				System.out.println("3) Reviewer");
+			}
+			if(myCurrentAuthor != null && myCurrentAuthor.getID().equals(theUser.getID())){
+				System.out.println("4) Author");
+			} else {
+				//Will only show submit a paper when the Author role is not available. 
+				System.out.println("5) Submit Paper");
+			}
+			System.out.println("0) Back");
+			
+			selection = scanner.nextInt();
+			System.out.println("_________________________________________________\n");
+			if(selection == 1){
+				myCurrentPC.pcMenu();
+			}
+			if(selection == 2){
+				myCurrentSC.scMenu();
+			}
+			if(selection == 3){
+				myCurrentReviewer.reviewerMenu();
+			}
+			if(selection == 4){
+				myCurrentAuthor.authorMenu();
+			}
+			if(selection == 5){
+				submitPaper(theUser);
+				
+			}
+			if(selection == 0){
+				theUser.userMenu();
+			}
 		}
+<<<<<<< HEAD
 		if(myCurrentSC != null){
 			System.out.println("2) Subprogram Chair");
 		}
@@ -200,14 +268,22 @@ public class Conference implements Serializable{
 			theUser.userMenu();
 		}
 		
+=======
+>>>>>>> refs/heads/master
 	}
 		
 	private void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
+<<<<<<< HEAD
 		myPapers.add(newPaper);
 		myAuthors.add(newAuthor);
+=======
+		myAuthors.add(newAuthor);
+		newPaper.paperMenu();
+		checkRoles(theUser);
+>>>>>>> refs/heads/master
 	}
 	
 	/**
@@ -262,9 +338,14 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
+<<<<<<< HEAD
 	public void setSCList(ArrayList<SubProgramChair> theSCList){
 		mySubProgramChairs = theSCList;
 
+=======
+	public void setSCList(ArrayList<SubProgramChair> theSCList){
+		mySubprogramChairs = theSCList;
+>>>>>>> refs/heads/master
 	}
 	/**
 	 * setter for Reviewer list.
@@ -309,8 +390,13 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
+<<<<<<< HEAD
 	public ArrayList<SubProgramChair> getSCList(){
 		return mySubProgramChairs;	
+=======
+	public ArrayList<SubProgramChair> getSCList(){
+		return mySubprogramChairs;	
+>>>>>>> refs/heads/master
 	}
 	/**
 	 * getter for Reviewer List.
@@ -340,6 +426,30 @@ public class Conference implements Serializable{
 		return myPapers;
 	}
 	
+	/**
+	 * Getter method for the Name of the conference.
+	 * @return the conference name.
+	 *
+	 */
+	public String getName() {
+		return myName;
+	}
+	
+	/**
+	 * Add Papers to the Conference List.
+	 * @param thePaper the paper to be added.
+	 */
+	public void addPaper(Paper thePaper) {
+		myPapers.add(thePaper);
+	}
+	
+	/**
+	 * Remove a paper from the conference.
+	 * @param thePaper to be removed
+	 */
+	public void removePaper(Paper thePaper) {
+		myPapers.remove(thePaper);
+	}
 }
 
 
