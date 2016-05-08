@@ -1,4 +1,5 @@
 package model;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -9,7 +10,6 @@ import java.util.Scanner;
  * Holds the data for a paper used in the conference.
  * 
  * @author Trevor N. Lowe
- * @author Jeremy Wolf - Created menu, made serializable.
  * @version 1 : 5/1/16
  */
 public class Paper implements Serializable {
@@ -61,10 +61,11 @@ public class Paper implements Serializable {
 	 */
 	public void paperMenu() {
 		Scanner scanner = new Scanner(System.in);
+
+		
 		System.out.println("Enter Title of Paper: ");
 		myTitle = scanner.nextLine(); 
-		System.out.println(myTitle);
-		uploadFile(scanner);
+		uploadFile();
 	}
 	
 	
@@ -73,18 +74,16 @@ public class Paper implements Serializable {
 	 * 
 	 * @author Jeremy Wolf
 	 */
-	private void uploadFile(Scanner scanner) {
+	public void uploadFile() {
+		Scanner scanner = new Scanner(System.in);
 		String pathOfPaper;
 		System.out.println("To submit a paper, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfPaper = scanner.nextLine();
-		System.out.println(pathOfPaper);
 		myFile = new File(pathOfPaper);
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
 	}
-	
-	
 	// -- Methods (Mutator) --
 	
 	/**
@@ -167,11 +166,17 @@ public class Paper implements Serializable {
 	}
 	
 	/**
-	 * Returns the File associated with the paper.
-	 * 
-	 * @return File associated with paper
+	 * Returns the File path.
+	 * @author Jeremy Wolf
 	 */
 	public File getFile() {
 		return myFile;
+	}
+	
+	/**
+	 * Add Review to paper.
+	 */
+	public void addReview(Review theRev) {
+		myReviews.add(theRev);
 	}
 }

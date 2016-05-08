@@ -1,9 +1,10 @@
-package model;
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
  *
  */
+
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class Author implements Serializable{
 	
 	private Conference myConference;
 	
+	private boolean myIsPastDueDate;
+	
 	/**
 	 * Constructor for the Author.
 	 * 
@@ -55,6 +58,7 @@ public class Author implements Serializable{
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
+		myIsPastDueDate = false;
 		myPaperList = new ArrayList<Paper>();
 		myConference = theConference;
 	}
@@ -70,23 +74,35 @@ public class Author implements Serializable{
 		
 		while(selection != 0) {
 			printDetails();
-			System.out.println("Make a Selection: ");
-			System.out.println("1) Submit");
-			System.out.println("2) un-Submit");
-			System.out.println("3) resubmit");
-			System.out.println("0) Back\n");
+			myIsPastDueDate = myConference.isDeadlinePast();
+			if (!myIsPastDueDate) {
+				System.out.println("Make a Selection: ");
+				System.out.println("1) Submit");
+				System.out.println("2) Un-Submit");
+				System.out.println("3) Resubmit");
+				System.out.println("4) View Reviews");
+				System.out.println("0) Back\n");
+			} else {
+				System.out.println("Deadline for submission has passed ");
+				System.out.println("Make a Selection: ");
+				System.out.println("2) Un-Submit");
+				System.out.println("4) View Reviews");
+				System.out.println("0) Back\n");
+			}
 			
 			selection = scanner.nextInt();
 			System.out.println("___________________________________________________\n");
 
-			if(selection == 1) {
+			if(selection == 1 && !myIsPastDueDate) {
 			    Paper temp = new Paper(myID);
 			    temp.paperMenu();
 			    addPaper(temp);
 			} else if (selection == 2) {
 				unsubmit();
-			} else if (selection == 3) {
+			} else if (selection == 3 && !myIsPastDueDate) {
 				edit();
+			} else if (selection == 4) {
+				displayReviews();
 			}
 		}
 	}
@@ -166,13 +182,51 @@ public class Author implements Serializable{
 	}
 
 	private void printDetails() {
-		System.out.println("MSEE Syystem");
+		System.out.println("MSEE System");
 		System.out.println("User: " + myID);
 		System.out.println("Role: Author");
 	}
 	
-	
-	
-	
-	
+	/**
+	 * Will display reviews of selected paper if the final 
+	 * Recommendation has been made.
+	 * @author Jeremy Wolf
+	 */
+	private void displayReviews() {
+		int optionCounter = 1;
+		int selection = -1;
+		Scanner scanner = new Scanner(System.in);
+		
+		printDetails();
+		System.out.println("Selected a paper to view reviews: ");
+		System.out.println("If no papers are displayed, they are still awaiting a decsion.");
+		for(Paper tempPaper : myPaperList) {
+			if (tempPaper.getFinal()) {
+				System.out.print(optionCounter + ") ");
+				System.out.println(tempPaper.getTitle());
+			}
+			optionCounter++;
+		}
+		System.out.println("0) Back");
+		
+		selection = scanner.nextInt();
+		System.out.println("___________________________________________________ \n");
+		
+		if(selection != 0) {
+			int counter = 1;
+			printDetails();
+			Paper tempPaper = myPaperList.get(selection - 1);
+			System.out.println("Paper: " + tempPaper.getTitle());
+			for(Review rev : tempPaper.getReviews()) {
+				System.out.println("Review number: " + counter);
+				System.out.println("\tThe rating was: " + rev.theRateing);
+				System.out.println("\tThe review comment was: ");
+				System.out.println("\t" + rev.getComment() + "\n");
+				counter++;
+			}
+			System.out.println("Press 0 to go back");
+			selection = scanner.nextInt();
+			System.out.println("___________________________________________________ \n");
+		}
+	}
 }

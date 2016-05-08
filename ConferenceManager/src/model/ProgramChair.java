@@ -1,9 +1,10 @@
-package model;
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
  *
  */
+
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,6 +54,11 @@ public class ProgramChair implements Serializable {
 	private ArrayList<User> myUserList;
 	
 	/**
+	 * Collection containing a list of all Reviewers. 
+	 */
+	private ArrayList<Reviewer> myReviewers;
+	
+	/**
 	 * Constructor for the Program Chair Class.
 	 * 
 	 * @author Jeremy Wolf
@@ -63,7 +69,7 @@ public class ProgramChair implements Serializable {
 	 */
 	public ProgramChair(String theFirst, String theLast, String theID, 
 			ArrayList<Paper> theList, ArrayList<SubProgramChair> theSCs, 
-			ArrayList<User> theUsers) {
+			ArrayList<User> theUsers, ArrayList<Reviewer> theReviewers) {
 		
 		myFirstName = theFirst;
 		myLastName = theLast;
@@ -71,6 +77,7 @@ public class ProgramChair implements Serializable {
 		myPaperList = theList; // No deep copy since we want this to be connected by reference. 
 		myUserList = theUsers; // No deep copy since we want this to be connected by reference. 
 		mySubList = theSCs;
+		myReviewers = theReviewers;
 		
 	}
 	/**
@@ -148,7 +155,6 @@ public class ProgramChair implements Serializable {
 	private void designateSC() {
 
 		int selection = -1;
-		int paperCounter = 1;
 		SubProgramChair tempSC = null;
 		User tempUser =null;
 		
@@ -165,13 +171,23 @@ public class ProgramChair implements Serializable {
 		
 			if(selection != 0) {
 				tempUser = myUserList.get(selection - 1);
+				if (!isPresent(tempUser)) {
 				// Creates a new subprogram Chair
-				tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
-											 tempUser.getID(), myUserList);
+					tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
+											 tempUser.getID(), myUserList, myReviewers);
+					mySubList.add(tempSC);
+				} else {
+					for(SubProgramChair temp : mySubList) {
+						if (tempUser.getID().equals(temp.getID())) {
+							tempSC = temp;
+							break;
+						}
+					}
+				}
 			
-				printDetails();
-				while (selection != 0 && paperCounter <= 4) {
-					paperCounter++;
+				
+				while (selection != 0 && tempSC.getPaperList().size() <= 4) {
+					printDetails();
 				
 					System.out.println("Select a Paper to be Assigned to " + tempUser.getFirst() 
 									+ " " + tempUser.getLast() + ":");
@@ -180,15 +196,46 @@ public class ProgramChair implements Serializable {
 					viewPapersWithOptions(); 
 					selection = scanner.nextInt();
 					if (selection != 0) {
-							tempSC.addPaper(myPaperList.get(selection - 1));
-							System.out.println("Paper has been assigned");
-							System.out.println("_________________________________________________\n");
+						Paper tPaper = myPaperList.get(selection - 1);
+							if (!tempSC.getID().equals(tPaper.getAuthor())) {
+								tempSC.addPaper(myPaperList.get(selection - 1));
+								System.out.println("Paper has been assigned");
+								System.out.println("_________________________________________________\n");
+					} else {
+						System.out.println("SubProgram Chair is the Author, can not assign paper");
+						System.out.println("_________________________________________________\n");
 					}
 				}
-				mySubList.add(tempSC);
+				
+				}
+				if (tempSC.getPaperList().size() >= 4 ) {
+					System.out.println("SubProgram Chair can have no more the 4 papers");
+					System.out.println("_________________________________________________\n");
+				}
 			}
+			
 		}
 	}
+	
+	/**
+	 * Checks to see if the User ID matches a Current SC.
+	 * @param theUser being checked
+	 * @return true if present, false if not.
+	 */
+	private boolean isPresent(User theUser) {
+		boolean isPresent = false; 
+		if (mySubList.isEmpty()) {
+			isPresent =  false;
+		} else {
+			for(SubProgramChair tempSC : mySubList) {
+				if (theUser.getID().equals(tempSC.getID())) {
+					isPresent = true;
+				}
+			}
+		}
+		return isPresent;
+	}
+	
 	/**
 	 * Allows the Program Chair to make the final decision on a paper.
 	 * @author Jeremy Wolf
@@ -246,6 +293,7 @@ public class ProgramChair implements Serializable {
 	 * @author Jeremy Wolf
 	 */
 	private void viewSCPapers() {
+		Scanner scanner = new Scanner(System.in);
 		printDetails();
 		for (SubProgramChair temp: mySubList) {
 			System.out.println(temp.getFirst() + " " + temp.getLast() + ":");
@@ -253,6 +301,9 @@ public class ProgramChair implements Serializable {
 				System.out.println("\t" + tempPaper.getTitle());
 			}
 		}
+		System.out.println("Press 0 to go back");
+		int selection = scanner.nextInt();
+		
 		System.out.println("_________________________________________________\n");
 	}
 	

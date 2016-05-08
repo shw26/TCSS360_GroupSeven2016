@@ -6,14 +6,16 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import model.Paper;
+import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
 
 public class SubProgramChairTest {
 	ArrayList<User> myUserList = new ArrayList<User>();
+	ArrayList<Reviewer> myRev = new ArrayList<Reviewer>();
 	User testUser = new User("Frank", "Small", "SmallTank@uw.edu");
 	User testUser1 = new User("James", "Franco", "jFrank@aswesome.net");
-	SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList);
+	SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
 	Paper thePaper = new Paper("Freddy is crazy");
 	Paper thePaper2 = new Paper("Beer Beer Beer");
 
@@ -21,7 +23,7 @@ public class SubProgramChairTest {
 	public void testscMenu() {
 		myUserList.add(testUser);
 		myUserList.add(testUser1); 
-		SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList);
+		SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
 		test1.addPaper(thePaper);
 		test1.scMenu();
 	}
