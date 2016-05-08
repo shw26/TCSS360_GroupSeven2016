@@ -377,10 +377,7 @@ public class Conference implements Serializable{
 		Calendar theDueDate = myCalendar;
 		theDueDate.add(Calendar.DAY_OF_MONTH, days);
 		return theDueDate;
+
 	}
 }
-
-
-
-
 
