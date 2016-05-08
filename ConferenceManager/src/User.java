@@ -7,7 +7,7 @@ import java.util.Scanner;
  * User Class
  * 
  * @author Will Almond
- * @version 1.0, 05/01/2016
+ * @version 1.1, 05/07/2016
  *
  */
 
@@ -99,19 +99,23 @@ public class User implements Serializable{
 	public void logout(){
 		System.exit(0);
 	}
+	
 	/**
-	 * 
-	 * @return theFirstName
-	 */
-	public String getFirst(){
-		return myFirst;
-	}
-	/**
+	 * Getter method for the last name field.
 	 * 
 	 * @return theLastName
 	 */
 	public String getLast(){
 		return myLast;
+	}
+	
+	/**
+	 * Getter Method for the last name.
+	 * 
+	 * @return theFirstName
+	 */
+	public String getFirst(){
+		return myFirst;
 	}
 	
 	/**

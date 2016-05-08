@@ -5,6 +5,7 @@
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -63,6 +64,21 @@ public class Conference implements Serializable{
 	 * if the user is a Author, then this will hold the info.
 	 */
 	public Author myCurrentAuthor;
+	/**
+	 * @author Will Almond
+	 * Calendar object for each conference.
+	 */
+	public Calendar calendar;
+	/**
+	 * @author Will Almond
+	 * Calendar object for each conference.
+	 */
+	public Calendar dueDate;
+	/**
+	 * @author Will Almond
+	 * the number of days that papers are due.
+	 */
+	public int myDays;
 		
 	/**
 	 * Menu will call this constructor. 
@@ -85,6 +101,10 @@ public class Conference implements Serializable{
 		myCurrentPC = myProgramChair;
 		myCurrentSC = null;
 		myCurrentReviewer= null;
+		//Trying this calendar and setting the dueDates to 2 weeks later.
+		calendar = Calendar.getInstance();
+		dueDate = setDueDate(calendar, myDays);
+		//
 	}
 	
 	/**
@@ -346,6 +366,17 @@ public class Conference implements Serializable{
 	 */
 	public void removePaper(Paper thePaper) {
 		myPapers.remove(thePaper);
+	}
+	
+	/**
+	 * Method to control the calendar for the Conference.
+	 * @author Will Almond
+	 * 
+	 */
+	private Calendar setDueDate(Calendar myCalendar, int days){
+		Calendar theDueDate = myCalendar;
+		theDueDate.add(Calendar.DAY_OF_MONTH, days);
+		return theDueDate;
 	}
 }
 
