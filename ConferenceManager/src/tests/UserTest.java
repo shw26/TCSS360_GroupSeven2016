@@ -95,5 +95,6 @@ public class UserTest {
 	public void testToString() {
 		fail("Not yet implemented");
 	}
-
+	
 }
+
