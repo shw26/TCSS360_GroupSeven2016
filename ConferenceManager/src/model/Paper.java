@@ -9,6 +9,7 @@ import java.util.Scanner;
  * Holds the data for a paper used in the conference.
  * 
  * @author Trevor N. Lowe
+ * @author Jeremy Wolf - Created menu, made serializable.
  * @version 1 : 5/1/16
  */
 public class Paper implements Serializable {
@@ -60,11 +61,10 @@ public class Paper implements Serializable {
 	 */
 	public void paperMenu() {
 		Scanner scanner = new Scanner(System.in);
-
-		
 		System.out.println("Enter Title of Paper: ");
 		myTitle = scanner.nextLine(); 
-		uploadFile();
+		System.out.println(myTitle);
+		uploadFile(scanner);
 	}
 	
 	
@@ -73,12 +73,12 @@ public class Paper implements Serializable {
 	 * 
 	 * @author Jeremy Wolf
 	 */
-	public void uploadFile() {
-		Scanner scanner = new Scanner(System.in);
+	private void uploadFile(Scanner scanner) {
 		String pathOfPaper;
 		System.out.println("To submit a paper, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfPaper = scanner.nextLine();
+		System.out.println(pathOfPaper);
 		myFile = new File(pathOfPaper);
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
@@ -164,5 +164,14 @@ public class Paper implements Serializable {
 	 */
 	public String getTitle() {
 		return myTitle;
+	}
+	
+	/**
+	 * Returns the File associated with the paper.
+	 * 
+	 * @return File associated with paper
+	 */
+	public File getFile() {
+		return myFile;
 	}
 }
