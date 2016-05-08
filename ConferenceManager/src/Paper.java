@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @version 1 : 5/1/16
  */
 public class Paper implements Serializable {
+
 	/**
 	 * Serial Version ID.
 	 */
@@ -167,3 +168,4 @@ public class Paper implements Serializable {
 		return myTitle;
 	}
 }
+
