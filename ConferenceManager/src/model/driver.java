@@ -21,9 +21,9 @@ public class driver {
 			User third = new User("Jacob", "Grey", "GreyJ@uw.edu");
 			User fourth = new User("Ubal", "Sakses", "ZB4LIFE@yahoo.com");
 			
-			system.createConference("The Stars are our Future Annual Meeting", first, 10);
-			system.createConference("453 Annual Beer Beer Beer Convention", second, 1);
-			system.createConference("15th Annual meeting of Robots Will Rule One Day", third, 3);
+			system.createConference("SPIE Astronomical Telescopes + Instrumentation Annual Meeting", first, 10);
+			system.createConference("10th Annual Early Childhood Education Convention", second, 1);
+			system.createConference("15th Annual meeting of Doctors in Orthopedics", third, 3);
 		}
 		
 		system.welcomeMenu();
