@@ -260,7 +260,7 @@ public class ProgramChair implements Serializable {
 			optionCounter++;
 		}
 		if (none) {
-			System.out.println("No papers are ready for final decsion.");
+			System.out.println("No papers are ready for final deicsion.");
 			System.out.println("_________________________________________________\n");
 
 		} else {
