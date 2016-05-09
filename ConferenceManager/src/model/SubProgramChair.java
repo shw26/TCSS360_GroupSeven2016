@@ -148,18 +148,9 @@ public class SubProgramChair implements Serializable {
 		}
 	}
 	
-	/**
-	 * Allows the Sub-Program Chair to assign Reviewer to papers
-	 * they are coordinating the review on. 
-	 * @author Jeremy Wolf
-	 */
-	private void assignReviewer() {
+	private int displayPapers() {
 		int optionCounter = 1;
 		int selection = -1;
-		Paper tempPaper = null;
-		User userTemp = null;
-		String authorID = "";
-		
 		Scanner scanner = new Scanner(System.in);
 		displayDetails();
 		System.out.println("Select a Paper to be Reviewed");
@@ -172,79 +163,109 @@ public class SubProgramChair implements Serializable {
 		System.out.println("0) Back\n");
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________ \n");
-		displayDetails();
 		
-		
+		return selection;
+	}
+	
+	
+	/**
+	 * Allows the Sub-Program Chair to assign Reviewer to papers
+	 * they are coordinating the review on. 
+	 * @author Jeremy Wolf
+	 */
+	private void assignReviewer() {
+		int selection = -1;
+		Paper tempPaper = null;
+		String authorID = "";
+		selection = displayPapers();
+
 		// Gets the paper the user selected.
 		if (selection != 0) {
-			
 			tempPaper = myPaperList.get(selection - 1);
 			authorID = tempPaper.getAuthor();
-			String compareID = "";
-			
-			//Displays the users for review.
-			while(selection != 0) {
-				displayDetails();
-				System.out.println("Paper: " + tempPaper.getTitle() + "\n");
-				selection = displayUsers();
-				if (selection != 0) {
-					compareID = myUsers.get(selection - 1).getID();
-				}
-				
-				if (!authorID.equals(compareID)) {
-					// Creates a Reviewer object and places into the Reviewer list.
-					if (selection != 0) {
-						
-						userTemp = myUsers.get(selection - 1);
-						//If the list is empty then a reviewer is added.
-						if(myRevList.isEmpty()) {
-							System.out.println(userTemp.getFirst() + " " + 
-									userTemp.getLast() + " has been assigned as the reviewer on the paper.");
-							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-								           userTemp.getLast(), userTemp.getID());
-							myRevList.add(tempRev);
-							tempRev.addPaper(tempPaper);
-						//If the list is not empty the contents must be check to avoid duplication.	
-						} else {
-							boolean isPresent = false;
-							for (Reviewer rev : myRevList) {
-								if (rev.getID().equals(userTemp.getID())) {
-									
-									// Check to make sure they don't have more then 4 papers.
-									if ((rev.getPaperList()).size() <= 3) {
-										rev.addPaper(tempPaper);
-										System.out.println("The paper has been assigned to " +
-														userTemp.getFirst() + " " + 
-														userTemp.getLast());
-									} else {
-										System.out.println("A Reviewer can't have more then 4 papers");
-									}
-									isPresent = true;
-									break;
-								}
-							}
-							//If the User is not already a reviewer a new reviewer is created.
-							if (!isPresent) {
-								System.out.println(userTemp.getFirst() + " " + 
-										userTemp.getLast() + " has been assigned as the reviewer on the paper.");
-								Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-								           userTemp.getLast(), userTemp.getID());
-								myRevList.add(tempRev);
-								tempRev.addPaper(tempPaper);
-							}
-						}
-					} 
-					System.out.println("___________________________________________________ \n");
-				}
-				if (authorID.equals(compareID)) {
-					System.out.println("An Author can't review their own paper.");
-					System.out.println("___________________________________________________ \n");	
-				}
-			}
+		}
+		//Displays the users for review.
+		while(selection != 0) {
+			displayDetails();
+			System.out.println("Paper: " + tempPaper.getTitle() + "\n");
+			selection = isAuthor(authorID, tempPaper);
 		}
 	}
 	
+	/**
+	 * Checks to see if the User is the author of the paper. This enforces 
+	 * the bussiness rule that a Author cant review a paper they have written.
+	 * @author Jeremy Wolf
+	 * @param theID the ID of the Author of the paper
+	 * @param thePaper the Paper to be assigned to a reviewer
+	 * @return the menu option selected.
+	 */
+	public int isAuthor(String theID, Paper thePaper) {
+		int selection = 1;
+		boolean isSame = true;
+		String compareID = "";
+		User userTemp = null;
+		selection = displayUsers();
 
+		// Creates a Reviewer object and places into the Reviewer list.
+		if (selection != 0) {
+			compareID = myUsers.get(selection - 1).getID();
+			if (!theID.equals(compareID)) {
+				userTemp = myUsers.get(selection - 1);
+				createReviewer(userTemp, thePaper);
+			} else {
+				System.out.println("An Author can't review their own paper.");
+				System.out.println("___________________________________________________ \n");	
+			} 
+		}
+		return selection;
+	}
+	
+	/**
+	 * If the user is not already a reviewer they a reviewer object is created.
+	 * If the user is a reviewer then they will have thePaper added to their review
+	 * list.
+	 * @author Jeremy Wolf
+	 * @param theUser theUser that is going to be a Reviewer.
+	 * @param thePaper the paper to be reviewed by the Reviewer.
+	 */
+	private void createReviewer(User theUser, Paper thePaper ) {
+		
+		//If the list is empty then a reviewer is added.
+		if(myRevList.isEmpty()) {
+			System.out.println(theUser.getFirst() + " " + theUser.getLast() + " has been assigned as the reviewer on the paper.");
+			Reviewer tempRev = new Reviewer(theUser.getFirst(), theUser.getLast(), theUser.getID());
+			myRevList.add(tempRev);
+			tempRev.addPaper(thePaper);
+			
+		//If the list is not empty the contents must be check to avoid duplication.	
+		} else {
+			boolean isPresent = false;
+			for (Reviewer rev : myRevList) {
+				if (rev.getID().equals(theUser.getID())) {
+					// Check to make sure they don't have more then 4 papers.
+					if ((rev.getPaperList()).size() <= 3) {
+						rev.addPaper(thePaper);
+						System.out.println("The paper has been assigned to " + theUser.getFirst() + " " + theUser.getLast());
+					} else {
+						System.out.println("A Reviewer can't have more then 4 papers");
+					}
+					isPresent = true;
+					break;
+				}
+			}
+			//If the User is not already a reviewer a new reviewer is created.
+			if (!isPresent) {
+				System.out.println(theUser.getFirst() + " " + 
+						theUser.getLast() + " has been assigned as the reviewer on the paper.");
+				Reviewer tempRev = new Reviewer(theUser.getFirst(), 
+						theUser.getLast(), theUser.getID());
+				myRevList.add(tempRev);
+				tempRev.addPaper(thePaper);
+				System.out.println("___________________________________________________ \n");
+			}
+		}
+	}
 
 	/**
 	 * Adds the Paper to the Sub-Program Chairs list.
@@ -296,12 +317,21 @@ public class SubProgramChair implements Serializable {
 		return myID;
 	}
 	
+	/**
+	 * Displays the details to be on the top of the screen
+	 * @author Jeremy Wolf
+	 */
 	private void displayDetails() {
 		System.out.println("MSEE System");
 		System.out.println("User: " + myID);
 		System.out.println("Role: Sub-ProgramChair");
 	}
 	
+	/**
+	 * Displays the Users to the console
+	 * @author Jeremy Wolf
+	 * @return an Int value for the menu selection.
+	 */
 	private int displayUsers() {
 		Scanner scanner = new Scanner(System.in);
 		int optionCounter = 1;

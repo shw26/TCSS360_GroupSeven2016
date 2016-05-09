@@ -193,7 +193,7 @@ public class Reviewer implements Serializable{
 	 */
 	private void printDetails() {
 		System.out.println("MSEE Syystem");
-		System.out.println("User: " + myFirstName);
+		System.out.println("User: " + myID);
 		System.out.println("Role: Reviewer");
 	}
 	
