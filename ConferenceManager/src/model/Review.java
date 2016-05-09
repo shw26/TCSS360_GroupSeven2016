@@ -1,4 +1,5 @@
 package model;
+
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -24,14 +25,20 @@ public class Review implements Serializable{
 	public String theComment;
 	/* the ID of the reviewer for the heading */
 	public String theID;
+	/* The paper to be reviewed */
+	public Paper myPaper;
+	/* The Reviewer doing the review */
+	public Reviewer myRev;
 	
 	/**
 	 * The constructor for Review class called every time 
 	 * a new review is made on a paper.
 	 * @param id
 	 */
-	public Review(String id){
+	public Review(String id, Paper thePaper, Reviewer theRev){
 		theID = id;
+		myPaper = thePaper;
+		myRev = theRev;
 	}
 	/**
 	 * The menu that will open every time a new review is to be created or edited.
@@ -41,25 +48,24 @@ public class Review implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("Role: Reviewer");
-			System.out.println("Paper: "+ theName + "\n");
+			displayDetails();
 		
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Type Review");
 			System.out.println("2) Rate Paper");
+			System.out.println("3) Submit Review");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________\n");
+			
 			
 			selection = scanner.nextInt();
+			System.out.println("___________________________________________________\n");
 			
 			if(selection == 1) {
 				typeReview();
 			} else if (selection == 2) {
 				rate();
-			}
-			else {
-				return;
-				//return to the previous menu somehow.
+			} else if (selection == 3) {
+				submitReview();
 			}
 		}
 	}
@@ -69,24 +75,28 @@ public class Review implements Serializable{
 	private void typeReview(){
 		String text = null;
 		Scanner scannerRev = new Scanner(System.in);
-		
-		System.out.println("Enter your review for " + theName);
+		displayDetails();
+		System.out.println("Enter your review for " + myPaper.getTitle());
 		text = scannerRev.nextLine();
 		setComment(text);
-		// return to the previous menu somehow.
+		System.out.println("Review comment updated");
+		System.out.println("___________________________________________________\n");
+
 	}
 	/**
-	 * Method to change the rating fo the paper.
+	 * Method to change the rating for the paper.
 	 */
 	private void rate(){
 		int selection = -1;
+		displayDetails();
 		Scanner scannerRate = new Scanner(System.in);
-		while(selection != 0) {
-			System.out.println("Select your numerical rating for "+ theName);
-			selection = scannerRate.nextInt();
-			setRateing(selection);
-		}
-		//return to the previous menu somehow.
+	
+		System.out.println("Select your numerical rating (1 - 10) for "+ myPaper.getTitle());
+		selection = scannerRate.nextInt();
+		System.out.println("The Paper was rated at a: " + selection);
+
+		setRateing(selection);
+		System.out.println("___________________________________________________\n");
 	}
 	/**
 	 * This method returns the conference name.
@@ -138,5 +148,35 @@ public class Review implements Serializable{
 		StringBuilder myString = new StringBuilder();
 		return myString.toString();
 	}
-	private void displayDetails(){}
+	
+	/**
+	 * Displays the details that are printed at the top of each screen.
+	 * @author Jeremy Wolf
+	 */
+	private void displayDetails(){
+		
+		System.out.println("MSEE System");
+		System.out.println("Role: Reviewer");	
+		System.out.println("Paper: " + myPaper.getTitle());
+	}
+	
+	/**
+	 * Submits the review when finished
+	 * @author Jeremy Wolf
+	 */
+	private void submitReview() {
+		myPaper.addReview(this);
+		myRev.addReview(this);
+		System.out.println("Review has been submitted");
+		System.out.println("___________________________________________________\n");
+	}
+	
+	/**
+	 * Getter method for the title of the paper.
+	 * @author Jeremy Wolf
+	 * @return the title of the paper.
+	 */
+	public String getPaperName() {
+		return myPaper.getTitle();
+	}
 }

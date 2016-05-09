@@ -1,4 +1,5 @@
 package model;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -32,6 +33,9 @@ public class Menu implements Serializable{
 	}
 	
 	public void welcomeMenu() {
+		
+		Conference two = myConferences.get(1);
+		two.changeDeadline(-2);
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -61,7 +65,7 @@ public class Menu implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome to the MSEE System\n");
-		System.out.println("Please enter your Email:");
+		System.out.print("Please enter your Email:  ");
 
 			
 		ID = scanner.nextLine();
@@ -124,7 +128,7 @@ public class Menu implements Serializable{
 				System.out.println(tempConf.getName());
 				optionCounter++;
 			}
-			System.out.println("0) Back");
+			System.out.println("0) Log Out");
 			selection = scanner.nextInt();
 			System.out.println("_________________________________________________");
 			if (selection != 0) {
@@ -135,9 +139,9 @@ public class Menu implements Serializable{
 		}
 	}
 	
-	public void createConference(String theName, User thePC) {
+	public void createConference(String theName, User thePC, int theNumDayUntilDue) {
 		myUsers.add(thePC);
-		Conference newConference = new Conference(theName, thePC, myUsers);
+		Conference newConference = new Conference(theName, thePC, myUsers, theNumDayUntilDue);
 		myConferences.add(newConference);
 		
 	}

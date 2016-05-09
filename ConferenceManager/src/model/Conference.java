@@ -1,4 +1,5 @@
 package model;
+
 /* 
  * Group Seven Project
  * TCSS360 - Spring 2016
@@ -77,7 +78,7 @@ public class Conference implements Serializable{
 	public Calendar dueDate;
 	/**
 	 * @author Will Almond
-	 * the number of days that papers are due.
+	 * the number of days until papers are due.
 	 */
 	public int myDays;
 		
@@ -90,18 +91,19 @@ public class Conference implements Serializable{
 	 * @param theProgramChair the Program Chair
 	 * @param theUsers the list of Users
 	 */
-	public Conference(String theName, User thePC, ArrayList<User> theUsers){
+	public Conference(String theName, User thePC, ArrayList<User> theUsers, int theNumDayUntilDue){
 		
 		myName = theName;
 		mySubprogramChairs = new ArrayList<SubProgramChair>();
 		myPapers = new ArrayList<Paper>();
 		myReviewers = new ArrayList<Reviewer>(); 
 		myAuthors = new ArrayList<Author>();
-		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers );
+		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers, myReviewers);
 		
 		myCurrentPC = myProgramChair;
 		myCurrentSC = null;
 		myCurrentReviewer= null;
+		myDays = theNumDayUntilDue; 
 		//Trying this calendar and setting the dueDates to 2 weeks later.
 				calendar = Calendar.getInstance();
 				dueDate = setDueDate(calendar, myDays);
@@ -176,7 +178,7 @@ public class Conference implements Serializable{
 			}
 			if(myCurrentAuthor != null && myCurrentAuthor.getID().equals(theUser.getID())){
 				System.out.println("4) Author");
-			} else {
+			} else if (!isDeadlinePast()){
 				//Will only show submit a paper when the Author role is not available. 
 				System.out.println("5) Submit Paper");
 			}
@@ -379,5 +381,14 @@ public class Conference implements Serializable{
 		return theDueDate;
 
 	}
-}
 
+	public boolean isDeadlinePast() {
+		return Calendar.getInstance().after(dueDate);
+		
+	}
+	//REMOVE THIS ONLY FOR TESTING
+	public void changeDeadline(int theNum) {
+		setDueDate(calendar, theNum);
+		
+	}
+}

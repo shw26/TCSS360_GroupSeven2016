@@ -1,9 +1,9 @@
-package model;
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
  *
  */
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,9 +49,11 @@ public class SubProgramChair implements Serializable {
 	private ArrayList<Reviewer> myRevList;
 	
 	/**
-	 * Collection containing a list of all Reviewer under the Program Chair.
+	 * Collection containing a list of all users.
 	 */
 	private ArrayList<User> myUsers;
+	
+
 	
 	
 	/**
@@ -64,14 +66,14 @@ public class SubProgramChair implements Serializable {
 	 * @param theList a collection of Users.
 	 */
 	public SubProgramChair(String theFirst, String theLast, String theID, 
-			ArrayList<User> theList) {
+			ArrayList<User> theList, ArrayList<Reviewer> theReviewers) {
 	
 		myFirstName = theFirst;
 		myLastName = theLast;
 		myID = theID;
 		myUsers = theList;
 		myPaperList = new ArrayList<Paper>();
-		myRevList = new ArrayList<Reviewer>();	
+		myRevList = theReviewers;	
 	}
 	
 	/**
@@ -178,59 +180,68 @@ public class SubProgramChair implements Serializable {
 			
 			tempPaper = myPaperList.get(selection - 1);
 			authorID = tempPaper.getAuthor();
-			
+			String compareID = "";
 			
 			//Displays the users for review.
 			while(selection != 0) {
 				displayDetails();
 				System.out.println("Paper: " + tempPaper.getTitle() + "\n");
-				optionCounter = 1;
-				for (User tempUser: myUsers) {
-					System.out.print(optionCounter + ") ");
-					System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
-					optionCounter++;
-					}
-				
-				System.out.println("0) Back"); 
-				selection = scanner.nextInt();
-				// Creates a Reviewer object and places into the Reviewer list.
+				selection = displayUsers();
 				if (selection != 0) {
-					
-					userTemp = myUsers.get(selection - 1);
-					//If the list is empty then a reviewer is added.
-					if(myRevList.isEmpty()) {
-						System.out.println(userTemp.getFirst() + " " + 
-								userTemp.getLast() + " has been assigned as the reviewer on the paper.");
-						Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.getLast(), userTemp.getID());
-						myRevList.add(tempRev);
-					//If the list is not empty the contents must be check to avoid duplication.	
-					} else {
-						boolean isPresent = false;
-						for (Reviewer rev : myRevList) {
-							if (rev.getID().equals(userTemp.getID())) {
-								rev.addPaper(tempPaper);
-								System.out.println("The paper has been assigned to " +
-													userTemp.getFirst() + " " + 
-													userTemp.getLast());
-								isPresent = true;
-								break;
-							}
-						}
-						//If the User is not already a reviewer a new reviewer is created.
-						if (!isPresent) {
+					compareID = myUsers.get(selection - 1).getID();
+				}
+				
+				if (!authorID.equals(compareID)) {
+					// Creates a Reviewer object and places into the Reviewer list.
+					if (selection != 0) {
+						
+						userTemp = myUsers.get(selection - 1);
+						//If the list is empty then a reviewer is added.
+						if(myRevList.isEmpty()) {
 							System.out.println(userTemp.getFirst() + " " + 
 									userTemp.getLast() + " has been assigned as the reviewer on the paper.");
 							Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
-							           userTemp.getLast(), userTemp.getID());
+								           userTemp.getLast(), userTemp.getID());
 							myRevList.add(tempRev);
+							tempRev.addPaper(tempPaper);
+						//If the list is not empty the contents must be check to avoid duplication.	
+						} else {
+							boolean isPresent = false;
+							for (Reviewer rev : myRevList) {
+								if (rev.getID().equals(userTemp.getID())) {
+									
+									// Check to make sure they don't have more then 4 papers.
+									if ((rev.getPaperList()).size() <= 3) {
+										rev.addPaper(tempPaper);
+										System.out.println("The paper has been assigned to " +
+														userTemp.getFirst() + " " + 
+														userTemp.getLast());
+									} else {
+										System.out.println("A Reviewer can't have more then 4 papers");
+									}
+									isPresent = true;
+									break;
+								}
+							}
+							//If the User is not already a reviewer a new reviewer is created.
+							if (!isPresent) {
+								System.out.println(userTemp.getFirst() + " " + 
+										userTemp.getLast() + " has been assigned as the reviewer on the paper.");
+								Reviewer tempRev = new Reviewer(userTemp.getFirst(), 
+								           userTemp.getLast(), userTemp.getID());
+								myRevList.add(tempRev);
+								tempRev.addPaper(tempPaper);
+							}
 						}
-					}
-				} 
-				System.out.println("___________________________________________________ \n");
+					} 
+					System.out.println("___________________________________________________ \n");
+				}
+				if (authorID.equals(compareID)) {
+					System.out.println("An Author can't review their own paper.");
+					System.out.println("___________________________________________________ \n");	
+				}
 			}
 		}
-		
 	}
 	
 
@@ -287,8 +298,23 @@ public class SubProgramChair implements Serializable {
 	
 	private void displayDetails() {
 		System.out.println("MSEE System");
-		System.out.println("User: " + myFirstName);
+		System.out.println("User: " + myID);
 		System.out.println("Role: Sub-ProgramChair");
+	}
+	
+	private int displayUsers() {
+		Scanner scanner = new Scanner(System.in);
+		int optionCounter = 1;
+		int selection = -1;
+		for (User tempUser: myUsers) {
+			System.out.print(optionCounter + ") ");
+			System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
+			optionCounter++;
+			}
+		
+		System.out.println("0) Back"); 
+		selection = scanner.nextInt();
+		return selection;
 	}
 }
 

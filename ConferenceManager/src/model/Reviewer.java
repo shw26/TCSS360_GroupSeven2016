@@ -1,9 +1,10 @@
-package model;
 /*
  * Group Seven Project
  * TCSS360 - Spring 2016
  *
  */
+
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,6 +45,11 @@ public class Reviewer implements Serializable{
 	private ArrayList<Paper> myPaperList;
 	
 	/**
+	 * Collection containing all reviews.
+	 */
+	private ArrayList<Review> myReviews;
+	
+	/**
 	 * Constructor for the Reviewer.
 	 * 
 	 * @author Jeremy Wolf
@@ -57,6 +63,7 @@ public class Reviewer implements Serializable{
 		myLastName = theLast;
 		myID = theID;
 		myPaperList = new ArrayList<Paper>();
+		myReviews = new ArrayList<Review>();
 	}
 	
 	/**
@@ -72,19 +79,44 @@ public class Reviewer implements Serializable{
 			System.out.println("Make a Selection: ");
 			System.out.println("1) View Papers");
 			System.out.println("2) Review a Paper");
+			System.out.println("3) View Reviews");
 			System.out.println("0) Back\n");
-			System.out.println("___________________________________________________\n");
+			
 			
 			selection = scanner.nextInt();
+			System.out.println("___________________________________________________\n");
 			
 			if(selection == 1) {
 				viewPapers();
 			} else if (selection == 2) {
 				submitReview();
+			} else if (selection == 3) {
+				viewReviews();
 			} 
 		}
 	}
 	
+	
+	
+	
+	
+	private void viewReviews() {
+		Scanner scanner = new Scanner(System.in);
+		if (!myReviews.isEmpty()) {
+			for (Review rev : myReviews) {
+				System.out.println("Title: " + rev.getPaperName());
+				System.out.println("\tThe rating was: " + rev.theRateing);
+				System.out.println("\tThe review comment was: ");
+				System.out.println("\t" + rev.getComment() + "\n");
+			}
+			System.out.println("Press 0 to go back");
+			int selection = scanner.nextInt();
+			System.out.println("___________________________________________________\n");
+		} else { 
+			System.out.println("You have no reviews to view");
+			System.out.println("___________________________________________________\n");
+		}
+	}
 	/**
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
@@ -106,11 +138,12 @@ public class Reviewer implements Serializable{
 		
 		// User selects paper to be reviewed.
 		selection = scanner.nextInt();
+		System.out.println("___________________________________________________\n");
 		
 		// Creates the Review object.
 		if (selection != 0) {
 			tPaper = myPaperList.get(selection - 1);
-			Review currentReview = new Review(myID);
+			Review currentReview = new Review(myID, tPaper, this);
 			currentReview.reviewMenu();
 
 		}
@@ -132,6 +165,7 @@ public class Reviewer implements Serializable{
 	 */
 	private void viewPapers() {
 		int optionCounter = 1;
+		Scanner scanner = new Scanner(System.in);
 		printDetails();
 		System.out.println("Currently Assigned Papers: ");
 		for (Paper printPaper: myPaperList ) {
@@ -140,6 +174,8 @@ public class Reviewer implements Serializable{
 			optionCounter++;
 		}
 		System.out.println("0) Back");
+		int selection = scanner.nextInt();
+		System.out.println("___________________________________________________\n");
 	}
 	
 	/**
@@ -150,9 +186,27 @@ public class Reviewer implements Serializable{
 		myPaperList.add(thePaper);
 		
 	}
+	
+	/**
+	 * Prints the details to print at the top of the screen.
+	 * @author Jeremy Wolf
+	 */
 	private void printDetails() {
 		System.out.println("MSEE Syystem");
 		System.out.println("User: " + myFirstName);
 		System.out.println("Role: Reviewer");
+	}
+	
+	/**
+	 * Getter method for the Paper list.
+	 * @author Jeremy Wolf
+	 */
+	public ArrayList<Paper> getPaperList() {
+		return myPaperList;
+		
+	}
+	
+	public void addReview(Review theRev) {
+		myReviews.add(theRev);
 	}
 }
