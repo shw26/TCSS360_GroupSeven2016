@@ -15,20 +15,13 @@ import model.Reviewer;
  * @version 05/08/2016
  */
 public class ReviewerTest {
-	
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		Reviewer testReviewer = new Reviewer("Bob", "Mortimer", "bobmortimer@gmail.com");
-	}
-
+	private Reviewer testReviewer;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		testReviewer = new Reviewer("Bob", "Mortimer", "bobmortimer@gmail.com");
 	}
 
 	/**
