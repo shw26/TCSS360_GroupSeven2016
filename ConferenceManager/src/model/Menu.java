@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import view.AuthorUI;
+
 public class Menu implements Serializable{
 	
 	/**
@@ -26,10 +28,15 @@ public class Menu implements Serializable{
 	 */
 	User myCurrentUser;
 	
+	/**
+	 * 
+	 */
+	private AuthorUI myAuthorUI;
 	
 	public Menu() {
 		myUsers = new ArrayList<User>();
 		myConferences = new ArrayList<Conference>();
+		myAuthorUI = new AuthorUI();
 	}
 	
 	public void welcomeMenu() {

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
+import view.AuthorUI;
+
 /**
  * Conference class.
  * 
@@ -81,6 +83,9 @@ public class Conference implements Serializable{
 	 * the number of days until papers are due.
 	 */
 	public int myDays;
+	
+
+	
 		
 	/**
 	 * Menu will call this constructor. 
@@ -107,7 +112,7 @@ public class Conference implements Serializable{
 		//Trying this calendar and setting the dueDates to 2 weeks later.
 				calendar = Calendar.getInstance();
 				dueDate = setDueDate(calendar, myDays);
-				//
+		
 	}
 	
 	/**
@@ -116,10 +121,12 @@ public class Conference implements Serializable{
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
-	private void checkRoles(User theUser){
+	public void checkRoles(User theUser){
 		
 		if(theUser.getID() == myCurrentPC.getID()){
 			myCurrentPC = myProgramChair;
+		} else {
+			myCurrentPC = null;
 		}
 		
 		for(int i = 0; i < mySubprogramChairs.size(); i++){
@@ -150,65 +157,8 @@ public class Conference implements Serializable{
 		}
 	}
 	
-	/**
-	 * menu for the conference level, User will choose a role here.
-	 * @param theUser
-	 * @author Shao-Han Wang 
-	 * @version 5/1/2016
-	 */
-	public void confMenu(User theUser){
 		
-		Scanner scanner = new Scanner(System.in);
-		int selection = -1;
-		System.out.println("User: " + theUser.getID());
-		checkRoles(theUser);
-		
-		while(selection != 0) {
-		
-			System.out.println("Select a Role or submit a paper");
-			
-			if(myCurrentPC.getID().equals(theUser.getID())){
-				System.out.println("1) Program Chair");
-			}
-			if(myCurrentSC != null && myCurrentSC.getID().equals(theUser.getID())){
-				System.out.println("2) Subprogram Chair");
-			}
-			if(myCurrentReviewer != null && myCurrentReviewer.getID().equals(theUser.getID())){
-				System.out.println("3) Reviewer");
-			}
-			if(myCurrentAuthor != null && myCurrentAuthor.getID().equals(theUser.getID())){
-				System.out.println("4) Author");
-			} else if (!isDeadlinePast()){
-				//Will only show submit a paper when the Author role is not available. 
-				System.out.println("5) Submit Paper");
-			}
-			System.out.println("0) Back");
-			
-			selection = scanner.nextInt();
-			System.out.println("_________________________________________________\n");
-			if(selection == 1){
-				myCurrentPC.pcMenu();
-			}
-			if(selection == 2){
-				myCurrentSC.scMenu();
-			}
-			if(selection == 3){
-				myCurrentReviewer.reviewerMenu();
-			}
-			if(selection == 4){
-				myCurrentAuthor.authorMenu();
-			}
-			if(selection == 5){
-				submitPaper(theUser);
-				
-			}
-			if(selection == 0){
-				theUser.userMenu();
-			}
-		}
-	}
-		
-	private void submitPaper(User theUser) {
+	public void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
