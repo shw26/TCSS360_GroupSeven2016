@@ -133,7 +133,7 @@ public class ProgramChair implements Serializable {
 	 * @param theUser being checked
 	 * @return true if present, false if not.
 	 */
-	private boolean isPresent(User theUser) {
+	public boolean isPresent(User theUser) {
 		boolean isPresent = false; 
 		if (mySubList.isEmpty()) {
 			isPresent =  false;

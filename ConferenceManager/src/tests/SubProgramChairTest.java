@@ -3,31 +3,101 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import model.Paper;
 import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
-
+/**
+ * not sure about ln 56 ~ 70. isAuthor tests
+ * @author user
+ *
+ */
 public class SubProgramChairTest {
-	ArrayList<User> myUserList = new ArrayList<User>();
-	ArrayList<Reviewer> myRev = new ArrayList<Reviewer>();
-	User testUser = new User("Frank", "Small", "SmallTank@uw.edu");
-	User testUser1 = new User("James", "Franco", "jFrank@aswesome.net");
-	SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
-	Paper thePaper = new Paper("Freddy is crazy");
-	Paper thePaper2 = new Paper("Beer Beer Beer");
-
-	@Test
-	public void testscMenu() {
-		myUserList.add(testUser);
-		myUserList.add(testUser1); 
-		SubProgramChair test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
-		test1.addPaper(thePaper);
-		test1.scMenu();
+	
+	
+	ArrayList<User> myUserList;
+	ArrayList<Reviewer> myRev;
+	SubProgramChair test1;
+	SubProgramChair test2;
+	Paper thePaper;
+	Paper thePaper2;
+	User user;
+	Reviewer someR;
+	
+	@Before
+	public void setUp() {
+		myUserList = new ArrayList<User>();
+		myRev = new ArrayList<Reviewer>();
+		user = new User("wi", "fi", "wifi@everywhere.com");
+		someR = new Reviewer("so", "me", "some@one.com");
+		thePaper = new Paper("wifi@everywhere.com");
+		thePaper2 = new Paper("Beer Beer Beer");
+		
+		test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
+		
+		ArrayList<Reviewer> myRev2 = new ArrayList<Reviewer>();
+		myRev2.add(someR);
+		ArrayList<User> UserList = new ArrayList<User>();
+		UserList.add(user);
+		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", UserList, myRev2);
 	}
-
+	
+	
+	@Test
+	public void testMakeRecommendationOne(){
+		test1.makeRecommendation(1, thePaper);
+		assertTrue("makeRecommendation choice 1 failed", thePaper.getRecommendation());
+	}
+	@Test
+	public void testMakeRecommendationTwo(){
+		test1.makeRecommendation(2, thePaper);
+		assertFalse("makeRecommendation choice 2 failed", thePaper.getRecommendation());
+	}
+	
+	//not sure
+	@Test
+	public void testIsAuthorT(){
+		assertEquals(" isAuthor T failed", 0 ,test2.isAuthor(1, thePaper2));
+	}
+	//not sure
+	@Test
+	public void testIsAuthorF(){
+		
+		assertEquals(" isAuthor F failed",-1 ,test2.isAuthor(1, thePaper));
+	}
+	
+	@Test
+	public void testCreateReviewerA(){
+		assertEquals("CreateReviewer A failed",1 ,test1.createReviewer(user, thePaper));
+	}
+	@Test
+	public void testCreateReviewerB(){
+		User someU = new User("so", "me", "some@one.com");
+		assertEquals("CreateReviewer B failed",1 ,test2.createReviewer(someU, thePaper));
+	}
+	@Test
+	public void testCreateReviewerC(){
+		Paper pa = new Paper("a");
+		Paper pb = new Paper("b");
+		Paper pc = new Paper("c");
+		Paper pd = new Paper("d");
+		someR.addPaper(pa);
+		someR.addPaper(pb);
+		someR.addPaper(pc);
+		someR.addPaper(pd);
+		User someU = new User("so", "me", "some@one.com");
+		assertEquals("CreateReviewer C failed",2 ,test2.createReviewer(someU, thePaper));
+	}
+	@Test
+	public void testCreateReviewerD(){
+		assertEquals("CreateReviewer D failed",1 ,test2.createReviewer(user, thePaper));
+	}
+	
+	
+	
 	@Test
 	public void testAddPaper() {
 		test1.addPaper(thePaper2);
@@ -57,5 +127,13 @@ public class SubProgramChairTest {
 		} else {
 			assertFalse("Last name did not match", false);
 		}
+	}
+	@Test
+	public void testGetID() {
+		assertEquals("getID failed", "Jwolf059@uw.edu", test1.getID());
+	}
+	@Test
+	public void testGetList() {
+		assertEquals("getList (user list) failed", myUserList, test1.getList());
 	}
 }
