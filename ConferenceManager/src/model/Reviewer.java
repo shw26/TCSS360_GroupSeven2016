@@ -66,57 +66,13 @@ public class Reviewer implements Serializable{
 		myReviews = new ArrayList<Review>();
 	}
 	
-	/**
-	 * Displays the Menu options for the Reviewer.
-	 * @author Jeremy Wolf
-	 */
-	public void reviewerMenu() {
-		int selection = -1;
-		Scanner scanner = new Scanner(System.in);
-		
-		while(selection != 0) {
-			printDetails();
-			System.out.println("Make a Selection: ");
-			System.out.println("1) View Papers");
-			System.out.println("2) Review a Paper");
-			System.out.println("3) View Reviews");
-			System.out.println("0) Back\n");
-			
-			
-			selection = scanner.nextInt();
-			System.out.println("___________________________________________________\n");
-			
-			if(selection == 1) {
-				viewPapers();
-			} else if (selection == 2) {
-				submitReview();
-			} else if (selection == 3) {
-				viewReviews();
-			} 
-		}
-	}
 	
 	
 	
 	
 	
-	private void viewReviews() {
-		Scanner scanner = new Scanner(System.in);
-		if (!myReviews.isEmpty()) {
-			for (Review rev : myReviews) {
-				System.out.println("Title: " + rev.getPaperName());
-				System.out.println("\tThe rating was: " + rev.theRateing);
-				System.out.println("\tThe review comment was: ");
-				System.out.println("\t" + rev.getComment() + "\n");
-			}
-			System.out.println("Press 0 to go back");
-			int selection = scanner.nextInt();
-			System.out.println("___________________________________________________\n");
-		} else { 
-			System.out.println("You have no reviews to view");
-			System.out.println("___________________________________________________\n");
-		}
-	}
+	
+
 	/**
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
@@ -158,25 +114,7 @@ public class Reviewer implements Serializable{
 		return myID;
 	}
 	
-	/**
-	 * Method displays an option number and the title of each paper to be
-	 * displayed to the console.
-	 * @author Jeremy Wolf
-	 */
-	private void viewPapers() {
-		int optionCounter = 1;
-		Scanner scanner = new Scanner(System.in);
-		printDetails();
-		System.out.println("Currently Assigned Papers: ");
-		for (Paper printPaper: myPaperList ) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(printPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		System.out.println("0) Back");
-		int selection = scanner.nextInt();
-		System.out.println("___________________________________________________\n");
-	}
+
 	
 	/**
 	 * Adds a paper to be reviewed.
@@ -186,17 +124,6 @@ public class Reviewer implements Serializable{
 		myPaperList.add(thePaper);
 		
 	}
-	
-	/**
-	 * Prints the details to print at the top of the screen.
-	 * @author Jeremy Wolf
-	 */
-	private void printDetails() {
-		System.out.println("MSEE Syystem");
-		System.out.println("User: " + myID);
-		System.out.println("Role: Reviewer");
-	}
-	
 	/**
 	 * Getter method for the Paper list.
 	 * @author Jeremy Wolf
