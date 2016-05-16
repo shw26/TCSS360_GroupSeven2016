@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import view.PaperUI;
+
 /**
  * Author class. This role can review papers.
  * 
@@ -79,7 +81,7 @@ public class Author implements Serializable{
 	public void edit(Paper thePaper) {		
 		unsubmit(thePaper);
 	    Paper temp = new Paper(myID);
-		temp.paperMenu();
+		PaperUI.paperMenu(temp);
 		addPaper(temp);
 	}
 	

@@ -2,9 +2,11 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 import view.AuthorUI;
+import view.ConferenceUI;
 
 public class Menu implements Serializable{
 	
@@ -42,7 +44,7 @@ public class Menu implements Serializable{
 	public void welcomeMenu() {
 		
 		Conference two = myConferences.get(1);
-		two.changeDeadline(-2);
+		two.setDueDate(Calendar.getInstance(), -2);
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -140,7 +142,9 @@ public class Menu implements Serializable{
 			System.out.println("_________________________________________________");
 			if (selection != 0) {
 				current = myConferences.get(selection - 1);
-				current.confMenu(myCurrentUser);
+				ConferenceUI ui = new ConferenceUI();
+				ui.confMenu(myCurrentUser, current);
+				
 			}
 	
 		}

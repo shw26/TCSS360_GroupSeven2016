@@ -54,36 +54,7 @@ public class Paper implements Serializable {
 		myFinal = false;
 	}
 	
-	/**
-	 * Paper menu prints to the console and calls private methods as 
-	 * the user makes selections.
-	 * @author Jeremy Wolf
-	 */
-	public void paperMenu() {
-		Scanner scanner = new Scanner(System.in);
-
-		
-		System.out.println("Enter Title of Paper: ");
-		myTitle = scanner.nextLine(); 
-		uploadFile();
-	}
 	
-	
-	/**
-	 * Uploads the paper file to the system.
-	 * 
-	 * @author Jeremy Wolf
-	 */
-	public void uploadFile() {
-		Scanner scanner = new Scanner(System.in);
-		String pathOfPaper;
-		System.out.println("To submit a paper, Enter desired path: ");
-		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
-		pathOfPaper = scanner.nextLine();
-		myFile = new File(pathOfPaper);
-		System.out.println("Upload Sucessful");
-		System.out.println("___________________________________________________\n");
-	}
 	// -- Methods (Mutator) --
 	
 	/**
@@ -115,6 +86,24 @@ public class Paper implements Serializable {
 		this.myFinal = newFinal;
 	}
 	
+	/**
+	 * Sets the file for a paper.
+	 * 
+	 * @param newFile file for the paper
+	 */
+	public void setFile(File newFile) {
+		this.myFile = newFile;
+	}
+	
+	/**
+	 * Sets the title for a paper
+	 * 
+	 * @param newTitle title of paper
+	 */
+	public void setTitle(String newTitle) {
+		this.myTitle = newTitle;
+	}
+	
 	
 	// -- Methods (Accessor) --
 	
@@ -126,6 +115,7 @@ public class Paper implements Serializable {
 	public String getAuthor() {
 		return this.myAuthor;
 	}
+	
 	
 	/**
 	 * Returns the recommendation status of the paper.

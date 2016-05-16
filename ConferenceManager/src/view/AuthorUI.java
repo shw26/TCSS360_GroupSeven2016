@@ -45,7 +45,7 @@ public class AuthorUI {
 
 			if(selection == 1 && !isPastDueDate) {
 			    Paper temp = new Paper(currentAuthor.getID());
-			    temp.paperMenu();
+			    PaperUI.paperMenu(temp);
 			    currentAuthor.addPaper(temp);
 			} else if (selection == 2) {
 				unsubmit(currentAuthor);

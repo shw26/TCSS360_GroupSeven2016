@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 
 import view.AuthorUI;
+import view.PaperUI;
 
 /**
  * Conference class.
@@ -110,8 +111,8 @@ public class Conference implements Serializable{
 		myCurrentReviewer= null;
 		myDays = theNumDayUntilDue; 
 		//Trying this calendar and setting the dueDates to 2 weeks later.
-				calendar = Calendar.getInstance();
-				dueDate = setDueDate(calendar, myDays);
+		calendar = Calendar.getInstance();
+		setDueDate(calendar, myDays);
 		
 	}
 	
@@ -157,13 +158,13 @@ public class Conference implements Serializable{
 		}
 	}
 	
-		
+
 	public void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
 		myAuthors.add(newAuthor);
-		newPaper.paperMenu();
+		PaperUI.paperMenu(newPaper);
 		checkRoles(theUser);
 	}
 	
@@ -322,23 +323,23 @@ public class Conference implements Serializable{
 	}
 	/**
 	 * Method to control the calendar for the Conference.
-	 * @author Will Almond
+	 * @author Will Almond, Trevor Lowe
 	 * 
 	 */
-	private Calendar setDueDate(Calendar myCalendar, int days){
+	public void setDueDate(Calendar myCalendar, int days){
 		Calendar theDueDate = myCalendar;
 		theDueDate.add(Calendar.DAY_OF_MONTH, days);
-		return theDueDate;
+		dueDate = theDueDate;
 
 	}
 
+	/**
+	 * Returns true if deadline past
+	 * 
+	 * @return True if deadline past
+	 */
 	public boolean isDeadlinePast() {
 		return Calendar.getInstance().after(dueDate);
-		
-	}
-	//REMOVE THIS ONLY FOR TESTING
-	public void changeDeadline(int theNum) {
-		setDueDate(calendar, theNum);
 		
 	}
 }
