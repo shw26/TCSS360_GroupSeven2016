@@ -26,7 +26,7 @@ public class driver {
 			system.createConference("15th Annual meeting of Doctors in Orthopedics", third, 3);
 		}
 		
-		system.welcomeMenu();
+		system.getMenuUI().welcomeMenu();
 		exitSave(system);
 
 	}
