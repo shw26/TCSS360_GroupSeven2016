@@ -21,11 +21,17 @@ public class MenuUI implements Serializable{
 	private Menu myMenu;
 	
 	/**
+	 * The Conference UI
+	 */
+	private ConferenceUI myConferenceUI;
+	
+	/**
 	 * Constructor for the MenuUI.
 	 * @param theMenu the Menu Model class.
 	 */
 	public MenuUI(Menu theMenu) {
 		myMenu = theMenu;
+		myConferenceUI = new ConferenceUI();
 	}
 	/**
 	 * UI welcome menu method.
@@ -95,11 +101,12 @@ public class MenuUI implements Serializable{
 		boolean found = myMenu.login(ID);
 		if (found) {
 			System.out.println("_________________________________________________");
+			selectConference();
 		} else {
 			System.out.println("Your email did not match anything in our system");
 			System.out.println("_________________________________________________");
 		}
-		selectConference();
+		
 	}
 	
 	/**
@@ -125,11 +132,10 @@ public class MenuUI implements Serializable{
 			System.out.println("_________________________________________________");
 			if (selection != 0) {
 				current = myMenu.getConferences().get(selection - 1);
-				ConferenceUI ui = new ConferenceUI();
-				ui.confMenu(myMenu.getCurrentUser(), current);
+				System.out.println(myConferenceUI.toString());
+				myConferenceUI.confMenu(tempUser, current);
 				
 			}
-	
 		}
 	}
 }

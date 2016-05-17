@@ -15,14 +15,14 @@ public class ConferenceUI {
 	public ProgramChairUI myPCUI;
 	public SubProgramChairUI mySCUI;
 	public ReviewerUI myReviewerUI;
-	public UserUI myUserUI;
+
 	
 	public ConferenceUI() {
 		myAuthorUI = new AuthorUI();
 		myPCUI = new ProgramChairUI();
 		mySCUI = new SubProgramChairUI();
 		myReviewerUI = new ReviewerUI();
-		myUserUI = new UserUI();
+
 	}
 	/**
 	 * menu for the conference level, User will choose a role here.
@@ -32,16 +32,17 @@ public class ConferenceUI {
 	 */
 	public void confMenu(User theUser, Conference theConference){
 		
-		Scanner scanner = new Scanner(System.in);
+		
 		int selection = -1;
 		System.out.println("User: " + theUser.getID());
 		theConference.checkRoles(theUser);
 		
 		while(selection != 0) {
-		
+			Scanner scanner = new Scanner(System.in);
+			
 			System.out.println("Select a Role or submit a paper");
 			
-			if(theConference.myCurrentPC.getID().equals(theUser.getID())){
+			if(theConference.myCurrentPC != null){
 				System.out.println("1) Program Chair");
 			}
 			if(theConference.myCurrentSC != null){
@@ -56,9 +57,11 @@ public class ConferenceUI {
 				//Will only show submit a paper when the Author role is not available. 
 				System.out.println("5) Submit Paper");
 			}
+			
 			System.out.println("0) Back");
 			
 			selection = scanner.nextInt();
+			
 			System.out.println("_________________________________________________\n");
 			if(selection == 1){
 				ProgramChair pC = theConference.myCurrentPC;
@@ -80,9 +83,11 @@ public class ConferenceUI {
 				theConference.submitPaper(theUser);
 				
 			}
-			if(selection == 0){
-				myUserUI.userMenu(theUser);
-			}
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "YEP ITS NOT NULL";
 	}
 }

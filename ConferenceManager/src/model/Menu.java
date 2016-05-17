@@ -19,20 +19,20 @@ public class Menu implements Serializable{
 	/**
 	 * Collection of all System Users.
 	 */
-	ArrayList<User> myUsers;
+	private ArrayList<User> myUsers;
 	
 	/**
 	 * Collection of all Conferences.
 	 */
-	ArrayList<Conference> myConferences;
+	private ArrayList<Conference> myConferences;
 	
 	/**
 	 * Current Users
 	 */
-	User myCurrentUser;
+	private User myCurrentUser;
 	
 	/**
-	 * 
+	 * The MenuUI to start the program.
 	 */
 	private MenuUI myMenuUI;
 	
@@ -43,6 +43,7 @@ public class Menu implements Serializable{
 		myUsers = new ArrayList<User>();
 		myConferences = new ArrayList<Conference>();
 		myMenuUI = new MenuUI(this);
+		myCurrentUser = null;
 	}
 	
 	/**

@@ -106,9 +106,10 @@ public class Conference implements Serializable{
 		myAuthors = new ArrayList<Author>();
 		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers, myReviewers);
 		
-		myCurrentPC = myProgramChair;
+		myCurrentPC = null;
 		myCurrentSC = null;
 		myCurrentReviewer= null;
+		myCurrentAuthor = null;
 		myDays = theNumDayUntilDue; 
 		//Trying this calendar and setting the dueDates to 2 weeks later.
 		calendar = Calendar.getInstance();
@@ -124,11 +125,14 @@ public class Conference implements Serializable{
 	 */
 	public void checkRoles(User theUser){
 		
-		if(theUser.getID() == myCurrentPC.getID()){
+		myCurrentSC = null;
+		myCurrentReviewer= null;
+		myCurrentPC = null;
+		myCurrentAuthor = null;
+		
+		if(theUser.getID() == myProgramChair.getID()){
 			myCurrentPC = myProgramChair;
-		} else {
-			myCurrentPC = null;
-		}
+		} 
 		
 		for(int i = 0; i < mySubprogramChairs.size(); i++){
 			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
@@ -340,6 +344,12 @@ public class Conference implements Serializable{
 	 */
 	public boolean isDeadlinePast() {
 		return Calendar.getInstance().after(dueDate);
+		
+	}
+	
+	@Override
+	public String toString() {
+		return myName;
 		
 	}
 }

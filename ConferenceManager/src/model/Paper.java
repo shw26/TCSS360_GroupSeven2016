@@ -35,6 +35,9 @@ public class Paper implements Serializable {
 	/** The Title of the Paper*/
 	private String myTitle;
 	
+	/**
+	 * The Paper file
+	 */
 	private File myFile;
 	
 	// -- Constructors --

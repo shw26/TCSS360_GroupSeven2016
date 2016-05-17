@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Conference;
@@ -10,17 +12,20 @@ import model.User;
 public class SubProgramChairUI {
 
 	private SubProgramChair mySubProgramChair;
+	private Conference myConference;
+	private Calendar myCalendar;
 	
-	public void scMenu(Conference theConference, SubProgramChair sC) {
-		// TODO Auto-generated method stub
-		
+	public SubProgramChairUI() {
+		myCalendar = Calendar.getInstance();
 	}
 	
 	/**
 	 * Displays the Menu options for the Sub-Program Chair.
 	 * @author Jeremy Wolf
 	 */
-	public void scMenu() {
+	public void scMenu(Conference theConference, SubProgramChair sC) {
+		mySubProgramChair = sC;
+		myConference = theConference;
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -116,7 +121,9 @@ public class SubProgramChairUI {
 	 * @author Jeremy Wolf
 	 */
 	public void displayDetails() {
+		Date today = myCalendar.getTime();
 		System.out.println("MSEE System");
+		System.out.println("Date: " + today.toString());
 		System.out.println("User: " + mySubProgramChair.getID());
 		System.out.println("Role: Sub-ProgramChair");
 	}

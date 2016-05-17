@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import view.ReviewUI;
+
 /**
  * 
  * Review Class 
@@ -32,6 +34,7 @@ public class Review implements Serializable{
 	public Reviewer myRev;
 	/* The Review File */
 	private File myFile;
+	private ReviewUI myReviewUI;
 	
 	/**
 	 * The constructor for Review class called every time 
@@ -43,6 +46,13 @@ public class Review implements Serializable{
 		myPaper = thePaper;
 		myRev = theRev;
 		myFile = null;
+		myReviewUI = new ReviewUI(this);
+	}
+	/**
+	 * Getter method for the ReviewUI
+	 */
+	public ReviewUI getReviewUI() {
+		return myReviewUI;
 	}
 	
 	/**
@@ -61,7 +71,7 @@ public class Review implements Serializable{
 		return theComment;
 	}
 	/**
-	 * The Program Chair will use this method to view the rateing. 
+	 * The Program Chair will use this method to view the rating. 
 	 * @return theRateing
 	 */
 	public int getRateing(){

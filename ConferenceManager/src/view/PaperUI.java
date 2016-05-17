@@ -12,7 +12,7 @@ public class PaperUI {
 		System.out.println("Enter Title of Paper: ");
 		thePaper.setTitle(scanner.nextLine()); 
 		uploadFile(thePaper);
-		scanner.close();
+		
 	}
 
 	public static void uploadFile(Paper thePaper) {
@@ -24,6 +24,6 @@ public class PaperUI {
 		thePaper.setFile(new File(pathOfPaper));
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
-		scanner.close();
+		
 	}
 }
