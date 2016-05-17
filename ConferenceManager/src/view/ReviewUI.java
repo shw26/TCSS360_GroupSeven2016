@@ -40,7 +40,6 @@ public class ReviewUI implements Serializable{
 			System.out.println("Make a Selection: ");
 			System.out.println("1) Type Review");
 			System.out.println("2) Rate Paper");
-			System.out.println("3) Submit Review");
 			System.out.println("0) Back\n");
 			
 			
@@ -51,10 +50,9 @@ public class ReviewUI implements Serializable{
 				uploadReview();
 			} else if (selection == 2) {
 				rate();
-			} else if (selection == 3) {
-				submitReview();
 			}
 		}
+		scanner.close();
 	}
 	private void rate() {
 		Scanner scannerRate = new Scanner(System.in);
@@ -64,17 +62,17 @@ public class ReviewUI implements Serializable{
 		System.out.println("The Paper was rated at a: " + selection);
 		myReview.setRateing(selection);
 		System.out.println("___________________________________________________\n");
+		scannerRate.close();
 		
 	}
 
 	public void uploadReview() {
 		Scanner scanner = new Scanner(System.in);
 		String pathOfReview;
-		File theReview
 		System.out.println("To submit a review, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfReview = scanner.nextLine();
-		thePaper.setFile(new File(pathOfReview));
+		myReview.setFile(new File(pathOfReview));
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
 		scanner.close();
@@ -90,16 +88,5 @@ public class ReviewUI implements Serializable{
 		System.out.println("MSEE System");
 		System.out.println("Role: Reviewer");	
 		System.out.println("Paper: " + myReview.getPaperName());
-	}
-	
-	/**
-	 * Submits the review when finished
-	 * @author Jeremy Wolf
-	 */
-	public void submitReview() {
-		myPaper.addReview(this);
-		myRev.addReview(this);
-		System.out.println("Review has been submitted");
-		System.out.println("___________________________________________________\n");
 	}
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -29,6 +30,8 @@ public class Review implements Serializable{
 	public Paper myPaper;
 	/* The Reviewer doing the review */
 	public Reviewer myRev;
+	/* The Review File */
+	private File myFile;
 	
 	/**
 	 * The constructor for Review class called every time 
@@ -39,21 +42,7 @@ public class Review implements Serializable{
 		theID = id;
 		myPaper = thePaper;
 		myRev = theRev;
-	}
-	
-	/**
-	 * Method to type the review of the paper.
-	 */
-	private void uploadReview(File theReview){
-		String text = null;
-		Scanner scannerRev = new Scanner(System.in);
-		displayDetails();
-		System.out.println("Enter your review for " + myPaper.getTitle());
-		text = scannerRev.nextLine();
-		setComment(text);
-		System.out.println("Review comment updated");
-		System.out.println("___________________________________________________\n");
-
+		myFile = null;
 	}
 	
 	/**
@@ -107,7 +96,13 @@ public class Review implements Serializable{
 		return myString.toString();
 	}
 	
-	
+	/**
+	 * Sets the file for the review
+	 * @param theFile the review file.
+	 */
+	public void setFile(File theFile) {
+		myFile = theFile;
+	}
 	
 	/**
 	 * Getter method for the title of the paper.
