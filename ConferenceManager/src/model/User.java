@@ -36,25 +36,13 @@ public class User implements Serializable{
 		myID = id;
 	}
 	/**
-	 * The menu that the user will see to log in.
-	 */
-	public void userMenu() {
-		// TODO Auto-generated method stub
-		
-	}
-	/**
 	 * method is called when user chooses a conference.
 	 * @return
 	 */
 	public Conference chooseConf(){
 		return theConf;
 	}
-	/**
-	 * This method is called to logout a user from the system.
-	 */
-	public void logout(){
-		
-	}
+
 	/**
 	 * Getter method for the last name field.
 	 * 

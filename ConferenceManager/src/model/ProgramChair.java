@@ -112,7 +112,7 @@ public class ProgramChair implements Serializable {
 	
 	public int assignPaperToSC(int theSelection, SubProgramChair theSC) {
 		int status = 0;	
-		if (theSC.getPaperList().size() <= 4) {
+		if (theSC.getPaperList().size() <= 3) {
 			Paper tPaper = myPaperList.get(theSelection - 1);
 			if (!theSC.getID().equals(tPaper.getAuthor())) {
 				theSC.addPaper(myPaperList.get(theSelection - 1));
@@ -156,6 +156,7 @@ public class ProgramChair implements Serializable {
 			thePaper.setFinal(true);
 		} else if (theSelection == 2) {
 			thePaper.setFinal(false);
+
 		}
 	}
 	

@@ -1,5 +1,8 @@
 package view;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Conference;
@@ -8,14 +11,32 @@ import model.ProgramChair;
 import model.SubProgramChair;
 import model.User;
 
-public class ProgramChairUI {
+public class ProgramChairUI implements Serializable{
 
+	/**
+	 * Serial ID for storage
+	 */
+	private static final long serialVersionUID = 2942664104684682820L;
+
+	/**
+	 * The current Program Chair
+	 */
 	private ProgramChair myCurrentPC;
-	private Conference myCurrentConference;
+	
+	/**
+	 * Calendar object to determine date
+	 */
+	private Calendar myCalendar;
+	
+	/**
+	 * Conference object
+	 */
+	private Conference myConference;
 	
 	public void pcMenu() {
 		myCurrentPC = null;
-		myCurrentConference = null;
+		myConference = null;
+		myCalendar = Calendar.getInstance();
 	}
 	
 	/**
@@ -24,13 +45,15 @@ public class ProgramChairUI {
 	 */
 	public void pcMenu(Conference theConference, ProgramChair thePC) {
 		myCurrentPC = thePC;
-		myCurrentConference = theConference;
+		myConference = theConference;
+		myCalendar = Calendar.getInstance();
+		
+		
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
-			System.out.println("User: " + thePC.getID());
-			System.out.println("Role: Program Chair");
+			printDetails();
 			System.out.println("Make a Selection: ");
 			System.out.println("1) View Papers");
 			System.out.println("2) Designate Sub-Program Chair(s)");
@@ -64,11 +87,15 @@ public class ProgramChairUI {
 		System.out.println("Select a User: (1 - " + myCurrentPC.getUsers().size() + ")");
 		
 		int selection = scanner.nextInt();
-		tempSC = myCurrentPC.createSubProgramChair(selection);
-		System.out.println("___________________________________________________\n");
-		printDetails();
-		System.out.println("Select a Paper to be Assigned to the SubProgram Chair: ");
-		selection = viewPapersWithOptions();
+		if (selection != 0) {
+			tempSC = myCurrentPC.createSubProgramChair(selection);
+			System.out.println("___________________________________________________\n");
+			printDetails();
+			System.out.println("Select a Paper to be Assigned to the SubProgram Chair: ");
+			selection = viewPapersWithOptions();
+		} else {
+			System.out.println("___________________________________________________\n");
+		}
 		if (selection != 0) {
 			int status = myCurrentPC.assignPaperToSC(selection, tempSC);
 			
@@ -97,7 +124,7 @@ public class ProgramChairUI {
 	 * displayed to the console.
 	 * @author Jeremy Wolf
 	 */
-	private void viewPapers() {
+	public void viewPapers() {
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		printDetails();
@@ -116,7 +143,7 @@ public class ProgramChairUI {
 	 * @author Jeremy Wolf
 	 * @return 
 	 */
-	private int viewPapersWithOptions() {
+	public int viewPapersWithOptions() {
 		int optionCounter = 1;
 		Scanner scanner = new Scanner(System.in);
 		for (Paper printPaper: myCurrentPC.getPapers() ) {
@@ -133,7 +160,7 @@ public class ProgramChairUI {
 	 * displayed to the console.
 	 * @author Jeremy Wolf
 	 */
-	private void viewPapersReadyForFinal() {
+	public void viewPapersReadyForFinal() {
 		int optionCounter = 1;
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
@@ -173,18 +200,22 @@ public class ProgramChairUI {
 	}
 	
 	/**
-	 * 
+	 * Prints the header at the top of the screen
 	 */
-	private void printDetails(){
+	public void printDetails(){
+		System.out.println("MSEE System");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
 		System.out.println("User: " + myCurrentPC.getID());
-		System.out.println("Role: Program Chair");	
+		System.out.println("Conference: " + myConference.getName());
+		System.out.println("Role: Program Chair \n");	
 	}
 
 	/**
 	 * Private helper method that displays all registered users to the console.
 	 * @author Jeremy Wolf
 	 */
-	private void displayUsers() {
+	public void displayUsers() {
 		int optionCounter = 1;
 		for (User u: myCurrentPC.getUsers()) {
 			System.out.print(optionCounter + ") ");
@@ -197,7 +228,7 @@ public class ProgramChairUI {
 	 * Displays the papers assigned to each Sub program Chair.
 	 * @author Jeremy Wolf
 	 */
-	private void viewSCPapers() {
+	public void viewSCPapers() {
 		Scanner scanner = new Scanner(System.in);
 		printDetails();
 		for (SubProgramChair temp: myCurrentPC.getSCs()) {

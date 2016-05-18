@@ -8,9 +8,11 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import view.AuthorUI;
+import view.PaperUI;
 
 /**
  * Conference class.
@@ -75,14 +77,16 @@ public class Conference implements Serializable{
 	public Calendar calendar;
 	/**
 	 * @author Will Almond
-	 * Calendar object for each conference.
+	 * Date object for each conference.
 	 */
-	public Calendar dueDate;
+	public Date dueDate;
 	/**
 	 * @author Will Almond
 	 * the number of days until papers are due.
 	 */
 	public int myDays;
+	
+	private PaperUI myPaperUI;
 	
 
 	
@@ -105,13 +109,15 @@ public class Conference implements Serializable{
 		myAuthors = new ArrayList<Author>();
 		myProgramChair = new ProgramChair(thePC.getFirst(), thePC.getLast(), thePC.getID(), myPapers, mySubprogramChairs, theUsers, myReviewers);
 		
-		myCurrentPC = myProgramChair;
+		myCurrentPC = null;
 		myCurrentSC = null;
 		myCurrentReviewer= null;
+		myCurrentAuthor = null;
 		myDays = theNumDayUntilDue; 
 		//Trying this calendar and setting the dueDates to 2 weeks later.
-				calendar = Calendar.getInstance();
-				dueDate = setDueDate(calendar, myDays);
+		calendar = Calendar.getInstance();
+		setDueDate(calendar, myDays);
+		myPaperUI = new PaperUI();
 		
 	}
 	
@@ -123,11 +129,14 @@ public class Conference implements Serializable{
 	 */
 	public void checkRoles(User theUser){
 		
-		if(theUser.getID() == myCurrentPC.getID()){
+		myCurrentSC = null;
+		myCurrentReviewer= null;
+		myCurrentPC = null;
+		myCurrentAuthor = null;
+		
+		if(theUser.getID() == myProgramChair.getID()){
 			myCurrentPC = myProgramChair;
-		} else {
-			myCurrentPC = null;
-		}
+		} 
 		
 		for(int i = 0; i < mySubprogramChairs.size(); i++){
 			if(mySubprogramChairs.get(i).getID() == theUser.getID()){
@@ -157,13 +166,13 @@ public class Conference implements Serializable{
 		}
 	}
 	
-		
+
 	public void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
 		myAuthors.add(newAuthor);
-		newPaper.paperMenu();
+		myPaperUI.paperMenu(newPaper);
 		checkRoles(theUser);
 	}
 	
@@ -322,23 +331,34 @@ public class Conference implements Serializable{
 	}
 	/**
 	 * Method to control the calendar for the Conference.
-	 * @author Will Almond
+	 * @author Will Almond, Trevor Lowe
 	 * 
 	 */
-	private Calendar setDueDate(Calendar myCalendar, int days){
+	public void setDueDate(Calendar myCalendar, int days){
 		Calendar theDueDate = myCalendar;
 		theDueDate.add(Calendar.DAY_OF_MONTH, days);
-		return theDueDate;
+		dueDate = theDueDate.getTime();
+		
+		
 
 	}
 
+	/**
+	 * Returns true if deadline past
+	 * 
+	 * @return True if deadline past
+	 */
 	public boolean isDeadlinePast() {
 		return Calendar.getInstance().after(dueDate);
 		
 	}
-	//REMOVE THIS ONLY FOR TESTING
-	public void changeDeadline(int theNum) {
-		setDueDate(calendar, theNum);
+	
+	/**
+	 * Getter method for the due date.
+	 * @return a Date object for the due date.
+	 */
+	public Date getDueDate() {
+		return dueDate;
 		
 	}
 }

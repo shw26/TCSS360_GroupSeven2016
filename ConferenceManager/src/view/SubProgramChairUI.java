@@ -1,5 +1,8 @@
 package view;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Conference;
@@ -7,20 +10,27 @@ import model.Paper;
 import model.SubProgramChair;
 import model.User;
 
-public class SubProgramChairUI {
+public class SubProgramChairUI implements Serializable{
 
+	/**
+	 * Serial ID for storage
+	 */
+	private static final long serialVersionUID = -871062617576421985L;
 	private SubProgramChair mySubProgramChair;
+	private Conference myConference;
+	private Calendar myCalendar;
 	
-	public void scMenu(Conference theConference, SubProgramChair sC) {
-		// TODO Auto-generated method stub
-		
+	public SubProgramChairUI() {
+		myCalendar = Calendar.getInstance();
 	}
 	
 	/**
 	 * Displays the Menu options for the Sub-Program Chair.
 	 * @author Jeremy Wolf
 	 */
-	public void scMenu() {
+	public void scMenu(Conference theConference, SubProgramChair sC) {
+		mySubProgramChair = sC;
+		myConference = theConference;
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -46,7 +56,7 @@ public class SubProgramChairUI {
 	
 	public void assignReviewer() {
 		Paper tempPaper = null;
-		displayDetails();
+		
 		int selection = displayPapers();
 		if (selection != 0) {
 			tempPaper = mySubProgramChair.getPaperList().get(selection - 1);
@@ -116,8 +126,12 @@ public class SubProgramChairUI {
 	 * @author Jeremy Wolf
 	 */
 	public void displayDetails() {
+		
 		System.out.println("MSEE System");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
 		System.out.println("User: " + mySubProgramChair.getID());
+		System.out.println("Conference: " + myConference.getName());
 		System.out.println("Role: Sub-ProgramChair");
 	}
 	
@@ -141,13 +155,11 @@ public class SubProgramChairUI {
 		return selection;
 	}
 	
+	/**
+	 * UI printout for Author is cant review.
+	 */
 	public void cantReview() {
 		System.out.println("An Author can't review their own paper.");
 		System.out.println("___________________________________________________ \n");	
 	}
-	
-	public void canReview() {
-		
-	}
-
 }
