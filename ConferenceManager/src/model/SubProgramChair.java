@@ -75,122 +75,16 @@ public class SubProgramChair implements Serializable {
 		myPaperList = new ArrayList<Paper>();
 		myRevList = theReviewers;	
 	}
-	
-	/**
-	 * Displays the Menu options for the Sub-Program Chair.
-	 * @author Jeremy Wolf
-	 */
-	public void scMenu() {
-		int selection = -1;
-		Scanner scanner = new Scanner(System.in);
-		
-		while(selection != 0) {
-			displayDetails();
-		
-			System.out.println("Make a Selection: ");
-			System.out.println("1) Submit a Recommendation");
-			System.out.println("2) Assign Reviewer to a paper");
-			System.out.println("0) Back\n");
-		
-			
-			selection = scanner.nextInt();
-			System.out.println("___________________________________________________ \n");
-			if(selection == 1) {
-				submitRecommendation();
-			} else if (selection == 2) {
-				assignReviewer();
-			}
-		}
-	}
-	
-	/**
-	 * Allows the Sub-program chair to submit a recommendation on
-	 * a paper.
-	 * @author Jeremy Wolf
-	 */
-	private void submitRecommendation() {
-		int optionCounter = 1;
-		int selection = -1;
-		Paper tempPaper = null;
-		Scanner scanner = new Scanner(System.in);
-		displayDetails();
-		System.out.println("Select a paper to make a recommendation:");
-		
-		for (Paper printPaper: myPaperList ) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(printPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		
-		selection = scanner.nextInt();
-		System.out.println("___________________________________________________ \n");
-		displayDetails();
-		tempPaper = myPaperList.get(selection - 1);
-		System.out.println("Paper: " + tempPaper.getTitle());
-		
-		if (selection != 0) {
-			tempPaper = myPaperList.get(selection - 1);
-			
-			// Displays Options
-			System.out.println("Select Recommendation:");
-			System.out.println("1) Recommend");
-			System.out.println("2) Deny");
-			System.out.println("0) Back");
-		
-			//Recommendation selection is made.
-			selection = scanner.nextInt();
-			if (selection == 1) {
-				tempPaper.setRecommendation(true);
-			} else if (selection == 2) {
-				tempPaper.setRecommendation(false);
-			}
-			System.out.println("___________________________________________________ \n");
-		}
-	}
-	
-	private int displayPapers() {
-		int optionCounter = 1;
-		int selection = -1;
-		Scanner scanner = new Scanner(System.in);
-		displayDetails();
-		System.out.println("Select a Paper to be Reviewed");
-		
-		for (Paper printPaper: myPaperList ) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(printPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		System.out.println("0) Back\n");
-		selection = scanner.nextInt();
-		System.out.println("___________________________________________________ \n");
-		
-		return selection;
-	}
-	
-	
-	/**
-	 * Allows the Sub-Program Chair to assign Reviewer to papers
-	 * they are coordinating the review on. 
-	 * @author Jeremy Wolf
-	 */
-	private void assignReviewer() {
-		int selection = -1;
-		Paper tempPaper = null;
-		String authorID = "";
-		selection = displayPapers();
 
-		// Gets the paper the user selected.
-		if (selection != 0) {
-			tempPaper = myPaperList.get(selection - 1);
-			authorID = tempPaper.getAuthor();
+	
+    public void makeRecommendation(int theSelection, Paper thePaper) {
+    	
+		if (theSelection == 1) {
+			thePaper.setRecommendation(true);
+		} else if (theSelection == 2) {
+			thePaper.setRecommendation(false);
 		}
-		//Displays the users for review.
-		while(selection != 0) {
-			displayDetails();
-			System.out.println("Paper: " + tempPaper.getTitle() + "\n");
-			selection = isAuthor(authorID, tempPaper);
-		}
-	}
+    }
 	
 	/**
 	 * Checks to see if the User is the author of the paper. This enforces 
@@ -200,24 +94,22 @@ public class SubProgramChair implements Serializable {
 	 * @param thePaper the Paper to be assigned to a reviewer
 	 * @return the menu option selected.
 	 */
-	public int isAuthor(String theID, Paper thePaper) {
-		int selection = 1;
-		boolean isSame = true;
+	public int isAuthor(int theSelection, Paper thePaper) {
+		int selection = theSelection;
+		int buildType = 0;
 		String compareID = "";
+		String theID = thePaper.getAuthor();
 		User userTemp = null;
-		selection = displayUsers();
-
-		// Creates a Reviewer object and places into the Reviewer list.
-		if (selection != 0) {
-			compareID = myUsers.get(selection - 1).getID();
-			if (!theID.equals(compareID)) {
-				userTemp = myUsers.get(selection - 1);
-				createReviewer(userTemp, thePaper);
-			} else {
-				System.out.println("An Author can't review their own paper.");
-				System.out.println("___________________________________________________ \n");	
-			} 
+		compareID = myUsers.get(selection - 1).getID();
+		if (!theID.equals(compareID)) {
+			userTemp = myUsers.get(selection - 1);
+			buildType = createReviewer(userTemp, thePaper);
+			selection = buildType;
+			
+		} else {
+			selection = -1;	
 		}
+		
 		return selection;
 	}
 	
@@ -229,14 +121,14 @@ public class SubProgramChair implements Serializable {
 	 * @param theUser theUser that is going to be a Reviewer.
 	 * @param thePaper the paper to be reviewed by the Reviewer.
 	 */
-	private void createReviewer(User theUser, Paper thePaper ) {
-		
+	public int createReviewer(User theUser, Paper thePaper ) {
+		int selection = 0;
 		//If the list is empty then a reviewer is added.
 		if(myRevList.isEmpty()) {
-			System.out.println(theUser.getFirst() + " " + theUser.getLast() + " has been assigned as the reviewer on the paper.");
 			Reviewer tempRev = new Reviewer(theUser.getFirst(), theUser.getLast(), theUser.getID());
 			myRevList.add(tempRev);
 			tempRev.addPaper(thePaper);
+			selection = 1;
 			
 		//If the list is not empty the contents must be check to avoid duplication.	
 		} else {
@@ -246,9 +138,9 @@ public class SubProgramChair implements Serializable {
 					// Check to make sure they don't have more then 4 papers.
 					if ((rev.getPaperList()).size() <= 3) {
 						rev.addPaper(thePaper);
-						System.out.println("The paper has been assigned to " + theUser.getFirst() + " " + theUser.getLast());
+						selection = 1;
 					} else {
-						System.out.println("A Reviewer can't have more then 4 papers");
+						selection = 2;
 					}
 					isPresent = true;
 					break;
@@ -256,15 +148,14 @@ public class SubProgramChair implements Serializable {
 			}
 			//If the User is not already a reviewer a new reviewer is created.
 			if (!isPresent) {
-				System.out.println(theUser.getFirst() + " " + 
-						theUser.getLast() + " has been assigned as the reviewer on the paper.");
 				Reviewer tempRev = new Reviewer(theUser.getFirst(), 
 						theUser.getLast(), theUser.getID());
 				myRevList.add(tempRev);
 				tempRev.addPaper(thePaper);
-				System.out.println("___________________________________________________ \n");
+				selection = 1;
 			}
 		}
+		return selection;
 	}
 
 	/**
@@ -304,6 +195,10 @@ public class SubProgramChair implements Serializable {
 		return myLastName;
 	}
 	
+	/**
+	 * Getter method for the User list
+	 * @return myUsers
+	 */
 	public ArrayList<User> getList() {
 		return myUsers;
 	}
@@ -315,36 +210,6 @@ public class SubProgramChair implements Serializable {
 	 */
 	public String getID() {
 		return myID;
-	}
-	
-	/**
-	 * Displays the details to be on the top of the screen
-	 * @author Jeremy Wolf
-	 */
-	private void displayDetails() {
-		System.out.println("MSEE System");
-		System.out.println("User: " + myID);
-		System.out.println("Role: Sub-ProgramChair");
-	}
-	
-	/**
-	 * Displays the Users to the console
-	 * @author Jeremy Wolf
-	 * @return an Int value for the menu selection.
-	 */
-	private int displayUsers() {
-		Scanner scanner = new Scanner(System.in);
-		int optionCounter = 1;
-		int selection = -1;
-		for (User tempUser: myUsers) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(tempUser.getFirst() + " " + tempUser.getLast() + "\n");
-			optionCounter++;
-			}
-		
-		System.out.println("0) Back"); 
-		selection = scanner.nextInt();
-		return selection;
 	}
 }
 

@@ -80,149 +80,60 @@ public class ProgramChair implements Serializable {
 		myReviewers = theReviewers;
 		
 	}
-	/**
-	 * Displays the Menu options for the Program Chair.
-	 * @author Jeremy Wolf
-	 */
-	public void pcMenu() {
-		int selection = -1;
-		Scanner scanner = new Scanner(System.in);
-		
-		while(selection != 0) {
-			System.out.println("User: " + myID);
-			System.out.println("Role: Program Chair");
-			System.out.println("Make a Selection: ");
-			System.out.println("1) View Papers");
-			System.out.println("2) Designate Sub-Program Chair(s)");
-			System.out.println("3) View Sub-Program Chair(s) assigned papers");
-			System.out.println("4) Make final decision");
-			System.out.println("0) Back\n");
-			
-			
-			selection = scanner.nextInt();
-			System.out.println("___________________________________________________\n");
-			if(selection == 1) {
-				viewPapers();
-			} else if (selection == 2) {
-				designateSC();
-			} else if (selection == 3) {
-				viewSCPapers();
-			} else if (selection == 4) {
-				
-				makeFinal();
-			}
-		}
-	}
 	
-	/**
-	 * Method displays title of each paper to be
-	 * displayed to the console.
-	 * @author Jeremy Wolf
-	 */
-	private void viewPapers() {
-		int selection = -1;
-		Scanner scanner = new Scanner(System.in);
-		printDetails();
-		System.out.println("Currently Assigned Papers:");
-		for (Paper printPaper: myPaperList ) {
-			System.out.print( "\t" + printPaper.getTitle()+ "\n");
-		}
-		System.out.println("Press 0 to go back");
-		selection = scanner.nextInt();
-		System.out.println("___________________________________________________\n");
-	}
 	
-	/**
-	 * Method displays an option number and the title of each paper to be
-	 * displayed to the console.
-	 * @author Jeremy Wolf
-	 */
-	private void viewPapersWithOptions() {
-		int optionCounter = 1;
-		for (Paper printPaper: myPaperList ) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(printPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		System.out.println("0) Back");
-
-	}
 	
 	/**
 	 * Allows the Program Chair to select SubProgram Chairs
 	 * @author Jeremy Wolf
 	 */
-	private void designateSC() {
-
-		int selection = -1;
+	public SubProgramChair createSubProgramChair(int theSelection) {		
+		User tempUser = null;
 		SubProgramChair tempSC = null;
-		User tempUser =null;
 		
-		Scanner scanner = new Scanner(System.in);
-		
-		while (selection != 0) {
-			printDetails();
-			System.out.println("Current Registered Users:\n");
-			displayUsers();
-			System.out.println("0) Back");
-			System.out.println("Select a User: (1 - " + myUserList.size() + ")");
-			
-			selection = scanner.nextInt();
-		
-			if(selection != 0) {
-				tempUser = myUserList.get(selection - 1);
-				if (!isPresent(tempUser)) {
-				// Creates a new subprogram Chair
-					tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
-											 tempUser.getID(), myUserList, myReviewers);
-					mySubList.add(tempSC);
-				} else {
-					for(SubProgramChair temp : mySubList) {
-						if (tempUser.getID().equals(temp.getID())) {
-							tempSC = temp;
-							break;
-						}
+		if(theSelection != 0) {
+			tempUser = myUserList.get(theSelection - 1);
+			if (!isPresent(tempUser)) {
+			// Creates a new subprogram Chair
+				tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
+										 tempUser.getID(), myUserList, myReviewers);
+				mySubList.add(tempSC);
+			} else {
+				for(SubProgramChair temp : mySubList) {
+					if (tempUser.getID().equals(temp.getID())) {
+						tempSC = temp;
+						break;
 					}
-				}
-			
-				
-				while (selection != 0 && tempSC.getPaperList().size() <= 4) {
-					printDetails();
-				
-					System.out.println("Select a Paper to be Assigned to " + tempUser.getFirst() 
-									+ " " + tempUser.getLast() + ":");
-					
-					// Will display the paper to be assigned.
-					viewPapersWithOptions(); 
-					selection = scanner.nextInt();
-					if (selection != 0) {
-						Paper tPaper = myPaperList.get(selection - 1);
-							if (!tempSC.getID().equals(tPaper.getAuthor())) {
-								tempSC.addPaper(myPaperList.get(selection - 1));
-								System.out.println("Paper has been assigned");
-								System.out.println("_________________________________________________\n");
-					} else {
-						System.out.println("SubProgram Chair is the Author, can not assign paper");
-						System.out.println("_________________________________________________\n");
-					}
-				}
-				
-				}
-				if (tempSC.getPaperList().size() >= 4 ) {
-					System.out.println("SubProgram Chair can have no more the 4 papers");
-					System.out.println("_________________________________________________\n");
 				}
 			}
-			
 		}
+		return tempSC;
 	}
 	
+	public int assignPaperToSC(int theSelection, SubProgramChair theSC) {
+		int status = 0;	
+		if (theSC.getPaperList().size() <= 3) {
+			Paper tPaper = myPaperList.get(theSelection - 1);
+			if (!theSC.getID().equals(tPaper.getAuthor())) {
+				theSC.addPaper(myPaperList.get(theSelection - 1));
+				status = 1;
+			} else {
+				// Subprogram chair is the author
+				status = 2;
+			}
+		} else {
+			// Has 4 papers
+			status = 3;
+		}
+		return status;
+	}
+
 	/**
 	 * Checks to see if the User ID matches a Current SC.
 	 * @param theUser being checked
 	 * @return true if present, false if not.
 	 */
-	private boolean isPresent(User theUser) {
+	public boolean isPresent(User theUser) {
 		boolean isPresent = false; 
 		if (mySubList.isEmpty()) {
 			isPresent =  false;
@@ -240,85 +151,14 @@ public class ProgramChair implements Serializable {
 	 * Allows the Program Chair to make the final decision on a paper.
 	 * @author Jeremy Wolf
 	 */
-	private void makeFinal() {
-		int optionCounter = 1;
-		int offsetCounter = 0;
-		int selection = -1;
-		Paper paperTemp = null;
-		
-		Scanner scanner = new Scanner(System.in);
-		printDetails();
-		System.out.println("Select a Paper:");
-		//Displays papers that have been given a true recommendation.
-		boolean none = true;
-		for (Paper tempPaper : myPaperList) {
-			if (tempPaper.getRecommendation() == true) {
-				none = false;
-				System.out.print(optionCounter + ") ");
-				System.out.print(tempPaper.getTitle() + "\n");
-			}
-			optionCounter++;
-		}
-		if (none) {
-			System.out.println("No papers are ready for final decsion.");
-			System.out.println("_________________________________________________\n");
-
-		} else {
-			//Scans for input for paper selection.
-			selection = scanner.nextInt();
-			paperTemp = myPaperList.get(selection - 1);
-		
-			System.out.println("_________________________________________________\n");
-			printDetails();
-			System.out.println("Paper: " + paperTemp.getTitle());
-			// Displays Options
-			System.out.println("Select Final Decision:\n");
-			System.out.println("1) Accept");
-			System.out.println("2) Deny");
-			System.out.println("0) Back");
-	
-			//Final Decision selection is made.
-			selection = scanner.nextInt();
-			System.out.println("_________________________________________________\n");
-			if (selection == 1) {
-				paperTemp.setFinal(true);
-			} else if (selection == 2) {
-				paperTemp.setFinal(false);
-			}
+	public void makeFinal(Paper thePaper, int theSelection) {
+		if (theSelection == 1) {
+			thePaper.setFinal(true);
+		} else if (theSelection == 2) {
+			thePaper.setFinal(false);
 		}
 	}
 	
-	/**
-	 * Displays the papers assigned to each Sub program Chair.
-	 * @author Jeremy Wolf
-	 */
-	private void viewSCPapers() {
-		Scanner scanner = new Scanner(System.in);
-		printDetails();
-		for (SubProgramChair temp: mySubList) {
-			System.out.println(temp.getFirst() + " " + temp.getLast() + ":");
-			for (Paper tempPaper : temp.getPaperList()){
-				System.out.println("\t" + tempPaper.getTitle());
-			}
-		}
-		System.out.println("Press 0 to go back");
-		int selection = scanner.nextInt();
-		
-		System.out.println("_________________________________________________\n");
-	}
-	
-	/**
-	 * Private helper method that displays all registered users to the console.
-	 * @author Jeremy Wolf
-	 */
-	private void displayUsers() {
-		int optionCounter = 1;
-		for (User u: myUserList) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(u.getFirst() + " " + u.getLast() + "\n");
-			optionCounter++;
-		}
-	}
 	
 	/**
 	 * Getter method for the myID field
@@ -329,8 +169,30 @@ public class ProgramChair implements Serializable {
 		return myID;
 	}
 	
-	private void printDetails(){
-		System.out.println("User: " + myID);
-		System.out.println("Role: Program Chair");	
+	/**
+	 * Getter method for the list of Papers
+	 * @return myPaperList;
+	 */
+	public ArrayList<Paper> getPapers() {
+
+		return myPaperList;
 	}
+
+
+	/**
+	 * Getter method for the User list
+	 * @return myUserList
+	 */
+	public ArrayList<User> getUsers() {
+		return myUserList;
 	}
+
+
+	/**
+	 * Getter method for the SubProgram Chair list
+	 * @return mySubList
+	 */
+	public ArrayList<SubProgramChair> getSCs() {
+		return mySubList;
+	}
+}

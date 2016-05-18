@@ -26,13 +26,13 @@ public class driver {
 			system.createConference("15th Annual meeting of Doctors in Orthopedics", third, 3);
 		}
 		
-		system.welcomeMenu();
+		system.getMenuUI().welcomeMenu();
 		exitSave(system);
 
 	}
 	
 	
-	private static Menu openSave() {
+	public static Menu openSave() {
 		Menu m = null;
 	      try
 	      {
@@ -57,7 +57,7 @@ public class driver {
 	/**
 	 * Creates output file with serialized information for the state of the system.
 	 */
-	private static void exitSave(Menu theMenu) {
+	public static void exitSave(Menu theMenu) {
 		 try
 	      {
 	         FileOutputStream fileOut =

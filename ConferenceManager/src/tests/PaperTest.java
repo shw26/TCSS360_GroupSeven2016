@@ -24,31 +24,6 @@ public class PaperTest {
 		testPaper = new Paper("Test Author");
 	}
 	
-	// paperMenu Tests
-	/** Tests to see if inputed paper title is saved to paper. **/
-	@Test
-	public void paperMenuTest() {
-		StringBuilder lines = new StringBuilder("Test title");
-		lines.append(System.getProperty("line.separator"));
-		lines.append("Assets/testPaper1");
-		String userInput = lines.toString();
-		System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-		testPaper.paperMenu();
-		assertEquals("Set paper title failed.", "Test title", testPaper.getTitle());
-	}
-	
-	// uploadFile Tests
-	/** Tests to see if inputed file is stored in paper. **/
-	@Test
-	public void uploadFileTest() {
-		StringBuilder lines = new StringBuilder("Test title");
-		lines.append(System.getProperty("line.separator"));
-		lines.append("Assets/testPaper1");
-		String userInput = lines.toString();
-		System.setIn(new ByteArrayInputStream(userInput.getBytes()));
-		testPaper.paperMenu();
-		assertEquals("Set paper address failed.", new File("Assets/testPaper1"), testPaper.getFile());
-	}
 	
 	// setRecommendation Tests
 	/** Tests if setRecoomendation sets the recommendation. **/
