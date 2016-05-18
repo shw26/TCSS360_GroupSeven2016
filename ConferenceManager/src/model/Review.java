@@ -41,28 +41,21 @@ public class Review implements Serializable{
 	/**
 	 * The constructor for Review class called every time 
 	 * a new review is made on a paper.
-	 * @param id
+	 * @param
 	 */
-	public Review(String id, Paper thePaper, Reviewer theRev){
-		theID = id;
+	public Review(Paper thePaper, Reviewer theRev){// removed String id to prevent errors 05/18/2016.
+		theID = theRev.getID();
 		myPaper = thePaper;
 		myRev = theRev;
 		myFile = null;
 		myReviewUI = new ReviewUI(this);
 	}
-//<<<<<<< HEAD
-//
-//
-//
-//=======
 	/**
 	 * Getter method for the ReviewUI
 	 */
 	public ReviewUI getReviewUI() {
 		return myReviewUI;
 	}
-//	
-//>>>>>>> refs/remotes/origin/master
 	/**
 	 * This method returns the conference name.
 	 * @return theName
@@ -106,30 +99,42 @@ public class Review implements Serializable{
 	public void setRateing(int rateing){
 		setTheRateing(rateing);
 	}
+//	/**
+//	 * toString method to display the review in a uniform instance.
+//	 */
+//	public String toString(){
+//		StringBuilder myString = new StringBuilder();
+//		return myString.toString();
+//	}
 	/**
-	 * toString method to display the review in a uniform instance.
-	 */
-	public String toString(){
-		StringBuilder myString = new StringBuilder();
-		return myString.toString();
-	}
-//<<<<<<< HEAD
-	/**
-	 * Submits the review when finished
+	 * Submits the review when finished.
 	 * @author Jeremy Wolf
 	 */
 	public void submitReview() {
 		myPaper.addReview(this);
 		myRev.addReview(this);
-//=======
+
+	}
+	/**
+	 * Gets the ID of the reviewer.
+	 * @return theID
+	 */
+	public String getTheID() {
+		return theID;
+	}
+	/**
+	 * Sets the id of the reviewer on this review.
+	 * @param theID
+	 */
+	public void setTheID(String theID) {
+		this.theID = theID;
 	}
 	/**
 	 * Sets the file for the review
 	 * @param theFile the review file.
 	 */
 	public void setFile(File theFile) {
-		myFile = theFile;
-//>>>>>>> refs/remotes/origin/master
+		this.myFile = theFile;
 	}
 	
 	/**
@@ -141,16 +146,18 @@ public class Review implements Serializable{
 		return myPaper.getTitle();
 	}
 	/**
-	 * Gets the rating
+	 * Gets the rating of the paper.
 	 * @author Will Almond
 	 * @return
 	 */
 	public int getTheRateing() {
 		return theRateing;
 	}
-
-
-
+	/**
+	 * Sets the rating of the paper.
+	 * @author Will Almond
+	 * @param theRateing
+	 */
 	public void setTheRateing(int theRateing) {
 		this.theRateing = theRateing;
 	}
