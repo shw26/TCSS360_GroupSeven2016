@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -93,14 +94,7 @@ public class ConferenceTest {
 	public void getThePCTest() {
 		assertEquals("getThePC failed!", first.getID(), myConference.getThePC().getID());
 	}
-	/* a test for menu require user input. does not check for any result.
-	@Test
-	public void confMenuTest() {
-		myConference.confMenu(first);
-		
-		//assertEquals(" confMenu failed!", null, myConference);
-	}
-	*/
+	
 	@Test
 	public void getNameTest() {
 		assertEquals("getName failed!", "Conference A", myConference.getName());
@@ -119,10 +113,34 @@ public class ConferenceTest {
 		assertEquals("removePaper failed!", true, myConference.getPaperList().isEmpty());
 	}
 	
-	/*
 	@Test
-	public void Test() {
-		assertEquals(" failed! (not null)", null, myConference);
+	public void checkRolesTest1() {
+		myConference.checkRoles(first);
+		assertEquals("checkRoles failed!", myConference.getThePC(), myConference.getPC());
 	}
-	*/
+	
+	@Test
+	public void checkRolesTest2() {
+		myConference.checkRoles(second);
+		assertEquals("checkRoles failed!", null, myConference.getPC());
+	}
+	
+	@Test
+	public void submitPapersTest() {
+		
+	}
+	
+	@Test
+	public void setDueDateTest1() {
+		Calendar myCal = Calendar.getInstance();
+		myConference.setDueDate(myCal, -1);
+		assertTrue("SetDueDate Failure", myConference.isDeadlinePast());
+	}
+	
+	@Test
+	public void setDueDateTest2() {
+		Calendar myCal = Calendar.getInstance();
+		myConference.setDueDate(myCal, 2);
+		assertFalse("SetDueDate Failure", myConference.isDeadlinePast());
+	}
 }

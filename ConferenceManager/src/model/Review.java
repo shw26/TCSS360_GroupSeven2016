@@ -1,7 +1,10 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Scanner;
+
+import view.ReviewUI;
 
 /**
  * 
@@ -29,6 +32,11 @@ public class Review implements Serializable{
 	private Paper myPaper;
 	/* The Reviewer doing the review */
 	private Reviewer myRev;
+
+	/* The Review File */
+	private File myFile;
+	private ReviewUI myReviewUI;
+
 	
 	/**
 	 * The constructor for Review class called every time 
@@ -39,10 +47,22 @@ public class Review implements Serializable{
 		theID = id;
 		myPaper = thePaper;
 		myRev = theRev;
+		myFile = null;
+		myReviewUI = new ReviewUI(this);
 	}
-
-
-
+//<<<<<<< HEAD
+//
+//
+//
+//=======
+	/**
+	 * Getter method for the ReviewUI
+	 */
+	public ReviewUI getReviewUI() {
+		return myReviewUI;
+	}
+//	
+//>>>>>>> refs/remotes/origin/master
 	/**
 	 * This method returns the conference name.
 	 * @return theName
@@ -59,7 +79,7 @@ public class Review implements Serializable{
 		return theComment;
 	}
 	/**
-	 * The Program Chair will use this method to view the rateing. 
+	 * The Program Chair will use this method to view the rating. 
 	 * @return theRateing
 	 */
 	public int getRateing(){
@@ -93,6 +113,7 @@ public class Review implements Serializable{
 		StringBuilder myString = new StringBuilder();
 		return myString.toString();
 	}
+//<<<<<<< HEAD
 	/**
 	 * Submits the review when finished
 	 * @author Jeremy Wolf
@@ -100,6 +121,15 @@ public class Review implements Serializable{
 	public void submitReview() {
 		myPaper.addReview(this);
 		myRev.addReview(this);
+//=======
+	}
+	/**
+	 * Sets the file for the review
+	 * @param theFile the review file.
+	 */
+	public void setFile(File theFile) {
+		myFile = theFile;
+//>>>>>>> refs/remotes/origin/master
 	}
 	
 	/**

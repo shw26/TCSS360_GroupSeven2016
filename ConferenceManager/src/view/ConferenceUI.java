@@ -1,5 +1,8 @@
 package view;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Author;
@@ -9,20 +12,43 @@ import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
 
-public class ConferenceUI {
+public class ConferenceUI implements Serializable{
 	
+	/**
+	 * Serial ID for Storage
+	 */
+	private static final long serialVersionUID = -625244184685421177L;
+	
+	/**
+	 * AuthorUI Object
+	 */
 	public AuthorUI myAuthorUI;
+	/**
+	 * Program Chair UI Object
+	 */
 	public ProgramChairUI myPCUI;
+	/**
+	 * SubProgram Chair UI object
+	 */
 	public SubProgramChairUI mySCUI;
+	
+	/**
+	 * Reviewer UI object
+	 */
 	public ReviewerUI myReviewerUI;
-	public UserUI myUserUI;
+	
+	/**
+	 * Calendar Object
+	 */
+	private Calendar myCalendar;
+
 	
 	public ConferenceUI() {
 		myAuthorUI = new AuthorUI();
 		myPCUI = new ProgramChairUI();
 		mySCUI = new SubProgramChairUI();
 		myReviewerUI = new ReviewerUI();
-		myUserUI = new UserUI();
+		myCalendar = Calendar.getInstance();
 	}
 	/**
 	 * menu for the conference level, User will choose a role here.
@@ -32,16 +58,17 @@ public class ConferenceUI {
 	 */
 	public void confMenu(User theUser, Conference theConference){
 		
-		Scanner scanner = new Scanner(System.in);
+		
 		int selection = -1;
-		System.out.println("User: " + theUser.getID());
+		printDetails(theUser);
 		theConference.checkRoles(theUser);
 		
 		while(selection != 0) {
-		
+			Scanner scanner = new Scanner(System.in);
+			
 			System.out.println("Select a Role or submit a paper");
 			
-			if(theConference.myCurrentPC.getID().equals(theUser.getID())){
+			if(theConference.myCurrentPC != null){
 				System.out.println("1) Program Chair");
 			}
 			if(theConference.myCurrentSC != null){
@@ -56,9 +83,11 @@ public class ConferenceUI {
 				//Will only show submit a paper when the Author role is not available. 
 				System.out.println("5) Submit Paper");
 			}
+			
 			System.out.println("0) Back");
 			
 			selection = scanner.nextInt();
+			
 			System.out.println("_________________________________________________\n");
 			if(selection == 1){
 				ProgramChair pC = theConference.myCurrentPC;
@@ -80,9 +109,12 @@ public class ConferenceUI {
 				theConference.submitPaper(theUser);
 				
 			}
-			if(selection == 0){
-				myUserUI.userMenu(theUser);
-			}
 		}
+	}
+	public void printDetails(User theUser) {
+		System.out.println("MSEE System");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
+		System.out.println("User: " + theUser.getID() + "\n");
 	}
 }
