@@ -95,14 +95,12 @@ public class SubProgramChair implements Serializable {
 	 * @return the menu option selected.
 	 */
 	public int isAuthor(int theSelection, Paper thePaper) {
-		int selection = 1;
+		int selection = theSelection;
 		int buildType = 0;
-		boolean isSame = true;
 		String compareID = "";
 		String theID = thePaper.getAuthor();
 		User userTemp = null;
 		compareID = myUsers.get(selection - 1).getID();
-		
 		if (!theID.equals(compareID)) {
 			userTemp = myUsers.get(selection - 1);
 			buildType = createReviewer(userTemp, thePaper);

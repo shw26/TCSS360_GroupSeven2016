@@ -2,6 +2,7 @@ package view;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Conference;
@@ -26,12 +27,18 @@ public class MenuUI implements Serializable{
 	private ConferenceUI myConferenceUI;
 	
 	/**
+	 * Calendar object to determine date
+	 */
+	private Calendar myCalendar;
+	
+	/**
 	 * Constructor for the MenuUI.
 	 * @param theMenu the Menu Model class.
 	 */
 	public MenuUI(Menu theMenu) {
 		myMenu = theMenu;
 		myConferenceUI = new ConferenceUI();
+		myCalendar = Calendar.getInstance();
 	}
 	/**
 	 * UI welcome menu method.
@@ -114,17 +121,24 @@ public class MenuUI implements Serializable{
 	 */
 	public void selectConference() {
 		int selection = -1;
+		Date due = null;
+		
 		User tempUser = myMenu.getCurrentUser();
 		if (selection != 0) {
 			int optionCounter = 1;
 			Conference current = null;
 			Scanner scanner = new Scanner(System.in);
-			System.out.println("User: " + tempUser.getID());
+			System.out.println("MSEE System");
+			Date today = myCalendar.getTime();
+			System.out.println("Date: " + today.toString());
+			System.out.println("User: " + tempUser.getID() + "\n");
 			System.out.println("Select a Conference:");
 		
 			for (Conference tempConf : myMenu.getConferences()) {
+				due = tempConf.getDueDate();
+				String dueDate = due.toString();
 				System.out.print(optionCounter + ") ");
-				System.out.println(tempConf.getName());
+				System.out.println(tempConf.getName() + " ---- Submission Deadline: " + dueDate.substring(0, 11) );
 				optionCounter++;
 			}
 			System.out.println("0) Log Out");
@@ -132,7 +146,6 @@ public class MenuUI implements Serializable{
 			System.out.println("_________________________________________________");
 			if (selection != 0) {
 				current = myMenu.getConferences().get(selection - 1);
-				System.out.println(myConferenceUI.toString());
 				myConferenceUI.confMenu(tempUser, current);
 				
 			}

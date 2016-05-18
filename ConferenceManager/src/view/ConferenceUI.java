@@ -1,5 +1,8 @@
 package view;
 
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Author;
@@ -9,12 +12,35 @@ import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
 
-public class ConferenceUI {
+public class ConferenceUI implements Serializable{
 	
+	/**
+	 * Serial ID for Storage
+	 */
+	private static final long serialVersionUID = -625244184685421177L;
+	
+	/**
+	 * AuthorUI Object
+	 */
 	public AuthorUI myAuthorUI;
+	/**
+	 * Program Chair UI Object
+	 */
 	public ProgramChairUI myPCUI;
+	/**
+	 * SubProgram Chair UI object
+	 */
 	public SubProgramChairUI mySCUI;
+	
+	/**
+	 * Reviewer UI object
+	 */
 	public ReviewerUI myReviewerUI;
+	
+	/**
+	 * Calendar Object
+	 */
+	private Calendar myCalendar;
 
 	
 	public ConferenceUI() {
@@ -22,7 +48,7 @@ public class ConferenceUI {
 		myPCUI = new ProgramChairUI();
 		mySCUI = new SubProgramChairUI();
 		myReviewerUI = new ReviewerUI();
-
+		myCalendar = Calendar.getInstance();
 	}
 	/**
 	 * menu for the conference level, User will choose a role here.
@@ -34,7 +60,7 @@ public class ConferenceUI {
 		
 		
 		int selection = -1;
-		System.out.println("User: " + theUser.getID());
+		printDetails(theUser);
 		theConference.checkRoles(theUser);
 		
 		while(selection != 0) {
@@ -85,9 +111,10 @@ public class ConferenceUI {
 			}
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "YEP ITS NOT NULL";
+	public void printDetails(User theUser) {
+		System.out.println("MSEE System");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
+		System.out.println("User: " + theUser.getID() + "\n");
 	}
 }

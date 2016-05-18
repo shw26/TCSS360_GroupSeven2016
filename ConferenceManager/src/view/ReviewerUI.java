@@ -1,6 +1,8 @@
 package view;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import model.Conference;
@@ -20,7 +22,15 @@ public class ReviewerUI implements Serializable{
 	 */
 	private Reviewer myReviewer;
 	
+	/**
+	 * The Current Conference
+	 */
 	private Conference myConference;
+	
+	/**
+	 * The calendar to determine the date.
+	 */
+	private Calendar myCalendar;
 	
 	/**
 	 * Displays the Menu options for the Reviewer.
@@ -29,10 +39,12 @@ public class ReviewerUI implements Serializable{
 	public void reviewerMenu(Conference theConference, Reviewer theReviewer) {
 		myReviewer = theReviewer;
 		myConference = theConference;
+		
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
+			myCalendar = Calendar.getInstance();
 			printDetails();
 			System.out.println("Make a Selection: ");
 			System.out.println("1) View Papers");
@@ -97,8 +109,10 @@ public class ReviewerUI implements Serializable{
 	 */
 	public void printDetails() {
 		System.out.println("MSEE Syystem");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
 		System.out.println("User: " + myReviewer.getID());
-		System.out.println("Role: Reviewer");
+		System.out.println("Role: Reviewer" + "\n");
 	}
 	
 	/**
@@ -106,7 +120,7 @@ public class ReviewerUI implements Serializable{
 	 * displayed to the console.
 	 * @author Jeremy Wolf
 	 */
-	private void viewPapers() {
+	public void viewPapers() {
 		int optionCounter = 1;
 		Scanner scanner = new Scanner(System.in);
 		printDetails();

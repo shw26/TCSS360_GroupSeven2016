@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 import view.AuthorUI;
@@ -76,14 +77,16 @@ public class Conference implements Serializable{
 	public Calendar calendar;
 	/**
 	 * @author Will Almond
-	 * Calendar object for each conference.
+	 * Date object for each conference.
 	 */
-	public Calendar dueDate;
+	public Date dueDate;
 	/**
 	 * @author Will Almond
 	 * the number of days until papers are due.
 	 */
 	public int myDays;
+	
+	private PaperUI myPaperUI;
 	
 
 	
@@ -114,6 +117,7 @@ public class Conference implements Serializable{
 		//Trying this calendar and setting the dueDates to 2 weeks later.
 		calendar = Calendar.getInstance();
 		setDueDate(calendar, myDays);
+		myPaperUI = new PaperUI();
 		
 	}
 	
@@ -168,7 +172,7 @@ public class Conference implements Serializable{
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
 		newAuthor.addPaper(newPaper);
 		myAuthors.add(newAuthor);
-		PaperUI.paperMenu(newPaper);
+		myPaperUI.paperMenu(newPaper);
 		checkRoles(theUser);
 	}
 	
@@ -333,7 +337,9 @@ public class Conference implements Serializable{
 	public void setDueDate(Calendar myCalendar, int days){
 		Calendar theDueDate = myCalendar;
 		theDueDate.add(Calendar.DAY_OF_MONTH, days);
-		dueDate = theDueDate;
+		dueDate = theDueDate.getTime();
+		
+		
 
 	}
 
@@ -347,9 +353,12 @@ public class Conference implements Serializable{
 		
 	}
 	
-	@Override
-	public String toString() {
-		return myName;
+	/**
+	 * Getter method for the due date.
+	 * @return a Date object for the due date.
+	 */
+	public Date getDueDate() {
+		return dueDate;
 		
 	}
 }

@@ -2,8 +2,11 @@ package view;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
+import model.Conference;
 import model.Review;
 
 public class ReviewUI implements Serializable{
@@ -18,6 +21,11 @@ public class ReviewUI implements Serializable{
 	 */
 	private Review myReview;
 	
+	/**
+	 * Calendar object to determine date
+	 */
+	private Calendar myCalendar;
+	
 	
 	/**
 	 * Constructor for ReviewUI
@@ -25,6 +33,7 @@ public class ReviewUI implements Serializable{
 	 */
 	public ReviewUI(Review theReview) {
 		myReview = theReview;
+		myCalendar = Calendar.getInstance();
 	}
 	
 	/**
@@ -35,10 +44,11 @@ public class ReviewUI implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 		
 		while(selection != 0) {
+			myCalendar = Calendar.getInstance();
 			displayDetails();
 		
 			System.out.println("Make a Selection: ");
-			System.out.println("1) Type Review");
+			System.out.println("1) Submit a Review File");
 			System.out.println("2) Rate Paper");
 			System.out.println("0) Back\n");
 			
@@ -52,9 +62,9 @@ public class ReviewUI implements Serializable{
 				rate();
 			}
 		}
-		scanner.close();
+		
 	}
-	private void rate() {
+	public void rate() {
 		Scanner scannerRate = new Scanner(System.in);
 		int selection = -1;
 		System.out.println("Select your numerical rating (1 - 10) for "+ myReview.getPaperName());
@@ -62,7 +72,7 @@ public class ReviewUI implements Serializable{
 		System.out.println("The Paper was rated at a: " + selection);
 		myReview.setRateing(selection);
 		System.out.println("___________________________________________________\n");
-		scannerRate.close();
+		
 		
 	}
 
@@ -75,7 +85,7 @@ public class ReviewUI implements Serializable{
 		myReview.setFile(new File(pathOfReview));
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
-		scanner.close();
+	
 		
 	}
 
@@ -86,7 +96,9 @@ public class ReviewUI implements Serializable{
 	public void displayDetails(){
 		
 		System.out.println("MSEE System");
+		Date today = myCalendar.getTime();
+		System.out.println("Date: " + today.toString());
 		System.out.println("Role: Reviewer");	
-		System.out.println("Paper: " + myReview.getPaperName());
+		System.out.println("Paper: " + myReview.getPaperName() + "\n");
 	}
 }
