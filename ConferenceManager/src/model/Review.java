@@ -63,7 +63,7 @@ public class Review implements Serializable{
 	 * @return theRateing
 	 */
 	public int getRateing(){
-		return theRateing;
+		return getTheRateing();
 	}
 	/**
 	 * This method will be used when creating a conference.
@@ -84,7 +84,7 @@ public class Review implements Serializable{
 	 * @param rateing
 	 */
 	public void setRateing(int rateing){
-		theRateing = rateing;
+		setTheRateing(rateing);
 	}
 	/**
 	 * toString method to display the review in a uniform instance.
@@ -109,5 +109,19 @@ public class Review implements Serializable{
 	 */
 	public String getPaperName() {
 		return myPaper.getTitle();
+	}
+	/**
+	 * Gets the rating
+	 * @author Will Almond
+	 * @return
+	 */
+	public int getTheRateing() {
+		return theRateing;
+	}
+
+
+
+	public void setTheRateing(int theRateing) {
+		this.theRateing = theRateing;
 	}
 }

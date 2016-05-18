@@ -77,32 +77,9 @@ public class Reviewer implements Serializable{
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
 	 */
-	private void submitReview() {
-		int optionCounter = 1;
-		int selection = -1;
-		Paper tPaper = null;
-		Scanner scanner = new Scanner(System.in);
-		printDetails();
-		System.out.println("Select a Paper to be Reviewed:");
-		
-		// Displays the papers to the console 
-		for (Paper tempPaper : myPaperList) {
-			System.out.print(optionCounter + ") ");
-			System.out.print(tempPaper.getTitle()+ "\n");
-			optionCounter++;
-		}
-		
-		// User selects paper to be reviewed.
-		selection = scanner.nextInt();
-		System.out.println("___________________________________________________\n");
-		
-		// Creates the Review object.
-		if (selection != 0) {
-			tPaper = myPaperList.get(selection - 1);
-			Review currentReview = new Review(myID, tPaper, this);
-			currentReview.reviewMenu();
-
-		}
+	public Review submitReview(Paper paper) {
+			Review currentReview = new Review(myID, paper, this);
+		return currentReview;
 	}
 	
 	/**
@@ -130,6 +107,15 @@ public class Reviewer implements Serializable{
 	 */
 	public ArrayList<Paper> getPaperList() {
 		return myPaperList;
+		
+	}
+	/**
+	 * Gets a list of reviews.
+	 * @author Will Almond
+	 * @return myReviews
+	 */
+	public ArrayList<Review> getReviewList() {
+		return myReviews;
 		
 	}
 	

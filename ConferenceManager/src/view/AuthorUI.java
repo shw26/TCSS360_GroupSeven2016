@@ -117,7 +117,7 @@ public class AuthorUI {
 			System.out.println("Paper: " + tempPaper.getTitle());
 			for(Review rev : tempPaper.getReviews()) {
 				System.out.println("Review number: " + counter);
-				System.out.println("\tThe rating was: " + rev.theRateing);
+				System.out.println("\tThe rating was: " + rev.getTheRateing());
 				System.out.println("\tThe review comment was: ");
 				System.out.println("\t" + rev.getComment() + "\n");
 				counter++;

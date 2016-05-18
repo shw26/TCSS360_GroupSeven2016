@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Conference;
@@ -10,9 +11,14 @@ import model.Reviewer;
 public class ReviewerUI {
 	private Conference myConference;
 	private Reviewer myReviewer;
+	private ArrayList<Paper> myPaperList;
+	private ArrayList<Review> myReviews;
+	private ReviewUI reviewUI;
 	public void reviewerMenu(Conference theConference, Reviewer reviewer) {
 		myConference = theConference;
 		myReviewer = reviewer;
+		myPaperList = reviewer.getPaperList();
+		myReviews = reviewer.getReviewList();
 		int selection = -1;
 		Scanner scanner = new Scanner(System.in);
 		
@@ -43,7 +49,7 @@ public class ReviewerUI {
 		if (!myReviews.isEmpty()) {
 			for (Review rev : myReviews) {
 				System.out.println("Title: " + rev.getPaperName());
-				System.out.println("\tThe rating was: " + rev.theRateing);
+				System.out.println("\tThe rating was: " + rev.getTheRateing());
 				System.out.println("\tThe review comment was: ");
 				System.out.println("\t" + rev.getComment() + "\n");
 			}
@@ -81,8 +87,8 @@ public class ReviewerUI {
 		// Creates the Review object.
 		if (selection != 0) {
 			tPaper = myPaperList.get(selection - 1);
-			Review currentReview = new Review(myID, tPaper, this);
-			currentReview.reviewMenu();
+			Review currentReview = myReviewer.submitReview(tPaper);
+			reviewUI.reviewMenu(currentReview);
 
 		}
 	}
@@ -111,7 +117,7 @@ public class ReviewerUI {
 	 */
 	private void printDetails() {
 		System.out.println("MSEE Syystem");
-		System.out.println("User: " + myID);
+		System.out.println("User: " + myReviewer.getID());
 		System.out.println("Role: Reviewer");
 	}
 
