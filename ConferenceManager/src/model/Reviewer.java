@@ -66,40 +66,24 @@ public class Reviewer implements Serializable{
 		myReviews = new ArrayList<Review>();
 	}
 	
-//<<<<<<< HEAD
-//=======
-//
-//>>>>>>> refs/remotes/origin/master
-//	
-//<<<<<<< HEAD
-//	
-//	
-//	
-//	
-//	
-//
-//=======
-//>>>>>>> refs/remotes/origin/master
+
+	
 	/**
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
 	 */
-//<<<<<<< HEAD
-//	public Review submitReview(Paper paper) {
-//			Review currentReview = new Review(myID, paper, this);
-//		return currentReview;
-//=======
 	public void submitReview(int theSelection) {
 		
 		Paper tPaper = null;
 		// Creates the Review object.
 		if (theSelection != 0) {
 			tPaper = myPaperList.get(theSelection - 1);
-			Review currentReview = new Review(myID, tPaper, this);
-			currentReview.getReviewUI().reviewMenu();
+
+			Review currentReview = new Review(tPaper, this);
+			currentReview.getReviewUI().reviewMenu();;
+
 
 		}
-//>>>>>>> refs/remotes/origin/master
 	}
 	
 	/**
@@ -111,11 +95,6 @@ public class Reviewer implements Serializable{
 		return myID;
 	}
 	
-//<<<<<<< HEAD
-//
-//	
-//=======
-//>>>>>>> refs/remotes/origin/master
 	/**
 	 * Adds a paper to be reviewed.
 	 * @author Jeremy Wolf
@@ -124,25 +103,13 @@ public class Reviewer implements Serializable{
 		myPaperList.add(thePaper);
 		
 	}
-//<<<<<<< HEAD
-//=======
-//	
-//>>>>>>> refs/remotes/origin/master
+	
 	/**
 	 * Getter method for the Paper list.
 	 * @author Jeremy Wolf
 	 */
 	public ArrayList<Paper> getPaperList() {
 		return myPaperList;
-		
-	}
-	/**
-	 * Gets a list of reviews.
-	 * @author Will Almond
-	 * @return myReviews
-	 */
-	public ArrayList<Review> getReviewList() {
-		return myReviews;
 		
 	}
 	
@@ -154,4 +121,23 @@ public class Reviewer implements Serializable{
 		myReviews.add(theRev);
 	}
 
+
+	/**
+	 * Getter method for the Review list
+	 * @return myReviews
+	 */
+	public ArrayList<Review> getReviewList() {
+		return myReviews;
+	}
+	
+	/**
+	 * Getter for a specific item in the review list.
+	 * @author Will Almond
+	 * @version 05/18/2016
+	 * @return theReveiw
+	 */
+	public Review getReview(int index){
+		Review theRev = myReviews.get(index);
+		return theRev;
+	}
 }

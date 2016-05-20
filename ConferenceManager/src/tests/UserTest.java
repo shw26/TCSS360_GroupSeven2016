@@ -44,4 +44,5 @@ public class UserTest {
 		assertEquals(testUser1.getID(), "SmithF@gamil.com");
 	}
 
+
 }
