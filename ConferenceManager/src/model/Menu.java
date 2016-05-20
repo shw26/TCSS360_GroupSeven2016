@@ -115,4 +115,8 @@ public class Menu implements Serializable{
 	public MenuUI getMenuUI() {
 		return myMenuUI;
 	}
+	
+	public void addUser(User theUser) {
+		myUsers.add(theUser);
+	}
 }
