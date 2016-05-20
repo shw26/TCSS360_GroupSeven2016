@@ -16,25 +16,24 @@ import view.ReviewUI;
  */
 public class Review implements Serializable{
 
-	/**
-	 * This is the serialized generated ID.
-	 */
+	/** This is the serialized generated ID.*/
 	private static final long serialVersionUID = -374717804308411534L;
-	/* The name of the paper being reviewed */
+	
+	/** The name of the paper being reviewed */
 	private String theName;
-	/* A numerical rating that the reviewer will leave for the author. */
+	/** A numerical rating that the reviewer will leave for the author. */
 	private int theRateing;
-	/* Comments that the reviewer will leave*/
+	/** Comments that the reviewer will leave*/
 	private String theComment;
-	/* the ID of the reviewer for the heading */
+	/** the ID of the reviewer for the heading */
 	private String theID;
-	/* The paper to be reviewed */
+	/** The paper to be reviewed */
 	private Paper myPaper;
-	/* The Reviewer doing the review */
+	/** The Reviewer doing the review */
 	private Reviewer myRev;
-
-	/* The Review File */
+	/** The Review File */
 	private File myFile;
+	/** The User Interface for the Review class. */
 	private ReviewUI myReviewUI;
 
 	

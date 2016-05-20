@@ -42,7 +42,7 @@ public class ConferenceUI implements Serializable{
 	 */
 	private Calendar myCalendar;
 
-	
+	/** Instantiates a new Conference User Interface object. **/
 	public ConferenceUI() {
 		myAuthorUI = new AuthorUI();
 		myPCUI = new ProgramChairUI();
@@ -111,6 +111,12 @@ public class ConferenceUI implements Serializable{
 			}
 		}
 	}
+	
+	/**
+	 * Prints the details regarding a user.
+	 * 
+	 * @param theUser the user whose details are to be printed
+	 */
 	public void printDetails(User theUser) {
 		System.out.println("MSEE System");
 		Date today = myCalendar.getTime();

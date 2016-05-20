@@ -81,8 +81,6 @@ public class Reviewer implements Serializable{
 
 			Review currentReview = new Review(tPaper, this);
 			currentReview.getReviewUI().reviewMenu();;
-
-
 		}
 	}
 	

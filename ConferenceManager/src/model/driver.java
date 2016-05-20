@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class driver {
-
+public class driver {	
 	
-	
+	/**
+	 * This is the driver for the Conference Manager program.
+	 * 
+	 * @param args console arguments, unused
+	 */
 	public static void main(String[] args) {
 		
 		Menu system = openSave();
@@ -31,7 +34,11 @@ public class driver {
 
 	}
 	
-	
+	/**
+	 * This opens a save file containing the serialized data from a previous state.
+	 * 
+	 * @return A previous saved state of the program
+	 */
 	public static Menu openSave() {
 		Menu m = null;
 	      try

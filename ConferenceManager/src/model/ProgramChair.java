@@ -82,7 +82,6 @@ public class ProgramChair implements Serializable {
 	}
 	
 	
-	
 	/**
 	 * Allows the Program Chair to select SubProgram Chairs
 	 * @author Jeremy Wolf
@@ -110,6 +109,13 @@ public class ProgramChair implements Serializable {
 		return tempSC;
 	}
 	
+	/**
+	 * This is called from a UI and assigns a paper to a subprogram chair.
+	 * 
+	 * @param theSelection The selected paper from the list of papers for the SC
+	 * @param theSC the subprogram chair being given a paper
+	 * @return 1 if paper has been assigned, 2 if SC is the author, and 3 if SC is already assigned 4 papers
+	 */
 	public int assignPaperToSC(int theSelection, SubProgramChair theSC) {
 		int status = 0;	
 		if (theSC.getPaperList().size() <= 3) {

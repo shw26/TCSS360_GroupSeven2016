@@ -81,7 +81,11 @@ public class AuthorUI implements Serializable{
 		}
 	}
 	
-	
+	/**
+	 * Displays the menu for the unsubmission of a paper.
+	 * 
+	 * @param theAuthor The author who wants to unsubmit a paper
+	 */
 	public void unsubmit(Author theAuthor) {
 		printDetails(theAuthor);
 		int selection = displayPapers(theAuthor);
@@ -92,6 +96,11 @@ public class AuthorUI implements Serializable{
 		} 
 	}
 	
+	/**
+	 * Menu allowing an author to edit a paper of their choosing.
+	 * 
+	 * @param theAuthor the author who wants to edit a paper
+	 */
 	public void edit(Author theAuthor) {
 		printDetails(theAuthor);
 		int selection = displayPapers(theAuthor);
@@ -102,6 +111,12 @@ public class AuthorUI implements Serializable{
 		}		
 	}
 	
+	/**
+	 * Displays a list of authors papers.
+	 * 
+	 * @param theAuthor the author whose papers are to be displayed 
+	 * @return the number corresponding to an author's paper, or 0 for the user to go back
+	 */
 	public int displayPapers(Author theAuthor) {
 		Scanner scanner = new Scanner(System.in);
 		int optionCounter = 1;
@@ -117,6 +132,12 @@ public class AuthorUI implements Serializable{
 		return selection;
 	}
 	
+	/**
+	 * Displays all papers of an author that have been reviewed.
+	 * 
+	 * @param theAuthor the author who has a list of papers
+	 * @return the number corresponding to an author's paper, or 0 for the user to go back
+	 */
 	public int displayPapersThatAreReviewed(Author theAuthor) {
 		Scanner scanner = new Scanner(System.in);
 		int optionCounter = 1;
@@ -170,6 +191,11 @@ public class AuthorUI implements Serializable{
 		System.out.println("___________________________________________________ \n");
 	}
 
+	/**
+	 * Prints details regarding the author to the console.
+	 * 
+	 * @param theAuthor the currently selected author
+	 */
 	public void printDetails(Author theAuthor) {
 		String dueDate = myConference.getDueDate().toString();
 		System.out.println("MSEE System");
@@ -181,11 +207,13 @@ public class AuthorUI implements Serializable{
 		System.out.println("Role: Author " + "\n");
 	}
 	
+	/** Prints to console that a paper has been removed. */
 	public void isRemoved() {
 		System.out.println("Paper has been removed");
 		System.out.println("___________________________________________________ \n");
 	}
 	
+	/** Prints to console that a paper has been updates. */
 	public void isUpdated() {
 		System.out.println("Paper has been updated");
 		System.out.println("___________________________________________________ \n");

@@ -14,21 +14,24 @@ import java.util.ArrayList;
  */
 
 public class User implements Serializable{
-	/**
-	 * Serial ID.
-	 */
+	
+	/** Generated Serial ID. */
 	private static final long serialVersionUID = -7767643624559317435L;
+	
+	/** The conference which the user is currently using. **/
 	public Conference theConf;
-	List confList = new List();
+	/** The first name of the user. */
 	public String theFirstName;
+	/** The last name of the user. */
 	public String theLastName;
+	/** The ID of the usrer. */
 	public String myID;
 	
 	/**
 	 * Constructor for the User to store the non-adjustable attributes of these users.
-	 * @param firstName
-	 * @param lastName
-	 * @param id
+	 * @param firstName first name of user
+	 * @param lastName last name of user
+	 * @param id the ID of user
 	 */
 	public User(String firstName, String lastName, String id){
 		theFirstName = firstName;
@@ -37,7 +40,7 @@ public class User implements Serializable{
 	}
 	/**
 	 * method is called when user chooses a conference.
-	 * @return
+	 * @return The conference user is currently viewing.
 	 */
 	public Conference chooseConf(){
 		return theConf;
@@ -46,7 +49,7 @@ public class User implements Serializable{
 	/**
 	 * Getter method for the last name field.
 	 * 
-	 * @return theLastName
+	 * @return theLastName Last name of user
 	 */
 	public String getLast(){
 		return theLastName;
@@ -55,15 +58,16 @@ public class User implements Serializable{
 	/**
 	 * Getter Method for the last name.
 	 * 
-	 * @return theFirstName
+	 * @return theFirstName First name of user
 	 */
 	public String getFirst(){
 		return theFirstName;
 	}
 	
 	/**
+	 * Returns the ID of the User.
 	 * 
-	 * @return myID
+	 * @return myID user's ID
 	 */
 	public String getID(){
 		return myID;

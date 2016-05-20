@@ -53,9 +53,6 @@ public class SubProgramChair implements Serializable {
 	 */
 	private ArrayList<User> myUsers;
 	
-
-	
-	
 	/**
 	 * Constructor for the Sub-Program Chair.
 	 * 
@@ -77,6 +74,12 @@ public class SubProgramChair implements Serializable {
 	}
 
 	
+	/**
+	 * Sets the recommendation status on a paper.
+	 * 
+	 * @param theSelection 1 if recommendation made, 2 otherwise
+	 * @param thePaper the paper whose status is being updated.
+	 */
     public void makeRecommendation(int theSelection, Paper thePaper) {
     	
 		if (theSelection == 1) {

@@ -44,8 +44,10 @@ public class Author implements Serializable{
 	 */
 	private ArrayList<Paper> myPaperList;
 	
+	/** The conference in which the author is held. */
 	private Conference myConference;
 	
+	/** The User Interface for the paper class. */
 	private PaperUI myPaperUI;
 	
 
@@ -109,11 +111,21 @@ public class Author implements Serializable{
 		return myID;
 	}
 
+	/**
+	 * Getter method for myPaperList.
+	 * 
+	 * @return the authors list of papers
+	 */
 	public ArrayList<Paper> getPapers() {
 		return myPaperList;
 	}
 
-
+	/**
+	 * Returns the selected paper from the authors list of papers.
+	 * 
+	 * @param theInt the number in the list of the paper being selected
+	 * @return the author's paper being selected
+	 */
 	public Paper getAPaper(int theInt) {
 		return myPaperList.get(theInt);
 	}

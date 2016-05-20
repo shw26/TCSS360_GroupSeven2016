@@ -91,7 +91,7 @@ public class Menu implements Serializable{
 	
 	
 	/**
-	 * Creates a new Conference
+	 * Creates a new Conference.
 	 * @param theName a String for the name  of the conference
 	 * @param thePC the User to be the Program Chair
 	 * @param theNumDayUntilDue the Number of days until the due date.
@@ -112,7 +112,7 @@ public class Menu implements Serializable{
 	}
 	
 	/**
-	 * Getter method for the conference list
+	 * Getter method for the conference list.
 	 * @return myConferences
 	 */
 	public ArrayList<Conference> getConferences() {
@@ -120,13 +120,18 @@ public class Menu implements Serializable{
 	}
 	
 	/**
-	 * Getter method for the menu ui
+	 * Getter method for the menu ui.
 	 * @return myMenuUI
 	 */
 	public MenuUI getMenuUI() {
 		return myMenuUI;
 	}
 	
+	/**
+	 * This adds a user to the list of system users.
+	 * 
+	 * @param theUser the user being added to the list of system users
+	 */
 	public void addUser(User theUser) {
 		myUsers.add(theUser);
 	}

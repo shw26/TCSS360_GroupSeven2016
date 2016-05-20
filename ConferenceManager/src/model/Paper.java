@@ -13,10 +13,10 @@ import java.util.Scanner;
  * @version 1 : 5/1/16
  */
 public class Paper implements Serializable {
-	/**
-	 * Serial Version ID.
-	 */
+	
+	/** Serial Version ID.*/
 	private static final long serialVersionUID = -1356721982552780326L;
+	
 
 	// -- Fields --
 	
@@ -32,13 +32,12 @@ public class Paper implements Serializable {
 	/** True if final decision has been made. **/
 	private boolean myFinal;
 	
-	/** The Title of the Paper*/
+	/** The Title of the Paper **/
 	private String myTitle;
 	
-	/**
-	 * The Paper file
-	 */
+	/** The Paper file **/
 	private File myFile;
+	
 	
 	// -- Constructors --
 	
@@ -107,6 +106,15 @@ public class Paper implements Serializable {
 		this.myTitle = newTitle;
 	}
 	
+	/**
+	 * Add Review to paper.
+	 * 
+	 * @param The review being added
+	 */
+	public void addReview(Review theRev) {
+		myReviews.add(theRev);
+	}
+	
 	
 	// -- Methods (Accessor) --
 	
@@ -164,12 +172,5 @@ public class Paper implements Serializable {
 	 */
 	public File getFile() {
 		return myFile;
-	}
-	
-	/**
-	 * Add Review to paper.
-	 */
-	public void addReview(Review theRev) {
-		myReviews.add(theRev);
 	}
 }

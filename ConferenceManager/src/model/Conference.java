@@ -86,6 +86,7 @@ public class Conference implements Serializable{
 	 */
 	public int myDays;
 	
+	/** The User Interface for a paper object. */
 	private PaperUI myPaperUI;
 	
 
@@ -166,7 +167,11 @@ public class Conference implements Serializable{
 		}
 	}
 	
-
+	/**
+	 * This allows the user to select a paper for submission.
+	 * 
+	 * @param theUser the user who will be submitting a paper
+	 */
 	public void submitPaper(User theUser) {
 		Paper newPaper = new Paper(theUser.myID);
 		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
@@ -338,9 +343,6 @@ public class Conference implements Serializable{
 		Calendar theDueDate = myCalendar;
 		theDueDate.add(Calendar.DAY_OF_MONTH, days);
 		dueDate = theDueDate.getTime();
-		
-		
-
 	}
 
 	/**
@@ -350,7 +352,6 @@ public class Conference implements Serializable{
 	 */
 	public boolean isDeadlinePast() {
 		return Calendar.getInstance().after(dueDate);
-		
 	}
 	
 	/**
@@ -358,7 +359,6 @@ public class Conference implements Serializable{
 	 * @return a Date object for the due date.
 	 */
 	public Date getDueDate() {
-		return dueDate;
-		
+		return dueDate;	
 	}
 }

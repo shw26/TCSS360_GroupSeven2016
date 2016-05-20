@@ -20,6 +20,11 @@ public class PaperUI implements Serializable {
 	 */
 	private Calendar myCalendar;
 	
+	/**
+	 * Prints the basic paper menu to the console.
+	 * 
+	 * @param thePaper the paper being addressed
+	 */
 	public void paperMenu(Paper thePaper) {
 		myCalendar = Calendar.getInstance();
 		Scanner scanner = new Scanner(System.in);
