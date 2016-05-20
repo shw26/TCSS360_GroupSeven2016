@@ -73,9 +73,11 @@ public class Author implements Serializable{
 	 * @author Jeremy Wolf
 	 */
 	public void unsubmit(Paper thePaper) {
-		myPaperList.remove(thePaper);
-		myConference.removePaper(thePaper);
-	}
+		if (!myPaperList.isEmpty()) {
+			myPaperList.remove(thePaper);
+			myConference.removePaper(thePaper);
+		}
+	}	
 	
 	/**
 	 * Allows an author to resubmit a paper.

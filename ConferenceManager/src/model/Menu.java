@@ -70,11 +70,22 @@ public class Menu implements Serializable{
 	 * @param theLast the last name
 	 * @param theID the email address
 	 */
-	public void register(String theFirst, String theLast, String theID) {
-		User newUser = new User(theFirst, theLast, theID);
-		myUsers.add(newUser);		
-		myCurrentUser = newUser;
+	public boolean register(String theFirst, String theLast, String theID) {
 		
+		Boolean found = false;
+		for (User temp : myUsers) {
+			String tempID = temp.getID();
+			if(tempID.equals(theID)) {
+				
+				found = true;
+			}
+		}
+		if (!found) {		
+			User newUser = new User(theFirst, theLast, theID);
+			myUsers.add(newUser);		
+			myCurrentUser = newUser;
+		}
+		return found;
 
 	}
 	

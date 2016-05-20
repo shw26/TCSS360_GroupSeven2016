@@ -85,11 +85,17 @@ public class MenuUI implements Serializable{
 		lastName = scanner.nextLine();
 		System.out.print("\nEnter your Email: ");
 		ID = scanner.nextLine();
+		boolean userFound = myMenu.register(firstName, lastName, ID);
 		
-		System.out.println("\nThank you for Registering!\n");
-		System.out.println("_________________________________________________");
-		myMenu.register(firstName, lastName, ID);
-		selectConference();
+		if (userFound) {
+			System.out.println("\nEmail is already registered with a User.\n");
+			System.out.println("_________________________________________________");
+			welcomeMenu();
+		} else {
+			System.out.println("\nThank you for Registering!\n");
+			System.out.println("_________________________________________________");
+			selectConference();
+		}
 	}
 
 	/**
