@@ -9,7 +9,11 @@ import org.junit.*;
 import model.Conference;
 import model.Menu;
 import model.User;
-
+/**
+ * This class tests the Menu class.
+ * @author Jeremy Wolf
+ * @version 05/19/2016
+ */
 public class MenuTest {
 	
 	Menu testMenu;

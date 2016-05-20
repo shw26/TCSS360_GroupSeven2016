@@ -11,6 +11,11 @@ import model.Conference;
 import model.Paper;
 import model.User;
 
+/**
+ * This class tests the Author class.
+ * @author Jeremy Wolf
+ * @version 05/19/2016
+ */
 public class AuthorTest {
 	private Conference myConference;
 	private Author myAuthor;

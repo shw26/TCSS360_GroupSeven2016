@@ -13,8 +13,8 @@ import model.User;
 
 /**
  * This class tests the User class.
- * @author Will Almond
- * @version 05/07/2016
+ * @author Jeremy Wolf
+ * @version 05/19/2016
  */
 public class UserTest {
 
