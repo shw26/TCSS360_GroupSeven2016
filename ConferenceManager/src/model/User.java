@@ -67,14 +67,5 @@ public class User implements Serializable{
 	 */
 	public String getID(){
 		return myID;
-	}
-	/**
-	 * The user should be displayed similarly in each instance.
-	 */
-	public String toString(){
-		StringBuilder myString = new StringBuilder();
-		myString.append(theLastName + ", " + theFirstName + ", " + myID);
-		return myString.toString();
-	}
-	
+	}	
 }
