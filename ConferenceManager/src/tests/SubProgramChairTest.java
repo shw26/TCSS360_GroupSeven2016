@@ -11,9 +11,9 @@ import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
 /**
- * not sure about ln 56 ~ 70. isAuthor tests
- * @author user
- *
+ * test for subprogram chair.
+ * @author shao-han wang (kevin)
+ * @version 5/22/2016
  */
 public class SubProgramChairTest {
 	
@@ -34,52 +34,71 @@ public class SubProgramChairTest {
 		user = new User("wi", "fi", "wifi@everywhere.com");
 		someR = new Reviewer("so", "me", "some@one.com");
 		thePaper = new Paper("wifi@everywhere.com");
-		thePaper2 = new Paper("Beer Beer Beer");
+		thePaper2 = new Paper("some@one.com");
 		
 		test1 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", myUserList, myRev);
 		
-		ArrayList<Reviewer> myRev2 = new ArrayList<Reviewer>();
-		myRev2.add(someR);
+		ArrayList<Reviewer> rev2 = new ArrayList<Reviewer>();
+		rev2.add(someR);
 		ArrayList<User> UserList = new ArrayList<User>();
 		UserList.add(user);
-		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", UserList, myRev2);
+		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", UserList, rev2);
 	}
 	
-	
+	/**
+	 * Recommended.
+	 */
 	@Test
-	public void testMakeRecommendationOne(){
+	public void testMakeRecommendation_Recommended(){
 		test1.makeRecommendation(1, thePaper);
-		assertTrue("makeRecommendation choice 1 failed", thePaper.getRecommendation());
+		assertTrue("makeRecommendation Recommended failed", thePaper.getRecommendation());
 	}
+	/**
+	 * not recommended.
+	 */
 	@Test
-	public void testMakeRecommendationTwo(){
+	public void testMakeRecommendation_notRecommended(){
 		test1.makeRecommendation(2, thePaper);
 		assertFalse("makeRecommendation choice 2 failed", thePaper.getRecommendation());
 	}
 	
-	//not sure
+	/**
+	 * the chosen user is not the author of the paper.
+	 */
 	@Test
-	public void testIsAuthorT(){
-		assertEquals(" isAuthor T failed", 0 ,test2.isAuthor(1, thePaper2));
+	public void testIsAuthor_notAuthor(){
+		assertEquals(" isAuthor notAuthor failed", 1 ,test2.isAuthor(1, thePaper2));
 	}
-	//not sure
+	/**
+	 * the chosen user is the author of the paper.
+	 */
 	@Test
-	public void testIsAuthorF(){
+	public void testIsAuthor_isAuthor(){
 		
-		assertEquals(" isAuthor F failed",-1 ,test2.isAuthor(1, thePaper));
+		assertEquals(" isAuthor isAuthor failed",-1 ,test2.isAuthor(1, thePaper));
 	}
 	
+	
+	/**
+	 * empty reviewer list.
+	 */
 	@Test
-	public void testCreateReviewerA(){
-		assertEquals("CreateReviewer A failed",1 ,test1.createReviewer(user, thePaper));
+	public void testCreateReviewer_empty(){
+		assertEquals("CreateReviewer empty failed",1 ,test1.createReviewer(user, thePaper));
 	}
+	/**
+	 * the user is a reviewer. no paper.
+	 */
 	@Test
-	public void testCreateReviewerB(){
+	public void testCreateReviewer_isReviewer(){
 		User someU = new User("so", "me", "some@one.com");
-		assertEquals("CreateReviewer B failed",1 ,test2.createReviewer(someU, thePaper));
+		assertEquals("CreateReviewer isReviewer failed",1 ,test2.createReviewer(someU, thePaper));
 	}
+	/**
+	 * the reviewer has max(4) papers.
+	 */
 	@Test
-	public void testCreateReviewerC(){
+	public void testCreateReviewer_exceedMaxPaper(){
 		Paper pa = new Paper("a");
 		Paper pb = new Paper("b");
 		Paper pc = new Paper("c");
@@ -89,11 +108,14 @@ public class SubProgramChairTest {
 		someR.addPaper(pc);
 		someR.addPaper(pd);
 		User someU = new User("so", "me", "some@one.com");
-		assertEquals("CreateReviewer C failed",2 ,test2.createReviewer(someU, thePaper));
+		assertEquals("CreateReviewer exceedMaxPaper failed",2 ,test2.createReviewer(someU, thePaper));
 	}
+	/**
+	 * new reviewer, user list is not empty.
+	 */
 	@Test
-	public void testCreateReviewerD(){
-		assertEquals("CreateReviewer D failed",1 ,test2.createReviewer(user, thePaper));
+	public void testCreateReviewer_notEmptyList(){
+		assertEquals("CreateReviewer notEmptyList failed",1 ,test2.createReviewer(user, thePaper));
 	}
 	
 	
