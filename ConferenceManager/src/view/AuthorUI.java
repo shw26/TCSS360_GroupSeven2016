@@ -74,13 +74,30 @@ public class AuthorUI implements Serializable{
 			} else if (selection == 2) {
 				unsubmit(currentAuthor);
 			} else if (selection == 3 && !isPastDueDate) {
-				edit(currentAuthor);
+				resubmit(currentAuthor);
 			} else if (selection == 4) {
 				displayReviews(currentAuthor);
+			} else if (selection == 5) {
+				edit(currentAuthor);
 			}
 		}
 	}
-	
+	public void resubmit(Author theAuthor) {
+		int selection = -1;
+		printDetails(theAuthor);
+		System.out.println("Select a paper to resubmit: \n");
+		selection = displayPapers(theAuthor);
+		if (selection != 0) {
+			Paper reSubmitPaper = theAuthor.getAPaper(selection - 1);
+			myPaperUI.paperMenu(reSubmitPaper);
+			System.out.println("Your paper has been resubmitted");
+			System.out.println("___________________________________________________\n");
+		} else {
+			System.out.println("___________________________________________________\n");
+		}
+		
+		
+	}
 	/**
 	 * Displays the menu for the unsubmission of a paper.
 	 * 
@@ -102,11 +119,16 @@ public class AuthorUI implements Serializable{
 	 * @param theAuthor the author who wants to edit a paper
 	 */
 	public void edit(Author theAuthor) {
+		String title = "";
+		Scanner scanner = new Scanner(System.in);
 		printDetails(theAuthor);
 		int selection = displayPapers(theAuthor);
 		if (selection != 0) {
 			Paper tempPaper = theAuthor.getAPaper(selection - 1);
-			theAuthor.edit(tempPaper);
+			System.out.println("Paper: " + tempPaper.getTitle());
+			System.out.println("Enter the new Title: ");
+			title = scanner.nextLine();
+			theAuthor.edit(tempPaper, title);
 			isUpdated();
 		}		
 	}
