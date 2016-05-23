@@ -46,9 +46,7 @@ public class Author implements Serializable{
 	
 	/** The conference in which the author is held. */
 	private Conference myConference;
-	
-	/** The User Interface for the paper class. */
-	private PaperUI myPaperUI;
+
 	
 
 	
@@ -66,7 +64,6 @@ public class Author implements Serializable{
 		myID = theID;
 		myPaperList = new ArrayList<Paper>();
 		myConference = theConference;
-		myPaperUI = new PaperUI();
 	}
 	
 	
@@ -82,14 +79,13 @@ public class Author implements Serializable{
 	}	
 	
 	/**
-	 * Allows an author to resubmit a paper.
+	 * Allows an author to edit the title of a paper.
 	 * @author Jeremy Wolf
+	 * @param thePaper the paper object that will have the title changed.
+	 * @param theTitle a string for the new title. 
 	 */ 
-	public void edit(Paper thePaper) {		
-		unsubmit(thePaper);
-	    Paper temp = new Paper(myID);
-	    myPaperUI.paperMenu(temp);
-		addPaper(temp);
+	public void edit(Paper thePaper, String theTitle) {		
+		thePaper.setTitle(theTitle);
 	}
 	
 	/**

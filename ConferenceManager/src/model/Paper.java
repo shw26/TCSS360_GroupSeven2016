@@ -42,7 +42,7 @@ public class Paper implements Serializable {
 	// -- Constructors --
 	
 	/**
-	 * Creates a new Paper object from an author's name.
+	 * Creates a new Paper object from an author's ID.
 	 * 
 	 * @param name the contact author for the paper
 	 */
@@ -51,6 +51,21 @@ public class Paper implements Serializable {
 		myTitle = "";
 		myFile = null;
 		myAuthor =  name;
+		myReviews = new LinkedList<Review>();
+		myRecommendation = false;
+		myFinal = false;
+	}
+	
+	/**
+	 * Creates a new paper object with a title and authors ID
+	 * @param theTitle the string for the papers title.
+	 * @param theAuthor the String for the Authors ID
+	 * @author Jeremy Wolf
+	 */
+	public Paper(String theTitle, String theAuthor) {
+		myTitle = theTitle;
+		myFile = null;
+		myAuthor =  theAuthor;
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;

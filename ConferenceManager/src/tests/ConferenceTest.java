@@ -114,13 +114,13 @@ public class ConferenceTest {
 	}
 	
 	@Test
-	public void checkRolesTest1() {
+	public void checkRolesTestForPC() {
 		myConference.checkRoles(first);
 		assertEquals("checkRoles failed!", myConference.getThePC(), myConference.getPC());
 	}
 	
 	@Test
-	public void checkRolesTest2() {
+	public void checkRolesTestForNonPC() {
 		myConference.checkRoles(second);
 		assertEquals("checkRoles failed!", null, myConference.getPC());
 	}

@@ -58,7 +58,9 @@ public class AuthorTest {
 	
 	@Test
 	public void testEdit() {
-		
+		Paper test1 = new Paper("Old Title", "someAuthor1");
+		myAuthor.edit(test1, "New Title");
+		assertEquals("Title should be the same", "New Title", test1.getTitle());
 	}
 	
 	@Test
@@ -67,7 +69,8 @@ public class AuthorTest {
 		test1.setTitle("Test Paper One");
 		myAuthor.addPaper(test1);
 		assertFalse("Paper list contains papers", myAuthor.getPapers().isEmpty());
-		assertEquals("Titles are the same ", "Test Paper One", myAuthor.getAPaper(0).getTitle() );
+		assertEquals("Titles are not the same ", "Test Paper One", myAuthor.getAPaper(0).getTitle() );
+		assertEquals("Authors are not the same ", "someAuthor1", myAuthor.getAPaper(0).getAuthor() );
 	}
 	
 	@Test
@@ -85,14 +88,25 @@ public class AuthorTest {
 	}
 	
 	@Test 
-	public void testGetAPaper() {
-		Paper test1 = new Paper("someAuthor1");
-		Paper test2 = new Paper("someAuthor2");
+	public void testGetAPaperOnePaper() {
+		Paper test1 = new Paper("This Title", "someAuthor1");
 		myAuthor.addPaper(test1);
-		myAuthor.addPaper(test2);
+
 		assertEquals("Author should be the same", "someAuthor1", myAuthor.getAPaper(0).getAuthor());
+		assertEquals("Title should be the same", "This Title", myAuthor.getAPaper(0).getTitle());
 	}
 	
+	@Test 
+	public void testGetAPaperMultiPaper() {
+		Paper test1 = new Paper("This Title", "someAuthor1");
+		Paper test2 = new Paper("Other Title", "someAuthor2");
+		myAuthor.addPaper(test1);
+		myAuthor.addPaper(test2);
+		assertEquals("Author should be the same", "someAuthor2", myAuthor.getAPaper(1).getAuthor());
+		assertEquals("Title should be the same", "Other Title", myAuthor.getAPaper(1).getTitle());
+		assertEquals("Author should be the same", "someAuthor1", myAuthor.getAPaper(0).getAuthor());
+		assertEquals("Title should be the same", "This Title", myAuthor.getAPaper(0).getTitle());
+	}
 	
 	
 }
