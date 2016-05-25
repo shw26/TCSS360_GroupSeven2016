@@ -16,36 +16,35 @@ public class Paper implements Serializable {
 	
 	// -- Constants --
 	
-	/** Serial Version ID.*/
+	/* Serial Version ID. */
 	private static final long serialVersionUID = -1356721982552780326L;
 	
 
 	// -- Fields --
 	
-	/** The contact author of the paper. **/
+	/* The contact author of the paper. */
 	private String myAuthor;
 	
-	/** A List of Reviews by Reviewers. **/
+	/* A List of Reviews by Reviewers. */
 	private List<Review> myReviews;
 	
-	/** True if recommendation has been made. **/
+	/* True if recommendation has been made. */
 	private boolean myRecommendation;
 	
-	/** True if final decision has been made. **/
+	/* True if final decision has been made. */
 	private boolean myFinal;
 	
-	/** The Title of the Paper **/
+	/* The Title of the Paper. */
 	private String myTitle;
 	
-	/** The Paper file **/
+	/* The Paper file. */
 	private File myFile;
 	
 	
 	// -- Constructors --
 	
 	/**
-	 * Creates a new Paper object from an author's ID.
-	 * @param name - the contact author for the paper
+	 * @param name - the contact author for the paper; not null
 	 */
 	public Paper(String name) {	
 		myTitle = "";
@@ -57,9 +56,10 @@ public class Paper implements Serializable {
 	}
 	
 	/**
+	 * TEST ONLY
 	 * Creates a new paper object with a title and authors ID
-	 * @param theTitle - the string for the papers title.
-	 * @param theAuthor - the String for the Authors ID
+	 * @param theTitle - the string for the papers title; not null
+	 * @param theAuthor - the String for the Authors ID; not null
 	 * @author Jeremy Wolf
 	 */
 	public Paper(String theTitle, String theAuthor) {
@@ -85,7 +85,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the Reviews for a paper.
-	 * @param newReviews - the reviews for a paper
+	 * @param newReviews - the reviews for a paper; not null
 	 */
 	public void setReviews(List<Review> newReviews) {
 		this.myReviews = newReviews;
@@ -102,7 +102,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the file for a paper.
-	 * @param newFile - file for the paper
+	 * @param newFile - file for the paper; not null
 	 */
 	public void setFile(File newFile) {
 		this.myFile = newFile;
@@ -110,7 +110,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the title for a paper
-	 * @param newTitle - title of paper
+	 * @param newTitle - title of paper; not null
 	 */
 	public void setTitle(String newTitle) {
 		this.myTitle = newTitle;
@@ -118,7 +118,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Add Review to paper.
-	 * @param theRev - The review being added
+	 * @param theRev - The review being added; not null
 	 */
 	public void addReview(Review theRev) {
 		myReviews.add(theRev);
