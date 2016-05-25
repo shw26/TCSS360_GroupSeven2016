@@ -166,11 +166,6 @@ public class ConferenceTest {
 		assertEquals("checkRoles failed!", testAuthor, myConference.getAuthor());
 	}
 	
-	@Test
-	public void testSubmitPaper_WithFirstUser() {
-		myConference.submitPaper(first);
-		assertTrue(true);
-	}
 	
 	@Test
 	public void testSetDueDateForNotPastDeadline() {
