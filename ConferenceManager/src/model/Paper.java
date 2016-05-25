@@ -89,7 +89,7 @@ public class Paper implements Serializable {
 	 * 
 	 * @param newReviews the reviews for a paper
 	 */
-	public void setReviewers(List<Review> newReviews) {
+	public void setReviews(List<Review> newReviews) {
 		this.myReviews = newReviews;
 	}
 	

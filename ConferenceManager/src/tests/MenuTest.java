@@ -75,4 +75,5 @@ public class MenuTest {
 		
 	}
 	
+	// Trevor's Notes: getMenuUI not tested, register test does not cover all if paths
 }
