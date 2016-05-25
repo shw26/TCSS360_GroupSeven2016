@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.junit.Test;
 import model.Author;
 import model.Conference;
 import model.Paper;
+import model.ProgramChair;
 import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
@@ -45,6 +48,14 @@ public class ConferenceTest {
 	public void testGetAuthorNoAuthorsAddedToConference() {
 		assertEquals("getAuthor failed!", null, myConference.getAuthor());
 	}
+	
+	@Test
+	public void testSetThePC_CreateNewPCSetUseGetter() {
+		ProgramChair testPC = new ProgramChair("First", "Last", "ID", null, null, null, null);
+		myConference.setThePC(testPC);
+		assertEquals("setPC failed!", testPC, myConference.getThePC());
+	}
+	
 	@Test
 	public void testGetAuthorListForNewAuthorCreationAndAddition() {
 		Author testA = new Author("Wi", "Fi","wifi@everywhere.com", myConference);
@@ -63,6 +74,7 @@ public class ConferenceTest {
 	}
 	@Test
 	public void testGetPCForPCCreatedInSetup() {
+		myConference.checkRoles(first);
 		assertEquals("getPC failed!", "jwolf059@uw.edu", myConference.getPC().getID());
 	}
 	@Test
@@ -125,10 +137,39 @@ public class ConferenceTest {
 	}
 	
 	@Test
-	public void testSetDueDateForPastDeadline() {
-		Calendar myCal = Calendar.getInstance();
-		myConference.setDueDate(myCal, -1);
-		assertTrue("SetDueDate Failure", myConference.isDeadlinePast());
+	public void testCheckRolesForSC() {
+		ArrayList<SubProgramChair> testSCList = new ArrayList<SubProgramChair>();
+		SubProgramChair testSC = new SubProgramChair("First", "Last", "jwolf059@uw.edu", null, null);
+		testSCList.add(testSC);
+		myConference.setSCList(testSCList);
+		myConference.checkRoles(first);
+		assertEquals("checkRoles failed!", testSC, myConference.getSC());
+	}
+	
+	@Test
+	public void testCheckRolesForReviewer() {
+		ArrayList<Reviewer> testReviewerList = new ArrayList<Reviewer>();
+		Reviewer testReviewer = new Reviewer("First", "Last", "jwolf059@uw.edu");
+		testReviewerList.add(testReviewer);
+		myConference.setReviewerList(testReviewerList);
+		myConference.checkRoles(first);
+		assertEquals("checkRoles failed!", testReviewer, myConference.getReviewer());
+	}
+	
+	@Test
+	public void testCheckRolesForAuthor() {
+		ArrayList<Author> testAuthorList = new ArrayList<Author>();
+		Author testAuthor = new Author("First", "Last", "jwolf059@uw.edu", myConference);
+		testAuthorList.add(testAuthor);
+		myConference.setAuthorList(testAuthorList);
+		myConference.checkRoles(first);
+		assertEquals("checkRoles failed!", testAuthor, myConference.getAuthor());
+	}
+	
+	@Test
+	public void testSubmitPaper_WithFirstUser() {
+		myConference.submitPaper(first);
+		assertTrue(true);
 	}
 	
 	@Test
@@ -136,5 +177,12 @@ public class ConferenceTest {
 		Calendar myCal = Calendar.getInstance();
 		myConference.setDueDate(myCal, 2);
 		assertFalse("SetDueDate Failure", myConference.isDeadlinePast());
+	}
+	
+	@Test
+	public void testGetDueDate_CreateCalSetDateAddToCalGetDate() {
+		Calendar myCal = Calendar.getInstance();
+		myConference.setDueDate(myCal, 2);
+		assertEquals("getTest Failed!", myCal.getTime(), myConference.getDueDate());
 	}
 }
