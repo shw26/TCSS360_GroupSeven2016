@@ -91,7 +91,7 @@ public class SubProgramChair implements Serializable {
 	
 	/**
 	 * Checks to see if the User is the author of the paper. This enforces 
-	 * the bussiness rule that a Author cant review a paper they have written.
+	 * the business rule that a Author can't review a paper they have written.
 	 * @author Jeremy Wolf
 	 * @param theID the ID of the Author of the paper
 	 * @param thePaper the Paper to be assigned to a reviewer
