@@ -2,9 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import model.Paper;
@@ -52,6 +50,16 @@ public class ReviewerTest {
 	@Test
 	public void testSubmitReviewWithOneAsSubmission(){
 		testReviewer.submitReview(1);
+		assertEquals("Should be the Paper 'Life and Death'", 
+				testReviewer.getReview(0).getPaperName(), 
+				"Life and Death");
+	}
+	/**
+	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
+	 */
+	@Test
+	public void testSubmitReviewWithTwoAsSubmission(){
+		testReviewer.submitReview(2);
 		assertEquals("Should be the Paper 'Life and Death'", 
 				testReviewer.getReview(0).getPaperName(), 
 				"Life and Death");
