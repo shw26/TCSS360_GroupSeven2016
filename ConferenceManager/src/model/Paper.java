@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Paper implements Serializable {
 	
+	// -- Constants --
+	
 	/** Serial Version ID.*/
 	private static final long serialVersionUID = -1356721982552780326L;
 	
@@ -43,11 +45,9 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Creates a new Paper object from an author's ID.
-	 * 
-	 * @param name the contact author for the paper
+	 * @param name - the contact author for the paper
 	 */
-	public Paper(String name) {
-		
+	public Paper(String name) {	
 		myTitle = "";
 		myFile = null;
 		myAuthor =  name;
@@ -58,8 +58,8 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Creates a new paper object with a title and authors ID
-	 * @param theTitle the string for the papers title.
-	 * @param theAuthor the String for the Authors ID
+	 * @param theTitle - the string for the papers title.
+	 * @param theAuthor - the String for the Authors ID
 	 * @author Jeremy Wolf
 	 */
 	public Paper(String theTitle, String theAuthor) {
@@ -77,8 +77,7 @@ public class Paper implements Serializable {
 	/**
 	 * Sets the recommendation status of a paper.
 	 * True if recommendation made.
-	 * 
-	 * @param newRecommendation recommendation status
+	 * @param newRecommendation - recommendation status
 	 */
 	public void setRecommendation(boolean newRecommendation) {
 		this.myRecommendation = newRecommendation;
@@ -86,8 +85,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the Reviews for a paper.
-	 * 
-	 * @param newReviews the reviews for a paper
+	 * @param newReviews - the reviews for a paper
 	 */
 	public void setReviews(List<Review> newReviews) {
 		this.myReviews = newReviews;
@@ -96,8 +94,7 @@ public class Paper implements Serializable {
 	/**
 	 * Sets the final decision status of a paper.
 	 * True if final decision made.
-	 * 
-	 * @param newFinal
+	 * @param newFinal - the new final decision status for a paper
 	 */
 	public void setFinal(boolean newFinal) {
 		this.myFinal = newFinal;
@@ -105,8 +102,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the file for a paper.
-	 * 
-	 * @param newFile file for the paper
+	 * @param newFile - file for the paper
 	 */
 	public void setFile(File newFile) {
 		this.myFile = newFile;
@@ -114,8 +110,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Sets the title for a paper
-	 * 
-	 * @param newTitle title of paper
+	 * @param newTitle - title of paper
 	 */
 	public void setTitle(String newTitle) {
 		this.myTitle = newTitle;
@@ -123,8 +118,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Add Review to paper.
-	 * 
-	 * @param The review being added
+	 * @param theRev - The review being added
 	 */
 	public void addReview(Review theRev) {
 		myReviews.add(theRev);
@@ -135,7 +129,6 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Returns the contact author of the paper.
-	 * 
 	 * @return contact author of paper
 	 */
 	public String getAuthor() {
@@ -146,7 +139,6 @@ public class Paper implements Serializable {
 	/**
 	 * Returns the recommendation status of the paper.
 	 * True if recommendation made.
-	 * 
 	 * @return recommendation status of paper
 	 */
 	public boolean getRecommendation() {
@@ -155,7 +147,6 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Returns a list of the reviews on a paper.
-	 * 
 	 * @return list of reviews on paper
 	 */
 	public List<Review> getReviews() {
@@ -165,7 +156,6 @@ public class Paper implements Serializable {
 	/**
 	 * Returns the final decision status on a paper.
 	 * True if final decision made.
-	 * 
 	 * @return final decision status of paper
 	 */
 	public boolean getFinal() {
@@ -174,7 +164,6 @@ public class Paper implements Serializable {
 
 	/**
 	 * Returns the Title of the paper.
-	 * 
 	 * @return Title of the paper
 	 */
 	public String getTitle() {
@@ -183,6 +172,7 @@ public class Paper implements Serializable {
 	
 	/**
 	 * Returns the File path.
+	 * @return File path of paper
 	 * @author Jeremy Wolf
 	 */
 	public File getFile() {
