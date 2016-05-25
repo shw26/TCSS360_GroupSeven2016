@@ -36,14 +36,6 @@ public class ReviewTest {
 		myReview = new Review(paper1, myRev1);
 	}
 
-//	/**
-//	 * Test method for {@link Review#Review(java.lang.String)}.
-//	 */
-//	@Test
-//	public void testReview() {
-//		fail("Not yet implemented");
-//	}
-
 	/**
 	 * Tests the ability of this method to submit a review to the Paper.
 	 * @author Will Almond

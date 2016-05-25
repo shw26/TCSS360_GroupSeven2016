@@ -25,16 +25,6 @@ public class ReviewerTest {
 		testReviewer = new Reviewer("Bob", "Mortimer", "bobmortimer@gmail.com");
 		testReviewer.addPaper(testPaper1);
 	}
-	
-
-	/**
-	 * Test method for {@link model.Reviewer#Reviewer(java.lang.String, java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testReviewer() {
-		fail("Not yet implemented");
-	}
-
 
 	/**
 	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
@@ -63,14 +53,6 @@ public class ReviewerTest {
 		assertEquals("Should not be able to access ", 
 				testReviewer.getReview(0).getPaperName(), 
 				"Life and Death");
-	}
-	
-	/**
-	 * Test method for {@link model.Reviewer#getID()}.
-	 */
-	@Test
-	public void testGetID() {
-		fail("Not yet implemented");
 	}
 
 	/**
