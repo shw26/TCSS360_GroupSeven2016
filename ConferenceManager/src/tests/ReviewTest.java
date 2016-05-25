@@ -37,14 +37,6 @@ public class ReviewTest {
 	}
 
 	/**
-	 * Test method for {@link Review#Review(java.lang.String)}.
-	 */
-	@Test
-	public void testReview() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Tests the ability of this method to submit a review to the Paper.
 	 * @author Will Almond
 	 * @version 05/18/2016
@@ -69,61 +61,6 @@ public class ReviewTest {
 				myReview, myRev1.getReview(0));
 	}
 
-	/**
-	 * Test method for {@link Review#getConfName()}.
-	 */
-	@Test
-	public void testGetConfName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#getComment()}.
-	 */
-	@Test
-	public void testGetComment() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#getRateing()}.
-	 */
-	@Test
-	public void testGetRateing() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#setConfName(java.lang.String)}.
-	 */
-	@Test
-	public void testSetConfName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#setComment(java.lang.String)}.
-	 */
-	@Test
-	public void testSetComment() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#setRateing(int)}.
-	 */
-	@Test
-	public void testSetRateing() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Review#toString()}.
-	 */
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
 
 }
 
