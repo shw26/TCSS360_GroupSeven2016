@@ -60,7 +60,7 @@ public class ReviewerTest {
 	@Test
 	public void testSubmitReviewWithTwoAsSubmission(){
 		testReviewer.submitReview(2);
-		assertEquals("Should be the Paper 'Life and Death'", 
+		assertEquals("Should not be able to access ", 
 				testReviewer.getReview(0).getPaperName(), 
 				"Life and Death");
 	}
