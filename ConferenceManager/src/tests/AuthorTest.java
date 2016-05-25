@@ -108,5 +108,5 @@ public class AuthorTest {
 		assertEquals("Title should be the same", "This Title", myAuthor.getAPaper(0).getTitle());
 	}
 	
-	
+	// TREVOR'S NOTE: May want to split the assertions into new methods.
 }
