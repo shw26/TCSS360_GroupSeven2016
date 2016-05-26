@@ -13,6 +13,14 @@ import model.User;
 
 public class ProgramChairUI implements Serializable{
 
+	
+	private static final int VIEW_PAPERS = 1;
+	
+	private static final int DESIGNATE_SC = 2;
+	
+	private static final int VIEW_SC = 3;
+	
+	private static final int MAKE_FINAL = 4;
 	/**
 	 * Serial ID for storage
 	 */
@@ -61,16 +69,16 @@ public class ProgramChairUI implements Serializable{
 			System.out.println("4) Make final decision");
 			System.out.println("0) Back\n");
 			
-			
+
 			selection = scanner.nextInt();
 			System.out.println("___________________________________________________\n");
-			if(selection == 1) {
+			if(selection == VIEW_PAPERS) {
 				viewPapers();
-			} else if (selection == 2) {
+			} else if (selection == DESIGNATE_SC) {
 				designateSC();
-			} else if (selection == 3) {
+			} else if (selection == VIEW_SC) {
 				viewSCPapers();
-			} else if (selection == 4) {
+			} else if (selection == MAKE_FINAL) {
 				
 				makeFinal();
 			}
@@ -97,20 +105,26 @@ public class ProgramChairUI implements Serializable{
 			System.out.println("___________________________________________________\n");
 		}
 		if (selection != 0) {
-			int status = myCurrentPC.assignPaperToSC(selection, tempSC);
+			boolean status = myCurrentPC.isAuthor(selection, tempSC);
 			
-			if (status == 1) {
-				System.out.println("Paper has been assigned");
-				System.out.println("_________________________________________________\n");
-			} else if (status == 2) {
+			if (status) {
 				System.out.println("SubProgram Chair is the Author, can not assign paper");
 				System.out.println("_________________________________________________\n");
-			} else if (status == 3) {
+				
+			} else {
+				status = myCurrentPC.assignPaperToSC(selection, tempSC);
+				
+				if (status) {
+					System.out.println("Paper has been assigned");
+					System.out.println("_________________________________________________\n");
+
+				} else {
 				System.out.println("SubProgram Chair can have no more the 4 papers");
 				System.out.println("_________________________________________________\n");
 			}
 		}
-	}
+		}
+	}				
 	
 	public void makeFinal() {
 		printDetails();

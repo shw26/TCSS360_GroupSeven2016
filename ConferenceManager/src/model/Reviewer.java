@@ -18,6 +18,11 @@ import java.util.Scanner;
  */
 
 public class Reviewer implements Serializable{
+	
+	/** 
+	 * Max number of Papers assigned to a Reviewer
+	 */
+	public static final int MAX_PAPERS = 4;
 
 	/**
 	 * Serial Version ID for persistent storage use.
@@ -97,9 +102,17 @@ public class Reviewer implements Serializable{
 	/**
 	 * Adds a paper to be reviewed.
 	 * @author Jeremy Wolf
+	 * @param thePaper a Paper object to be added to the Reviewers colleciton of papers. 
+	 * @return a boolean true if the paper was successfully added.
 	 */
-	public void addPaper(Paper thePaper) {
-		myPaperList.add(thePaper);
+	public boolean addPaper(Paper thePaper) {
+		boolean paperAdded = false;
+		
+		if (myPaperList.size() < MAX_PAPERS) {
+			myPaperList.add(thePaper);
+			paperAdded = true;
+		}
+		return paperAdded;
 		
 	}
 	

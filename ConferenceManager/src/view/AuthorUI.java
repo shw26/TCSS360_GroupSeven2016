@@ -12,6 +12,13 @@ import model.Review;
 
 public class AuthorUI implements Serializable{
 
+	
+	private static final int SUBMIT = 1;
+	private static final int UNSUBMIT = 2;
+	private static final int RESUBMIT = 3;
+	private static final int VIEW_REVIEWS = 4;
+	private static final int EDIT = 5;
+	
 	/**
 	 * Serial ID for storage
 	 */
@@ -55,6 +62,7 @@ public class AuthorUI implements Serializable{
 				System.out.println("2) Un-Submit");
 				System.out.println("3) Resubmit");
 				System.out.println("4) View Reviews");
+				System.out.println("5) Edit");
 				System.out.println("0) Back\n");
 			} else {
 				System.out.println("Deadline for submission has passed ");
@@ -66,18 +74,19 @@ public class AuthorUI implements Serializable{
 			
 			selection = scanner.nextInt();
 			System.out.println("___________________________________________________\n");
+			
 
-			if(selection == 1 && !isPastDueDate) {
+			if(selection == SUBMIT && !isPastDueDate) {
 			    Paper temp = new Paper(currentAuthor.getID());
 			    myPaperUI.paperMenu(temp);
 			    currentAuthor.addPaper(temp);
-			} else if (selection == 2) {
+			} else if (selection == UNSUBMIT) {
 				unsubmit(currentAuthor);
-			} else if (selection == 3 && !isPastDueDate) {
+			} else if (selection == RESUBMIT && !isPastDueDate) {
 				resubmit(currentAuthor);
-			} else if (selection == 4) {
+			} else if (selection == VIEW_REVIEWS) {
 				displayReviews(currentAuthor);
-			} else if (selection == 5) {
+			} else if (selection == EDIT) {
 				edit(currentAuthor);
 			}
 		}

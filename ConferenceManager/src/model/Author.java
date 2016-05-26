@@ -51,12 +51,11 @@ public class Author implements Serializable{
 
 	
 	/**
-	 * Constructor for the Author.
-	 * 
 	 * @author Jeremy Wolf
-	 * @param theFirst string for the First Name.
-	 * @param theLast String for the Last Name.
-	 * @param theID String for the ID
+	 * @param theFirst string for the First Name; not null
+	 * @param theLast String for the Last Name; not null
+	 * @param theID String for the ID; not null
+	 * @param theConference Conference where Author is held; not null
 	 */
 	public Author(String theFirst, String theLast, String theID, Conference theConference) {
 		myFirstName = theFirst;
@@ -68,34 +67,42 @@ public class Author implements Serializable{
 	
 	
 	/**
-	 * Allows an author to removed a paper.
+	 * Removes (thePaper) from the Author's Paper collection and the Conference (thePaper) was submitted to.
 	 * @author Jeremy Wolf
+	 * @param thePaper A Paper Object; not null
 	 */
 	public void unsubmit(Paper thePaper) {
 		if (!myPaperList.isEmpty()) {
 			myPaperList.remove(thePaper);
 			myConference.removePaper(thePaper);
+			
+			assert myPaperList.contains(thePaper);
 		}
 	}	
 	
 	/**
 	 * Allows an author to edit the title of a paper.
 	 * @author Jeremy Wolf
-	 * @param thePaper the paper object that will have the title changed.
-	 * @param theTitle a string for the new title. 
+	 * @param thePaper the paper object that will have the title changed; not null
+	 * @param theTitle a string for the new title; not null 
 	 */ 
 	public void edit(Paper thePaper, String theTitle) {		
 		thePaper.setTitle(theTitle);
+		
+		assert thePaper.getTitle().equals(theTitle);
 	}
 	
 	/**
-	 * Adds the paper to be submitted to the list of papers the author has.
+	 * Adds the paper to be submitted to the list of papers the author has and the conference.
 	 * @author Jeremy Wolf
-	 * @param thePaper the paper to be added.
+	 * @param thePaper the paper to be added; not null
 	 */
 	public void addPaper(Paper thePaper) {
 		myPaperList.add(thePaper);
 		myConference.addPaper(thePaper);
+		
+		assert myPaperList.contains(thePaper);
+		assert myConference.getPaperList().contains(thePaper);
 }
 
 	/**
@@ -119,8 +126,8 @@ public class Author implements Serializable{
 	/**
 	 * Returns the selected paper from the authors list of papers.
 	 * 
-	 * @param theInt the number in the list of the paper being selected
-	 * @return the author's paper being selected
+	 * @param theInt the number in the list of the paper being selected; greater than or equal to 0, less than size of the paper collection
+	 * @return the author's paper being selected by (theInt) index in the collection
 	 */
 	public Paper getAPaper(int theInt) {
 		return myPaperList.get(theInt);

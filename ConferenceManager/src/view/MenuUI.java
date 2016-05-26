@@ -11,6 +11,10 @@ import model.User;
 
 public class MenuUI implements Serializable{
 	
+	
+	private static final int LOGIN = 1;
+	private static final int REGISTER = 2;
+	
 	/**
 	 * Serial Version ID.
 	 */
@@ -59,9 +63,9 @@ public class MenuUI implements Serializable{
 			
 			System.out.println("_________________________________________________");
 
-			if (selection == 1) {
+			if (selection == LOGIN) {
 				login();
-			} else if (selection == 2) {
+			} else if (selection == REGISTER) {
 				register();
 			}
 		}
