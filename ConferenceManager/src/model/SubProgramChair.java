@@ -18,6 +18,11 @@ import java.util.Scanner;
  */
 public class SubProgramChair implements Serializable {
 
+	
+	/** 
+	 * Max number of Papers assigned to a Reviewer
+	 */
+	public static final int MAX_PAPERS = 4;
 	/**
 	 * Serial Version ID for persistent storage use.
 	 */
@@ -96,80 +101,65 @@ public class SubProgramChair implements Serializable {
 	 * @param theSelection an integer value for the index position of the User in the User collection that is
 	 * 					   being compared to the Author of the paper
 	 * @param thePaper the Paper to be assigned to a reviewer
-	 * @return the menu option selected.
+	 * @return a boolean true if the selected user is the author of the paper.
 	 */
-	public int isAuthor(int theSelection, Paper thePaper) {
-		int selection = theSelection;
-		int buildType = 0;
+	public boolean isAuthor(int theSelection, Paper thePaper) {
+		boolean isTheAuthor = false;
 		String compareID = "";
 		String theID = thePaper.getAuthor();
-		User userTemp = null;
-		compareID = myUsers.get(selection - 1).getID();
-		if (!theID.equals(compareID)) {
-			userTemp = myUsers.get(selection - 1);
-			buildType = createReviewer(userTemp, thePaper);
-			selection = buildType;
-			
-		} else {
-			selection = -1;	
-		}
 		
-		return selection;
+		compareID = myUsers.get(theSelection - 1).getID();
+		if (theID.equals(compareID)) {
+			isTheAuthor = true;	
+		} 
+		
+		return isTheAuthor;
 	}
 	
 	/**
-	 * If the user is not already a reviewer they a reviewer object is created.
-	 * If the user is a reviewer then they will have thePaper added to their review
-	 * list.
+	 * If the user is not already a reviewer then a reviewer object is created.
+	 * 
 	 * @author Jeremy Wolf
 	 * @param theUser theUser that is going to be a Reviewer.
 	 * @param thePaper the paper to be reviewed by the Reviewer.
+	 * @return if a Reviewer Object is found with the same ID then it is returned, otherwise a
+	 * 			new Reviewer is created.
 	 */
-	public int createReviewer(User theUser, Paper thePaper ) {
-		int selection = 0;
-		//If the list is empty then a reviewer is added.
-		if(myRevList.isEmpty()) {
-			Reviewer tempRev = new Reviewer(theUser.getFirst(), theUser.getLast(), theUser.getID());
-			myRevList.add(tempRev);
-			tempRev.addPaper(thePaper);
-			selection = 1;
-			
-		//If the list is not empty the contents must be check to avoid duplication.	
-		} else {
-			boolean isPresent = false;
-			for (Reviewer rev : myRevList) {
-				if (rev.getID().equals(theUser.getID())) {
-					// Check to make sure they don't have more then 4 papers.
-					if ((rev.getPaperList()).size() <= 3) {
-						rev.addPaper(thePaper);
-						selection = 1;
-					} else {
-						selection = 2;
-					}
-					isPresent = true;
-					break;
-				}
-			}
-			//If the User is not already a reviewer a new reviewer is created.
-			if (!isPresent) {
-				Reviewer tempRev = new Reviewer(theUser.getFirst(), 
-						theUser.getLast(), theUser.getID());
-				myRevList.add(tempRev);
-				tempRev.addPaper(thePaper);
-				selection = 1;
+	public Reviewer createReviewer(int theSelection, Paper thePaper ) {
+		Reviewer tempReviewer = null;
+		User userTemp = myUsers.get(theSelection - 1);
+		boolean isPresent = false;
+		for (Reviewer rev : myRevList) {
+			if (rev.getID().equals(userTemp.getID())) {
+				isPresent = true;
+				tempReviewer = rev;
+				break;
 			}
 		}
-		return selection;
+		//If the User is not already a reviewer a new reviewer is created.
+		if (!isPresent) {
+			tempReviewer = new Reviewer(userTemp.getFirst(), 
+					userTemp.getLast(), userTemp.getID());
+			myRevList.add(tempReviewer);
+		}
+	
+		return tempReviewer;
 	}
 
 	/**
 	 * Adds the Paper to the Sub-Program Chairs list.
 	 * @author Jeremy Wolf
 	 * @param thePaper the paper to be assigned to reviewers.
+	 * @return a boolean value indicating if the paper was successfully added/ 
 	 */
-	public void addPaper(Paper thePaper) {
-		myPaperList.add(thePaper);
+	public boolean addPaper(Paper thePaper) {
+		boolean paperAdded = false;
 		
+		if (myPaperList.size() < MAX_PAPERS) {
+			myPaperList.add(thePaper);
+			paperAdded = true;
+		}
+		return paperAdded;
 	}
 
 	/**

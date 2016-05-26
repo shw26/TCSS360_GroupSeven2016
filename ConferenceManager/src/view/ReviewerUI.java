@@ -12,6 +12,11 @@ import model.Reviewer;
 
 public class ReviewerUI implements Serializable{
 
+	
+	private static final int VIEW_PAPERS = 1;
+	private static final int REVIEW_PAPER = 2;
+	private static final int VIEW_REVIEWS = 3;
+	
 	/**
 	 * Serial Version ID for persistent storage use
 	 */
@@ -52,15 +57,15 @@ public class ReviewerUI implements Serializable{
 			System.out.println("3) View Reviews");
 			System.out.println("0) Back\n");
 			
-			
+
 			selection = scanner.nextInt();
 			System.out.println("___________________________________________________\n");
 			
-			if(selection == 1) {
+			if(selection == VIEW_PAPERS) {
 				viewPapers();
-			} else if (selection == 2) {
+			} else if (selection == REVIEW_PAPER) {
 				submitReview();
-			} else if (selection == 3) {
+			} else if (selection == VIEW_REVIEWS) {
 				viewReviews();
 			} 
 		}

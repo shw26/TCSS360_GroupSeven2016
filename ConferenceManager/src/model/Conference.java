@@ -158,27 +158,20 @@ public class Conference implements Serializable{
 				break;
 			}
 		}
-		
+		boolean isFound = false;
 		for(int i = 0; i < myAuthors.size(); i++){
 			if(myAuthors.get(i).getID() == theUser.getID()){
 				myCurrentAuthor = myAuthors.get(i);
+				isFound = true;
 				break;
 			}
 		}
-	}
-	
-	/**
-	 * This allows the user to select a paper for submission.
-	 * 
-	 * @param theUser the user who will be submitting a paper
-	 */
-	public void submitPaper(User theUser) {
-		Paper newPaper = new Paper(theUser.myID);
-		Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
-		newAuthor.addPaper(newPaper);
-		myAuthors.add(newAuthor);
-		myPaperUI.paperMenu(newPaper);
-		checkRoles(theUser);
+		if (!isFound) {
+			Author newAuthor = new Author(theUser.getFirst(), theUser.getLast(), theUser.getID(), this);
+			myAuthors.add(newAuthor);
+			myCurrentAuthor = newAuthor;
+		}
+		
 	}
 	
 	/**

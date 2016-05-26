@@ -7,11 +7,15 @@ import java.util.Scanner;
 
 import model.Conference;
 import model.Paper;
+import model.Reviewer;
 import model.SubProgramChair;
 import model.User;
 
 public class SubProgramChairUI implements Serializable{
 
+	private static final int SUBMIT_REC = 1;
+	private static final int ASSIGN_REV = 2;
+	
 	/**
 	 * Serial ID for storage
 	 */
@@ -42,12 +46,13 @@ public class SubProgramChairUI implements Serializable{
 			System.out.println("2) Assign Reviewer to a paper");
 			System.out.println("0) Back\n");
 		
-			
+
+
 			selection = scanner.nextInt();
 			System.out.println("___________________________________________________ \n");
-			if(selection == 1) {
+			if(selection == SUBMIT_REC) {
 				submitRecommendation();
-			} else if (selection == 2) {
+			} else if (selection == ASSIGN_REV) {
 				assignReviewer();
 			}
 		}
@@ -56,23 +61,28 @@ public class SubProgramChairUI implements Serializable{
 	
 	public void assignReviewer() {
 		Paper tempPaper = null;
-		
+		Reviewer tempRev = null;
 		int selection = displayPapers();
 		if (selection != 0) {
 			tempPaper = mySubProgramChair.getPaperList().get(selection - 1);
 			displayDetails();
 			System.out.println("Paper: " + tempPaper.getTitle() + "\n");
 			selection = displayUsers();
-			selection = mySubProgramChair.isAuthor(selection, tempPaper);
+			boolean status = mySubProgramChair.isAuthor(selection, tempPaper);
 			
-			if (selection == -1) {
+			if (status) {
 				cantReview();
-			} else if (selection == 1) {
-				System.out.println("The paper has been assigned to the reviewer.");
-			} else if (selection == 2) {
+			} else {
+				tempRev = mySubProgramChair.createReviewer(selection, tempPaper); 
+				boolean wasAdded = tempRev.addPaper(tempPaper);
+				
+				if (wasAdded) {
+					System.out.println("The paper has been assigned to the reviewer.");
+				} else {
 				System.out.println("A Reviewer can't have more then 4 papers");
 			}
 			System.out.println("___________________________________________________ \n");
+			}
 		}
 	}
 
