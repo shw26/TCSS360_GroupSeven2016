@@ -14,6 +14,15 @@ import model.User;
 
 public class ConferenceUI implements Serializable{
 	
+	
+	private static final int PROGRAMCHAIR = 1;
+	
+	private static final int SUBPROGRAMCHAIR = 2;
+	
+	private static final int REVIEWER = 3;
+	
+	private static final int AUTHOR = 4;
+	
 	/**
 	 * Serial ID for Storage
 	 */
@@ -79,36 +88,30 @@ public class ConferenceUI implements Serializable{
 			}
 			if(theConference.myCurrentAuthor != null){
 				System.out.println("4) Author");
-			} else if (!theConference.isDeadlinePast()){
-				//Will only show submit a paper when the Author role is not available. 
-				System.out.println("5) Submit Paper");
-			}
+			} 
 			
 			System.out.println("0) Back");
 			
 			selection = scanner.nextInt();
 			
 			System.out.println("_________________________________________________\n");
-			if(selection == 1){
+			if(selection == PROGRAMCHAIR){
 				ProgramChair pC = theConference.myCurrentPC;
 				myPCUI.pcMenu(theConference, pC);
 			}
-			if(selection == 2){
+			if(selection == SUBPROGRAMCHAIR){
 				SubProgramChair sC = theConference.myCurrentSC;
 				mySCUI.scMenu(theConference, sC);
 			}
-			if(selection == 3){
+			if(selection == REVIEWER){
 				Reviewer reviewer = theConference.myCurrentReviewer;
 				myReviewerUI.reviewerMenu(theConference, reviewer);
 			}
-			if(selection == 4){
+			if(selection == AUTHOR){
 				Author author = theConference.myCurrentAuthor;
 				myAuthorUI.authorMenu(author, theConference);
 			}
-			if(selection == 5){
-				theConference.submitPaper(theUser);
-				
-			}
+
 		}
 	}
 	

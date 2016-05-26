@@ -18,6 +18,11 @@ import java.util.Scanner;
  */
 public class ProgramChair implements Serializable {
 	
+	
+	/** 
+	 * Max number of Papers assigned to a SubProgramChair
+	 */
+	public static final int MAX_PAPERS = 4;
 	/**
 	 * Serial Version ID for persistent storage use.
 	 */
@@ -114,26 +119,36 @@ public class ProgramChair implements Serializable {
 	 * 
 	 * @param theSelection The selected paper from the list of papers for the SC
 	 * @param theSC the subprogram chair being given a paper
-	 * @return 1 if paper has been assigned, 2 if SC is the author, and 3 if SC is already assigned 4 papers
+	 * @return boolean value, True if paper was assigned. 
 	 */
-	public int assignPaperToSC(int theSelection, SubProgramChair theSC) {
-		int status = 0;	
-		if (theSC.getPaperList().size() <= 3) {
+	public boolean assignPaperToSC(int theSelection, SubProgramChair theSC) {
+		boolean status = false;	
+		if (theSC.getPaperList().size() < MAX_PAPERS) {
 			Paper tPaper = myPaperList.get(theSelection - 1);
-			if (!theSC.getID().equals(tPaper.getAuthor())) {
-				theSC.addPaper(myPaperList.get(theSelection - 1));
-				status = 1;
-			} else {
-				// Subprogram chair is the author
-				status = 2;
-			}
-		} else {
-			// Has 4 papers
-			status = 3;
+			theSC.addPaper(tPaper);
+			status = true;
 		}
 		return status;
 	}
 
+	/**
+	 * Check the Papers Author ID against the SubProgram Chairs ID. Ensures
+	 * that the a SubProgram Chair can not assign reviewers to the paper.
+	 * @param theSelection a integer value >= 0 and less than Paper List collection size.
+	 * @param theSC the SubProgram Chair that the paper is to be assigned too.
+	 * @return a boolean value, True if the SubProgam Chair is the Author of the Paper.
+	 */
+	public boolean isAuthor(int theSelection, SubProgramChair theSC) {
+		boolean isTheAuthor = false;
+		Paper tPaper = myPaperList.get(theSelection - 1);
+		
+		if (theSC.getID().equals(tPaper.getAuthor())) {
+			isTheAuthor = true;
+		}
+		return isTheAuthor;
+		
+	}
+	
 	/**
 	 * Checks to see if the User ID matches a Current SC.
 	 * @param theUser being checked
