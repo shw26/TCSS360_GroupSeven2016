@@ -65,10 +65,18 @@ public class ReviewerUI implements Serializable{
 			} 
 		}
 	}
-	
+	/**
+	 * Method displays the User Interface for submitting a review as a Reviewer.
+	 * The method prints all the papers in the paperList assigned to the Reviewer.
+	 * It then utilizes a scanner to collect an integer that selects which paper to
+	 * select a review for a (Paper) that is then passed to the Reviewer class before
+	 * calling the reviewMenu() method in this class.
+	 * @author Will Almond
+	 */
 	public void submitReview() {
 		int optionCounter = 1;
 		int selection = -1;
+		Review currentReview = null;
 	
 		Scanner scanner = new Scanner(System.in);
 		printDetails();
@@ -84,7 +92,8 @@ public class ReviewerUI implements Serializable{
 		// User selects paper to be reviewed.
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________\n");
-		myReviewer.submitReview(selection);
+		currentReview = myReviewer.submitReview(selection);
+		currentReview.getReviewUI().reviewMenu();
 	}
 
 	public void viewReviews() {

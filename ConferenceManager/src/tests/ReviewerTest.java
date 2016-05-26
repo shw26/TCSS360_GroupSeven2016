@@ -26,14 +26,14 @@ public class ReviewerTest {
 		testReviewer.addPaper(testPaper1);
 	}
 
-	/**
-	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
-	 */
-	@Test
-	public void testSubmitReviewWithZeroAsSubmission(){
-		testReviewer.submitReview(0);
-		assertEquals("Should return null", testReviewer.getReview(1), null);
-	}
+//	/**
+//	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
+//	 */
+//	@Test
+//	public void testSubmitReviewWithZeroAsSubmission(){
+//		testReviewer.submitReview(0);
+//		assertEquals("Should return null", testReviewer.getReview(1), null);
+//	}
 	/**
 	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
 	 */

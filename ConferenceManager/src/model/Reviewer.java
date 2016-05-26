@@ -71,17 +71,18 @@ public class Reviewer implements Serializable{
 	/**
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
+	 * @author Will Almond
 	 */
-	public void submitReview(int theSelection) {
-		
+	public Review submitReview(int theSelection) {
+		Review currentReview = null;
 		Paper tPaper = null;
 		// Creates the Review object.
 		if (theSelection != 0) {
 			tPaper = myPaperList.get(theSelection - 1);
 
-			Review currentReview = new Review(tPaper, this);
-			currentReview.getReviewUI().reviewMenu();;
+			currentReview = new Review(tPaper, this);
 		}
+		return currentReview;
 	}
 	
 	/**
