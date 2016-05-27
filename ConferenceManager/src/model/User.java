@@ -24,7 +24,7 @@ public class User implements Serializable{
 	public String theFirstName;
 	/** The last name of the user. */
 	public String theLastName;
-	/** The ID of the usrer. */
+	/** The ID of the user. */
 	public String myID;
 	
 	/**

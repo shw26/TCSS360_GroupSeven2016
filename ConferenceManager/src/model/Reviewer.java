@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Reviewer class. This role can review papers.
+ * Reviewer class. This role can review papers and submit reviews.
  * 
  * @author Jeremy Wolf
  * @version v1 5/1/2016
@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class Reviewer implements Serializable{
 	
 	/** 
-	 * Max number of Papers assigned to a Reviewer
+	 * Max number of Papers assigned to a Reviewer.
 	 */
 	public static final int MAX_PAPERS = 4;
 
@@ -30,17 +30,17 @@ public class Reviewer implements Serializable{
 	private static final long serialVersionUID = -6833321289334518369L;
 
 	/**
-	 * String representation the first name of the Sub Program Chair.
+	 * String representation the first name of the Reviewer.
 	 */
 	private String myFirstName;
 	
 	/**
-	 * String representation of the Last of the Sub Program Chair.
+	 * String representation of the Last of the Reviewer.
 	 */
 	private String myLastName;
 	
 	/**
-	 * String representation of the ID of the Sub Program Chair.
+	 * String representation of the ID of the Reviewer.
 	 */
 	private String myID;
 	
@@ -58,9 +58,9 @@ public class Reviewer implements Serializable{
 	 * Constructor for the Reviewer.
 	 * 
 	 * @author Jeremy Wolf
-	 * @param theFirst string for the First Name.
-	 * @param theLast String for the Last Name.
-	 * @param theID String for the ID
+	 * @param theFirst string for the Reviewers First Name.
+	 * @param theLast String for the Reviewers Last Name.
+	 * @param theID String for the Reviewers ID (email).
 	 */
 	public Reviewer(String theFirst, String theLast, String theID) {
 		
@@ -76,23 +76,28 @@ public class Reviewer implements Serializable{
 	/**
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
+	 * @author Will Almond
+	 * @param theSelection is an integer that the user inputs on the console. 
+	 * @return currentReview is the review that corresponds to the Paper that
+	 * the user requested via console input.
 	 */
-	public void submitReview(int theSelection) {
-		
+	public Review submitReview(int theSelection) {
+		Review currentReview = null;
 		Paper tPaper = null;
 		// Creates the Review object.
 		if (theSelection != 0) {
 			tPaper = myPaperList.get(theSelection - 1);
 
-			Review currentReview = new Review(tPaper, this);
-			currentReview.getReviewUI().reviewMenu();;
+			currentReview = new Review(tPaper, this);
 		}
+		return currentReview;
 	}
 	
 	/**
 	 * Getter method for the myID field
 	 * @author Jeremy Wolf
-	 * @return the String myIDs
+	 * @return myID is a String for the Reviewer's email address.
+	 * 
 	 */
 	public String getID() {
 		return myID;
@@ -101,7 +106,7 @@ public class Reviewer implements Serializable{
 	/**
 	 * Adds a paper to be reviewed.
 	 * @author Jeremy Wolf
-	 * @param thePaper a Paper object to be added to the Reviewers colleciton of papers. 
+	 * @param thePaper a Paper object to be added to the Reviewers collection of papers. 
 	 * @return a boolean true if the paper was successfully added.
 	 */
 	public boolean addPaper(Paper thePaper) {
@@ -118,6 +123,7 @@ public class Reviewer implements Serializable{
 	/**
 	 * Getter method for the Paper list.
 	 * @author Jeremy Wolf
+	 * @return myPaperLists is the list of Papers that belong to the Reviewer.
 	 */
 	public ArrayList<Paper> getPaperList() {
 		return myPaperList;
@@ -126,7 +132,9 @@ public class Reviewer implements Serializable{
 	
 	/**
 	 * Adds a review to the Review list.
-	 * @param theRev is the review to be added.
+	 * @author Will Almond
+	 * @param theRev is the review to be added to the list of Reviews
+	 * that belong to the Reviewer.
 	 */
 	public void addReview(Review theRev) {
 		myReviews.add(theRev);
@@ -135,7 +143,8 @@ public class Reviewer implements Serializable{
 
 	/**
 	 * Getter method for the Review list
-	 * @return myReviews
+	 * @author Will Almond
+	 * @return myReviews is a list of Reviews that belongs to the Reviewer.
 	 */
 	public ArrayList<Review> getReviewList() {
 		return myReviews;
@@ -145,7 +154,8 @@ public class Reviewer implements Serializable{
 	 * Getter for a specific item in the review list.
 	 * @author Will Almond
 	 * @version 05/18/2016
-	 * @return theReveiw
+	 * @param index is the index of the Reviews list that will be accessed.
+	 * @return theReview is a single review that is retrieved from the Review list.
 	 */
 	public Review getReview(int index){
 		Review theRev = myReviews.get(index);

@@ -40,7 +40,8 @@ public class Review implements Serializable{
 	/**
 	 * The constructor for Review class called every time 
 	 * a new review is made on a paper.
-	 * @param
+	 * @param thePaper is the paper assigned to this Review.
+	 * @param theRev is the Reviewer that wrote this Review.
 	 */
 	public Review(Paper thePaper, Reviewer theRev){// removed String id to prevent errors 05/18/2016.
 		theID = theRev.getID();
@@ -51,6 +52,7 @@ public class Review implements Serializable{
 	}
 	/**
 	 * Getter method for the ReviewUI
+	 * @return myReviewUI gets the class.
 	 */
 	public ReviewUI getReviewUI() {
 		return myReviewUI;

@@ -2,11 +2,10 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import model.Paper;
 import model.Reviewer;
 
 /**
@@ -16,43 +15,44 @@ import model.Reviewer;
  */
 public class ReviewerTest {
 	private Reviewer testReviewer;
+	private Paper testPaper1;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		testPaper1 = new Paper("Life and Death");
 		testReviewer = new Reviewer("Bob", "Mortimer", "bobmortimer@gmail.com");
+		testReviewer.addPaper(testPaper1);
 	}
 
+//	/**
+//	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
+//	 */
+//	@Test
+//	public void testSubmitReviewWithZeroAsSubmission(){
+//		testReviewer.submitReview(0);
+//		assertEquals("Should return null", testReviewer.getReview(1), null);
+//	}
 	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link model.Reviewer#Reviewer(java.lang.String, java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testReviewer() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link model.Reviewer#reviewerMenu()}.
+	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
 	 */
 	@Test
-	public void testReviewerMenu() {
-		fail("Not yet implemented");
+	public void testSubmitReviewWithOneAsSubmission(){
+		testReviewer.submitReview(1);
+		assertEquals("Should be the Paper 'Life and Death'", 
+				testReviewer.getReview(0).getPaperName(), 
+				"Life and Death");
 	}
-
 	/**
-	 * Test method for {@link model.Reviewer#getID()}.
+	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
 	 */
 	@Test
-	public void testGetID() {
-		fail("Not yet implemented");
+	public void testSubmitReviewWithTwoAsSubmission(){
+		testReviewer.submitReview(2);
+		assertEquals("Should not be able to access ", 
+				testReviewer.getReview(0).getPaperName(), 
+				"Life and Death");
 	}
 
 	/**
