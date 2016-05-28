@@ -1,7 +1,11 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 import view.ReviewUI;
@@ -32,7 +36,7 @@ public class Review implements Serializable{
 	/** The Reviewer doing the review */
 	private Reviewer myRev;
 	/** The Review File */
-	private File myFile;
+	private String myFile;
 	/** The User Interface for the Review class. */
 	private ReviewUI myReviewUI;
 
@@ -132,9 +136,21 @@ public class Review implements Serializable{
 	 * Sets the file for the review
 	 * @param theFile the review file.
 	 */
-	public void setFile(File theFile) {
-		this.myFile = theFile;
+	public boolean setFile(String theFile) {
+		
+		boolean fileSet = false;
+		String newFilePath = ".\\Assets\\Reviews\\" + myPaper.getTitle() + "_" + theID + "Review.txt";
+		try {
+			Files.copy(Paths.get(theFile), Paths.get(newFilePath), StandardCopyOption.REPLACE_EXISTING);
+			fileSet = true;
+			myFile = newFilePath;
+			
+		} catch (IOException E) {
+			fileSet = false;
+		}
+		return fileSet;
 	}
+		
 	
 	/**
 	 * Getter method for the title of the paper.

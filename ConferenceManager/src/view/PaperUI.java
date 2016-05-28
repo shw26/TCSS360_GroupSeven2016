@@ -45,7 +45,7 @@ public class PaperUI implements Serializable {
 		System.out.println("\nTo submit a paper, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfPaper = scanner.nextLine();
-		thePaper.setFile(new File(pathOfPaper));
+		thePaper.setFile(pathOfPaper);
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
 		

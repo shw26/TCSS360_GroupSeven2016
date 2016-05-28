@@ -83,7 +83,7 @@ public class PaperTest {
 	// setFile/getFile Tests
 	@Test
 	public void testSetFile_CreateNewFileUseGetter() {
-		File testFile = new File("Assets/testPaper1.txt");
+		String testFile = "Assets/testPaper1.txt";
 		testPaper.setFile(testFile);
 		assertEquals("setFile/getFile failed!", testFile, testPaper.getFile());
 	}

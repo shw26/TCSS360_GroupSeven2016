@@ -1,7 +1,11 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,8 +41,8 @@ public class Paper implements Serializable {
 	/* The Title of the Paper. */
 	private String myTitle;
 	
-	/* The Paper file. */
-	private File myFile;
+	/* The Path for the Paper file. */
+	private String myFile;
 	
 	
 	// -- Constructors --
@@ -104,8 +108,17 @@ public class Paper implements Serializable {
 	 * Sets the file for a paper.
 	 * @param newFile - file for the paper; not null
 	 */
-	public void setFile(File newFile) {
-		this.myFile = newFile;
+	public boolean setFile(String theFile) {
+		boolean fileSet = false;
+		String newFilePath = ".\\Assets\\" + myTitle + ".txt";
+		try {
+			Files.copy(Paths.get(theFile), Paths.get(newFilePath), StandardCopyOption.REPLACE_EXISTING);
+			fileSet = true;
+			myFile = newFilePath;
+		} catch (IOException E) {
+			fileSet = false;
+		}
+		return fileSet;
 	}
 	
 	/**
@@ -175,7 +188,7 @@ public class Paper implements Serializable {
 	 * @return File path of paper
 	 * @author Jeremy Wolf
 	 */
-	public File getFile() {
+	public String getFile() {
 		return myFile;
 	}
 }

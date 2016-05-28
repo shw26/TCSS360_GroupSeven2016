@@ -86,7 +86,7 @@ public class ReviewUI implements Serializable{
 		System.out.println("To submit a review, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfReview = scanner.nextLine();
-		myReview.setFile(new File(pathOfReview));
+		myReview.setFile(pathOfReview);
 		System.out.println("Upload Sucessful");
 		System.out.println("___________________________________________________\n");
 	
