@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Paper;
+import model.Review;
 import model.Reviewer;
 
 /**
@@ -16,14 +17,19 @@ import model.Reviewer;
 public class ReviewerTest {
 	private Reviewer testReviewer;
 	private Paper testPaper1;
+	private Paper testPaper2;
+	private Review review1;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		testPaper1 = new Paper("Life and Death");
+		testPaper2 = new Paper("What is Love?");
 		testReviewer = new Reviewer("Bob", "Mortimer", "bobmortimer@gmail.com");
+		review1 = new Review(testPaper1, testReviewer);
 		testReviewer.addPaper(testPaper1);
+		testReviewer.addReview(review1);
 	}
 
 //	/**
@@ -32,7 +38,7 @@ public class ReviewerTest {
 //	@Test
 //	public void testSubmitReviewWithZeroAsSubmission(){
 //		testReviewer.submitReview(0);
-//		assertEquals("Should return null", testReviewer.getReview(1), null);
+//		assertEquals("Should return", testReviewer.getReview(0));
 //	}
 	/**
 	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
@@ -42,17 +48,15 @@ public class ReviewerTest {
 		testReviewer.submitReview(1);
 		assertEquals("Should be the Paper 'Life and Death'", 
 				testReviewer.getReview(0).getPaperName(), 
-				"Life and Death");
+				testPaper1.getTitle());
 	}
 	/**
 	 * Test method for {@link model.Reviewer#submitReview(java.lang.int)}.
 	 */
 	@Test
 	public void testSubmitReviewWithTwoAsSubmission(){
-		testReviewer.submitReview(2);
-		assertEquals("Should not be able to access ", 
-				testReviewer.getReview(0).getPaperName(), 
-				"Life and Death");
+		testReviewer.submitReview(1);
+		assertFalse(testReviewer.equals(2));
 	}
 
 	/**
@@ -60,15 +64,9 @@ public class ReviewerTest {
 	 */
 	@Test
 	public void testAddPaper() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link model.Reviewer#getPaperList()}.
-	 */
-	@Test
-	public void testGetPaperList() {
-		fail("Not yet implemented");
+		testReviewer.addPaper(testPaper2);
+		assertEquals("should be 'What is Love?'",testReviewer.getPaperList().get(1).getTitle(),
+				testPaper2.getTitle());
 	}
 
 	/**
@@ -76,7 +74,7 @@ public class ReviewerTest {
 	 */
 	@Test
 	public void testAddReview() {
-		fail("Not yet implemented");
+		assertEquals(testReviewer.getReview(0), review1);
 	}
 
 }
