@@ -40,9 +40,11 @@ public class SubProgramChairTest {
 		
 		ArrayList<Reviewer> rev2 = new ArrayList<Reviewer>();
 		rev2.add(someR);
-		ArrayList<User> UserList = new ArrayList<User>();
-		UserList.add(user);
-		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", UserList, rev2);
+		ArrayList<User> userList = new ArrayList<User>();
+		userList.add(user);
+		User someU= new User("so", "me", "some@one.com");
+		userList.add(someU);
+		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu",userList, rev2);
 	}
 	
 	/**
@@ -67,7 +69,7 @@ public class SubProgramChairTest {
 	 */
 	@Test
 	public void testIsAuthor_notAuthor(){
-		assertEquals(" isAuthor notAuthor failed", 1 ,test2.isAuthor(1, thePaper2));
+		assertEquals(" isAuthor notAuthor failed", false ,test2.isAuthor(1, thePaper2));
 	}
 	/**
 	 * the chosen user is the author of the paper.
@@ -75,7 +77,7 @@ public class SubProgramChairTest {
 	@Test
 	public void testIsAuthor_isAuthor(){
 		
-		assertEquals(" isAuthor isAuthor failed",-1 ,test2.isAuthor(1, thePaper));
+		assertEquals(" isAuthor isAuthor failed", true ,test2.isAuthor(1, thePaper));
 	}
 	
 	
@@ -83,8 +85,10 @@ public class SubProgramChairTest {
 	 * empty reviewer list.
 	 */
 	@Test
-	public void testCreateReviewer_empty(){
-		assertEquals("CreateReviewer empty failed",1 ,test1.createReviewer(user, thePaper));
+	public void testCreateReviewer_noReviewer(){
+		myUserList.add(user);
+		Reviewer expected = new Reviewer("wi", "fi", "wifi@everywhere.com");
+		assertEquals("CreateReviewer empty failed", expected.getID(), test1.createReviewer(1, thePaper).getID());
 	}
 	/**
 	 * the user is a reviewer. no paper.
@@ -92,7 +96,8 @@ public class SubProgramChairTest {
 	@Test
 	public void testCreateReviewer_isReviewer(){
 		User someU = new User("so", "me", "some@one.com");
-		assertEquals("CreateReviewer isReviewer failed",1 ,test2.createReviewer(someU, thePaper));
+		myUserList.add(someU);
+		assertEquals("CreateReviewer isReviewer failed","some@one.com" ,test2.createReviewer(2, thePaper).getID());
 	}
 	/**
 	 * the reviewer has max(4) papers.
@@ -108,16 +113,16 @@ public class SubProgramChairTest {
 		someR.addPaper(pc);
 		someR.addPaper(pd);
 		User someU = new User("so", "me", "some@one.com");
-		assertEquals("CreateReviewer exceedMaxPaper failed",2 ,test2.createReviewer(someU, thePaper));
+		
+		assertEquals("CreateReviewer exceedMaxPaper failed",someU.getID() ,test2.createReviewer(2, thePaper).getID());
 	}
 	/**
 	 * new reviewer, user list is not empty.
 	 */
 	@Test
 	public void testCreateReviewer_notEmptyList(){
-		assertEquals("CreateReviewer notEmptyList failed",1 ,test2.createReviewer(user, thePaper));
+		assertEquals("CreateReviewer notEmptyList failed","wifi@everywhere.com" ,test2.createReviewer(1, thePaper).getID());
 	}
-	
 	
 	
 	@Test
