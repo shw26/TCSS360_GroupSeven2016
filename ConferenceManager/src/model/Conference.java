@@ -21,72 +21,68 @@ import view.PaperUI;
  * @version 5/1/2016
  */
 public class Conference implements Serializable{
-	
-	/**
-	 * Serial Version ID.
-	 */
+
 	private static final long serialVersionUID = -6224113936102614936L;
 	
-	
-	/**
+	/*
 	 * the name of the conference.
 	 */
-	public String myName;
+	private String myName;
 	
-	/**
+	/*
 	 * the program chair of the conference.
 	 */
-	public ProgramChair myProgramChair;
-	/**
+	private ProgramChair myProgramChair;
+	/*
 	 * the list of subprogram chairs of the conference.
 	 */
-	public ArrayList<SubProgramChair> mySubprogramChairs;
-	/**
+	private ArrayList<SubProgramChair> mySubprogramChairs;
+	/*
 	 * the list of reviewers of the conference.
 	 */
-	public ArrayList<Reviewer> myReviewers;
-	/**
+	private ArrayList<Reviewer> myReviewers;
+	/*
 	 * the list of authors of the conference.
 	 */
-	public ArrayList<Author> myAuthors;
-	/**
+	private ArrayList<Author> myAuthors;
+	/*
 	 * the list of papers of the conference.
 	 */
-	public ArrayList<Paper> myPapers;
+	private ArrayList<Paper> myPapers;
 	
-	/**
+	/*
 	 * if the user is a PC, then this will hold the info.
 	 */
-	public ProgramChair myCurrentPC;
-	/**
+	private ProgramChair myCurrentPC;
+	/*
 	 * if the user is a SC, then this will hold the info.
 	 */
-	public SubProgramChair myCurrentSC;
-	/**
+	private SubProgramChair myCurrentSC;
+	/*
 	 * if the user is a Reviewer, then this will hold the info.
 	 */
-	public Reviewer myCurrentReviewer;
-	/**
+	private Reviewer myCurrentReviewer;
+	/*
 	 * if the user is a Author, then this will hold the info.
 	 */
-	public Author myCurrentAuthor;
-	/**
+	private Author myCurrentAuthor;
+	/*
 	 * @author Will Almond
 	 * Calendar object for each conference.
 	 */
-	public Calendar calendar;
-	/**
+	private Calendar calendar;
+	/*
 	 * @author Will Almond
 	 * Date object for each conference.
 	 */
-	public Date dueDate;
-	/**
+	private Date dueDate;
+	/*
 	 * @author Will Almond
 	 * the number of days until papers are due.
 	 */
-	public int myDays;
+	private int myDays;
 	
-	/** The User Interface for a paper object. */
+	/* The User Interface for a paper object. */
 	private PaperUI myPaperUI;
 	
 
@@ -294,8 +290,8 @@ public class Conference implements Serializable{
 		return myAuthors;
 	}
 	/**
-	 * getter for paper List.
-	 * @return myPapers
+	 * Getter for paper List.
+	 * @return a collection of papers that have been submitted to this conference.
 	 * @author Shao-Han Wang 
 	 * @version 5/1/2016
 	 */
@@ -344,7 +340,9 @@ public class Conference implements Serializable{
 	 * @return True if deadline past
 	 */
 	public boolean isDeadlinePast() {
-		return Calendar.getInstance().after(dueDate);
+		Date today = Calendar.getInstance().getTime();
+		int value = today.compareTo(dueDate);
+		return	value > 0;
 	}
 	
 	/**

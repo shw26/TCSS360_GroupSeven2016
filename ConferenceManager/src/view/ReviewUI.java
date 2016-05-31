@@ -74,7 +74,7 @@ public class ReviewUI implements Serializable{
 		System.out.println("Select your numerical rating (1 - 10) for "+ myReview.getPaperName());
 		selection = scannerRate.nextInt();
 		System.out.println("The Paper was rated at a: " + selection);
-		myReview.setRateing(selection);
+		myReview.setRating(selection);
 		System.out.println("___________________________________________________\n");
 		
 		
@@ -86,11 +86,14 @@ public class ReviewUI implements Serializable{
 		System.out.println("To submit a review, Enter desired path: ");
 		System.out.println("(example: C:\\Windows\\System64\\Document\\manuscript)");
 		pathOfReview = scanner.nextLine();
-		myReview.setFile(pathOfReview);
-		System.out.println("Upload Sucessful");
-		System.out.println("___________________________________________________\n");
-	
-		
+		boolean wasLoaded = myReview.setFile(pathOfReview);
+		if (wasLoaded) {
+			System.out.println("Upload Successful");
+			System.out.println("___________________________________________________\n");
+		} else { 
+			System.out.println("File Upload un-successful");
+			System.out.println("___________________________________________________\n");
+		}
 	}
 
 	/**

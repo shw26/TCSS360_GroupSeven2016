@@ -40,6 +40,7 @@ public class MenuTest {
 		assertFalse(testMenu.login("Jredd@uw.edu"));
 	}
 	
+	@Test
 	public void testRegisterNewUser() {
 		testMenu.register("New", "User", "UserNew@uw.edu");
 		assertTrue(testMenu.login("UserNew@uw.edu"));

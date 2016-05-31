@@ -89,7 +89,11 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * Allows the Program Chair to select SubProgram Chairs.
+	 * The clients have to know the position of a user in a list of user.
+	 * theSelection is the index of a user plus 1.
 	 * @author Jeremy Wolf
+	 * @param theSelection the position of a user in a list of user.
+	 * @return
 	 */
 	public SubProgramChair createSubProgramChair(int theSelection) {		
 		User tempUser = null;
@@ -116,7 +120,10 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * This will be called from a UI and assigns a paper to a subprogram chair.
-	 * 
+	 * This will not check if the subprogram chair(theSC) is a author of the paper.
+	 * The client have to know the position of the desire paper in the list of paper.
+	 * theSelection is the index of a paper plus 1.
+	 * The range of theSelection: 1 ~ size of the paper list.
 	 * @param theSelection The selected paper from the list of papers for the subprogram chair(theSC)
 	 * @param theSC the subprogram chair being given a paper
 	 * @return boolean value, True if paper was assigned. 
@@ -208,7 +215,6 @@ public class ProgramChair implements Serializable {
 	public ArrayList<User> getUsers() {
 		return myUserList;
 	}
-
 
 	/**
 	 * Getter method for the SubProgram Chair list

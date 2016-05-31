@@ -91,9 +91,24 @@ public class ProgramChairTest {
 		theSCs.add(spc);
 		thePList.add(pa);
 		
-		assertEquals("AssignPaperToSC paperHasBeenAssigned fail", true, pc.assignPaperToSC(1, spc));
+		assertTrue("AssignPaperToSC paperHasBeenAssigned fail", pc.assignPaperToSC(1, spc));
 	}
 	
+	/**
+	 * the selected SC is the Author of the paper.
+	 */
+/*
+	@Test
+	public void testAssignPaperToSC_isTheAuthor() {
+		SubProgramChair spc = new SubProgramChair("so", "me", "some", null, null);
+		Paper pa = new Paper("some");
+		spc.addPaper(pa);
+		
+		theSCs.add(spc);
+		thePList.add(pa);
+		assertTrue("AssignPaperToSC isTheAuthor fail", pc.assignPaperToSC(1, spc));
+	}
+*/
 	/**
 	 * sc already have 4 papers.
 	 */
@@ -111,7 +126,7 @@ public class ProgramChairTest {
 		theSCs.add(spc);
 		thePList.add(pa);
 		
-		assertEquals("AssignPaperToSC exceedMax fail", false, pc.assignPaperToSC(1, spc));
+		assertFalse("AssignPaperToSC exceedMax fail", pc.assignPaperToSC(1, spc));
 	}
 	
 	/**

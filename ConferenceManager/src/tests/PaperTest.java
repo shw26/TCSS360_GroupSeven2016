@@ -83,9 +83,10 @@ public class PaperTest {
 	// setFile/getFile Tests
 	@Test
 	public void testSetFile_CreateNewFileUseGetter() {
-		String testFile = "Assets/testPaper1.txt";
-		testPaper.setFile(testFile);
-		assertEquals("setFile/getFile failed!", testFile, testPaper.getFile());
+		String testFile = ".\\Assets\\testPaper1.txt";
+		Paper testPaper = new Paper ("SomeAuthor");
+		testPaper.setTitle("This is the Title");
+		assertTrue("Did not upload", testPaper.setFile(testFile));
 	}
 	
 	// setTitle/getTitle Tests

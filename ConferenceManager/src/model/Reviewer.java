@@ -24,43 +24,42 @@ public class Reviewer implements Serializable{
 	 */
 	public static final int MAX_PAPERS = 4;
 
-	/**
+	/*
 	 * Serial Version ID for persistent storage use.
 	 */
 	private static final long serialVersionUID = -6833321289334518369L;
 
-	/**
+	/*
 	 * String representation the first name of the Reviewer.
 	 */
 	private String myFirstName;
 	
-	/**
+	/*
 	 * String representation of the Last of the Reviewer.
 	 */
 	private String myLastName;
 	
-	/**
+	/*
 	 * String representation of the ID of the Reviewer.
 	 */
 	private String myID;
-	
-	/**
+
+	/*
 	 * Collection containing a list of all papers assigned to the Sub Program Chair.
 	 */
 	private ArrayList<Paper> myPaperList;
 	
-	/**
+	/*
 	 * Collection containing all reviews.
 	 */
 	private ArrayList<Review> myReviews;
 	
 	/**
-	 * Constructor for the Reviewer.
 	 * 
 	 * @author Jeremy Wolf
-	 * @param theFirst string for the Reviewers First Name.
-	 * @param theLast String for the Reviewers Last Name.
-	 * @param theID String for the Reviewers ID (email).
+	 * @param theFirst string for the Reviewers First Name; not null.
+	 * @param theLast String for the Reviewers Last Name; not null.
+	 * @param theID String for the Reviewers ID (email); not null.
 	 */
 	public Reviewer(String theFirst, String theLast, String theID) {
 		
@@ -77,9 +76,8 @@ public class Reviewer implements Serializable{
 	 * Allows the Reviewer to submit a review
 	 * @author Jeremy Wolf
 	 * @author Will Almond
-	 * @param theSelection is an integer that the user inputs on the console. 
-	 * @return currentReview is the review that corresponds to the Paper that
-	 * the user requested via console input.
+	 * @param theSelection is an integer value for the paper selected (from console input). 
+	 * @return a Review object for the current paper. 
 	 */
 	public Review submitReview(int theSelection) {
 		Review currentReview = null;
@@ -94,9 +92,9 @@ public class Reviewer implements Serializable{
 	}
 	
 	/**
-	 * Getter method for the myID field
+	 * Getter method for the Reviewers ID
 	 * @author Jeremy Wolf
-	 * @return myID is a String for the Reviewer's email address.
+	 * @return a String for the Reviewer's email address.
 	 * 
 	 */
 	public String getID() {
@@ -104,7 +102,8 @@ public class Reviewer implements Serializable{
 	}
 	
 	/**
-	 * Adds a paper to be reviewed.
+	 * Adds a paper to the Reviewers list, will only add the paper if the Reviewer
+	 * Paper Collection is < MAX_PAPERS.
 	 * @author Jeremy Wolf
 	 * @param thePaper a Paper object to be added to the Reviewers collection of papers. 
 	 * @return a boolean true if the paper was successfully added.
@@ -121,9 +120,9 @@ public class Reviewer implements Serializable{
 	}
 	
 	/**
-	 * Getter method for the Paper list.
+	 * Getter method for the Paper collection.
 	 * @author Jeremy Wolf
-	 * @return myPaperLists is the list of Papers that belong to the Reviewer.
+	 * @return a collection of Papers that belong to the Reviewer.
 	 */
 	public ArrayList<Paper> getPaperList() {
 		return myPaperList;
@@ -131,7 +130,7 @@ public class Reviewer implements Serializable{
 	}
 	
 	/**
-	 * Adds a review to the Review list.
+	 * Adds a review to the Review collection.
 	 * @author Will Almond
 	 * @param theRev is the review to be added to the list of Reviews
 	 * that belong to the Reviewer.

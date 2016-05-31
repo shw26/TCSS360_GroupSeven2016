@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 /**
  * 
- * User Class
+ * User is the object that represents each registered user. It contains
+ * a First and Last name and a ID (Unique String). This object is used
+ * to verify if a user is already registered. 
  * 
  * @author Will Almond
  * @version 1.0, 05/01/2016
@@ -15,23 +17,23 @@ import java.util.ArrayList;
 
 public class User implements Serializable{
 	
-	/** Generated Serial ID. */
+	/* Generated Serial ID. */
 	private static final long serialVersionUID = -7767643624559317435L;
 	
-	/** The conference which the user is currently using. **/
-	public Conference theConf;
-	/** The first name of the user. */
-	public String theFirstName;
-	/** The last name of the user. */
-	public String theLastName;
-	/** The ID of the user. */
-	public String myID;
+	/* The conference which the user is currently using. **/
+	private Conference theConf;
+	/* The first name of the user. */
+	private String theFirstName;
+	/* The last name of the user. */
+	private String theLastName;
+	/* The ID of the user. */
+	private String myID;
 	
 	/**
 	 * Constructor for the User to store the non-adjustable attributes of these users.
-	 * @param firstName first name of user
-	 * @param lastName last name of user
-	 * @param id the ID of user
+	 * @param firstName first name of user; not null.
+	 * @param lastName last name of user; not null.
+	 * @param id the ID of user; not null.
 	 */
 	public User(String firstName, String lastName, String id){
 		theFirstName = firstName;
@@ -49,7 +51,7 @@ public class User implements Serializable{
 	/**
 	 * Getter method for the last name field.
 	 * 
-	 * @return theLastName Last name of user
+	 * @return a String representing the Last name of user
 	 */
 	public String getLast(){
 		return theLastName;
@@ -58,7 +60,7 @@ public class User implements Serializable{
 	/**
 	 * Getter Method for the last name.
 	 * 
-	 * @return theFirstName First name of user
+	 * @return a String representing the First name of user
 	 */
 	public String getFirst(){
 		return theFirstName;
@@ -67,7 +69,7 @@ public class User implements Serializable{
 	/**
 	 * Returns the ID of the User.
 	 * 
-	 * @return myID user's ID
+	 * @return a String representing the user's ID
 	 */
 	public String getID(){
 		return myID;
