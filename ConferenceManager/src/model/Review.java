@@ -20,24 +20,24 @@ import view.ReviewUI;
  */
 public class Review implements Serializable{
 
-	/** This is the serialized generated ID.*/
+	/* This is the serialized generated ID.*/
 	private static final long serialVersionUID = -374717804308411534L;
 	
-	/** The name of the paper being reviewed */
+	/* The name of the paper being reviewed */
 	private String theName;
-	/** A numerical rating that the reviewer will leave for the author. */
-	private int theRateing;
-	/** Comments that the reviewer will leave*/
+	/* A numerical rating that the reviewer will leave for the author. */
+	private int myRateing;
+	/* Comments that the reviewer will leave*/
 	private String theComment;
-	/** the ID of the reviewer for the heading */
+	/* the ID of the reviewer for the heading */
 	private String theID;
-	/** The paper to be reviewed */
+	/* The paper to be reviewed */
 	private Paper myPaper;
-	/** The Reviewer doing the review */
+	/* The Reviewer doing the review */
 	private Reviewer myRev;
-	/** The Review File */
+	/* The Review File */
 	private String myFile;
-	/** The User Interface for the Review class. */
+	/* The User Interface for the Review class. */
 	private ReviewUI myReviewUI;
 
 	
@@ -56,87 +56,44 @@ public class Review implements Serializable{
 	}
 	/**
 	 * Getter method for the ReviewUI
-	 * @return myReviewUI gets the class.
+	 * @return the Review UI to be used in console display.
 	 */
 	public ReviewUI getReviewUI() {
 		return myReviewUI;
 	}
 	/**
 	 * This method returns the conference name.
-	 * @return theName
+	 * @return a String representing the conference name; may be null.
 	 */
 	public String getConfName(){
 		return theName;
 	}
 	
 	/**
-	 * Subprogram chairs and authors will need to use this to view the comments.
-	 * @return theComment
-	 */
-	public String getComment(){
-		return theComment;
-	}
-	/**
-	 * The Program Chair will use this method to view the rating. 
-	 * @return theRateing
-	 */
-	public int getRateing(){
-		return getTheRateing();
-	}
-	/**
-	 * This method will be used when creating a conference.
-	 * @param name
-	 */
-	public void setConfName(String name){
-		theName = name;
-	}
-	/**
-	 * The reviewer will need to comment on each paper and will use this method.
-	 * @param comment
-	 */
-	public void setComment(String comment){
-		theComment = comment;
-	}
-	/**
-	 * When the reviewer desires to set a rating they will call this method.
-	 * @param rateing
-	 */
-	public void setRateing(int rateing){
-		setTheRateing(rateing);
-	}
-//	/**
-//	 * toString method to display the review in a uniform instance.
-//	 */
-//	public String toString(){
-//		StringBuilder myString = new StringBuilder();
-//		return myString.toString();
-//	}
-	/**
-	 * Submits the review when finished.
+	 * Submits the review to the both the papers review list and the Reviewers list of reviews..
 	 * @author Jeremy Wolf
 	 */
 	public void submitReview() {
 		myPaper.addReview(this);
 		myRev.addReview(this);
-
 	}
 	/**
 	 * Gets the ID of the reviewer.
-	 * @return theID
+	 * @return a unique string value representing the reviewers ID.
 	 */
 	public String getTheID() {
 		return theID;
 	}
 	/**
 	 * Sets the id of the reviewer on this review.
-	 * @param theID
+	 * @param a unique string value representing the reviewers ID; can not be null.
 	 */
 	public void setTheID(String theID) {
 		this.theID = theID;
 	}
 	/**
-	 * Sets the file for the review
-	 * @param theFile the review file.
+	 * Moves the submitted file to the System Review folder.
+	 * @param a string representing the file path (source file).
 	 */
 	public boolean setFile(String theFile) {
 		
@@ -156,8 +113,9 @@ public class Review implements Serializable{
 	
 	/**
 	 * Getter method for the title of the paper.
+	 * 
 	 * @author Jeremy Wolf
-	 * @return the title of the paper.
+	 * @return a string value for the title of the paper.
 	 */
 	public String getPaperName() {
 		return myPaper.getTitle();
@@ -165,17 +123,17 @@ public class Review implements Serializable{
 	/**
 	 * Gets the rating of the paper.
 	 * @author Will Almond
-	 * @return
+	 * @return an integer value for a the rating.
 	 */
-	public int getTheRateing() {
-		return theRateing;
+	public int getRating() {
+		return myRateing;
 	}
 	/**
 	 * Sets the rating of the paper.
 	 * @author Will Almond
-	 * @param theRateing
+	 * @param theRateing the integer value for the rating given to the paper.
 	 */
-	public void setTheRateing(int theRateing) {
-		this.theRateing = theRateing;
+	public void setRating(int theRating) {
+		myRateing = theRating;
 	}
 }

@@ -106,7 +106,7 @@ public class ReviewerUI implements Serializable{
 		if (!myReviewer.getReviewList().isEmpty()) {
 			for (Review rev : myReviewer.getReviewList()) {
 				System.out.println("Title: " + rev.getPaperName());
-				System.out.println("\tThe rating was: " + rev.getRateing());
+				System.out.println("\tThe rating was: " + rev.getRating());
 			}
 			System.out.println("Press 0 to go back");
 			int selection = scanner.nextInt();

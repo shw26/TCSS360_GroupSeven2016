@@ -210,9 +210,7 @@ public class AuthorUI implements Serializable{
 			System.out.println("Paper: " + tempPaper.getTitle());
 			for(Review rev : tempPaper.getReviews()) {
 				System.out.println("Review number: " + counter);
-				System.out.println("\tThe rating was: " + rev.getTheRateing());
-				System.out.println("\tThe review comment was: ");
-				System.out.println("\t" + rev.getComment() + "\n");
+				System.out.println("\tThe rating was: " + rev.getRating());
 				counter++;
 			}
 			System.out.println("Press 0 to go back");
