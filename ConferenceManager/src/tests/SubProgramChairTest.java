@@ -48,19 +48,9 @@ public class SubProgramChairTest {
 		
 		ArrayList<Reviewer> rev2 = new ArrayList<Reviewer>();
 		rev2.add(someR);
-<<<<<<< HEAD
-		ArrayList<User> userList = new ArrayList<User>();
-		userList.add(user);
-		User someU= new User("so", "me", "some@one.com");
-		userList.add(someU);
-		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu",userList, rev2);
-=======
 		ArrayList<User> UserList = new ArrayList<User>();
 		UserList.add(user);
 		test2 = new SubProgramChair("Jeremy", "Wolf", "Jwolf059@uw.edu", UserList, rev2);
-		
-
->>>>>>> refs/heads/j3
 	}
 	
 	/**
@@ -85,23 +75,15 @@ public class SubProgramChairTest {
 	 */
 	@Test
 	public void testIsAuthor_notAuthor(){
-<<<<<<< HEAD
-		assertEquals(" isAuthor notAuthor failed", false ,test2.isAuthor(1, thePaper2));
-=======
 		assertEquals("Is the Author, should not be the author", false,  test1.isAuthor(2, thePaper2));
->>>>>>> refs/heads/j3
+
 	}
 	/**
 	 * the chosen user is the author of the paper.
 	 */
 	@Test
 	public void testIsAuthor_isAuthor(){
-		
-<<<<<<< HEAD
-		assertEquals(" isAuthor isAuthor failed", true ,test2.isAuthor(1, thePaper));
-=======
 		assertEquals("Is not the Author, Should be the Author", true ,test2.isAuthor(1, thePaper));
->>>>>>> refs/heads/j3
 	}
 	
 	
@@ -109,12 +91,6 @@ public class SubProgramChairTest {
 	 * empty reviewer list.
 	 */
 	@Test
-<<<<<<< HEAD
-	public void testCreateReviewer_noReviewer(){
-		myUserList.add(user);
-		Reviewer expected = new Reviewer("wi", "fi", "wifi@everywhere.com");
-		assertEquals("CreateReviewer empty failed", expected.getID(), test1.createReviewer(1, thePaper).getID());
-=======
 	public void testCreateReviewer_empty(){
 		assertTrue ("Review List is not empty", test1.getReviewers().isEmpty());
 		Reviewer testRev = test1.createReviewer(1);
@@ -122,45 +98,23 @@ public class SubProgramChairTest {
 		String compareID = test1.getReviewers().get(0).getID();
 		assertEquals("ID of the Reviewer did not match one in the list", "JRedd@gmail.com", compareID);
 		assertEquals("ID of the Reviewer did not match returned value", "JRedd@gmail.com", testRev.getID());
-		
->>>>>>> refs/heads/j3
 	}
 	/**
 	 * the user is a reviewer. no paper.
 	 */
 	@Test
 	public void testCreateReviewer_isReviewer(){
-<<<<<<< HEAD
-		User someU = new User("so", "me", "some@one.com");
-		myUserList.add(someU);
-		assertEquals("CreateReviewer isReviewer failed","some@one.com" ,test2.createReviewer(2, thePaper).getID());
-=======
 		assertTrue ("Review List is not empty", test1.getReviewers().isEmpty());
 		Reviewer testRev = test1.createReviewer(1); // Add to empty list
 		assertEquals("List does not contain 1 Reviewer", 1, test1.getReviewers().size());
 		Reviewer testRev2 = test1.createReviewer(1); // Add again, since it is the same it will not be added.
 		assertEquals("Duplicated Reviewer was Added", 1, test1.getReviewers().size());
 		assertEquals("ID of the Reviewer did not match", testRev.getID(), testRev2.getID());
->>>>>>> refs/heads/j3
 	}
 	/**
 	 * the subProgram Chair has max papers.
 	 */
 	@Test
-<<<<<<< HEAD
-	public void testCreateReviewer_exceedMaxPaper(){
-		Paper pa = new Paper("a");
-		Paper pb = new Paper("b");
-		Paper pc = new Paper("c");
-		Paper pd = new Paper("d");
-		someR.addPaper(pa);
-		someR.addPaper(pb);
-		someR.addPaper(pc);
-		someR.addPaper(pd);
-		User someU = new User("so", "me", "some@one.com");
-		
-		assertEquals("CreateReviewer exceedMaxPaper failed",someU.getID() ,test2.createReviewer(2, thePaper).getID());
-=======
 	public void testaddPaper_exceedMaxPaper(){
 		Paper p1 = new Paper("Test 1");
 		Paper p2 = new Paper("Test 2");
@@ -174,26 +128,18 @@ public class SubProgramChairTest {
 		test1.addPaper(p4);
 		
 		assertFalse("Paper was added, Max paper was not enforced", test1.addPaper(p5));
-		
-		
-		
->>>>>>> refs/heads/j3
 	}
 	/**
 	 * new reviewer, user list is not empty.
 	 */
 	@Test
 	public void testCreateReviewer_notEmptyList(){
-<<<<<<< HEAD
-		assertEquals("CreateReviewer notEmptyList failed","wifi@everywhere.com" ,test2.createReviewer(1, thePaper).getID());
-=======
 		assertTrue ("Review List is not empty", test1.getReviewers().isEmpty());
 		Reviewer testRev = test1.createReviewer(1);
 		assertEquals("Empty CreateReview Failed", 1, test1.getReviewers().size());
 		Reviewer testRev2 = test1.createReviewer(2);
 		assertEquals("Empty CreateReview Failed, should be 2", 2, test1.getReviewers().size());
 		assertEquals("ID of the Reviewer did not match returned value", "SamH@gmail.com", testRev2.getID());
->>>>>>> refs/heads/j3
 	}
 	
 	
