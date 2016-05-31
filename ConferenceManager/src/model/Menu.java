@@ -34,7 +34,7 @@ public class Menu implements Serializable{
 	/**
 	 * The MenuUI to start the program.
 	 */
-	private MenuUI myMenuUI;
+	//private MenuUI myMenuUI;
 	
 	/**
 	 * Menu object constructor.
@@ -42,7 +42,7 @@ public class Menu implements Serializable{
 	public Menu() {
 		myUsers = new ArrayList<User>();
 		myConferences = new ArrayList<Conference>();
-		myMenuUI = new MenuUI(this);
+		//myMenuUI = new MenuUI(this);
 		myCurrentUser = null;
 	}
 	
@@ -123,9 +123,9 @@ public class Menu implements Serializable{
 	 * Getter method for the menu ui.
 	 * @return myMenuUI
 	 */
-	public MenuUI getMenuUI() {
-		return myMenuUI;
-	}
+	//public MenuUI getMenuUI() {
+	//	return myMenuUI;
+	//}
 	
 	/**
 	 * This adds a user to the list of system users.

@@ -39,8 +39,8 @@ public class MenuUI implements Serializable{
 	 * Constructor for the MenuUI.
 	 * @param theMenu the Menu Model class.
 	 */
-	public MenuUI(Menu theMenu) {
-		myMenu = theMenu;
+	public MenuUI() {
+		myMenu = new Menu();//= theMenu;
 		myConferenceUI = new ConferenceUI();
 		myCalendar = Calendar.getInstance();
 	}
@@ -161,4 +161,9 @@ public class MenuUI implements Serializable{
 			}
 		}
 	}
+	
+	public void setMenu(Menu theMenu){
+		myMenu = theMenu; 
+	}
+	
 }

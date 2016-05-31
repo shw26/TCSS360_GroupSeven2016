@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import view.MenuUI;
+
 public class driver {	
 	
 	/**
@@ -15,7 +17,7 @@ public class driver {
 	 * @param args console arguments, unused
 	 */
 	public static void main(String[] args) {
-		
+		MenuUI newSystem = new MenuUI();
 		Menu system = openSave();
 		if (system == null) {
 			system = new Menu();
@@ -28,8 +30,8 @@ public class driver {
 			system.createConference("10th Annual Early Childhood Education Convention", second, 1);
 			system.createConference("15th Annual meeting of Doctors in Orthopedics", third, 3);
 		}
-		
-		system.getMenuUI().welcomeMenu();
+		newSystem.setMenu(system);
+		newSystem.welcomeMenu();//system.getMenuUI().welcomeMenu();
 		exitSave(system);
 
 	}
