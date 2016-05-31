@@ -8,7 +8,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Program Chair class.
@@ -93,29 +92,29 @@ public class ProgramChair implements Serializable {
 	 * theSelection is the index of a user plus 1.
 	 * @author Jeremy Wolf
 	 * @param theSelection the position of a user in a list of user.
-	 * @return
+	 * @return 
 	 */
 	public SubProgramChair createSubProgramChair(int theSelection) {		
-		User tempUser = null;
-		SubProgramChair tempSC = null;
+		User selectedUser = null;
+		SubProgramChair createdSC = null;
 		
 		if(theSelection != 0) {
-			tempUser = myUserList.get(theSelection - 1);
-			if (!isPresent(tempUser)) {
+			selectedUser = myUserList.get(theSelection - 1);
+			if (!isPresent(selectedUser)) {
 			// Creates a new subprogram Chair
-				tempSC = new SubProgramChair(tempUser.getFirst(), tempUser.getLast(),
-										 tempUser.getID(), myUserList, myReviewers);
-				mySubList.add(tempSC);
+				createdSC = new SubProgramChair(selectedUser.getFirst(), selectedUser.getLast(),
+										 selectedUser.getID(), myUserList, myReviewers);
+				mySubList.add(createdSC);
 			} else {
-				for(SubProgramChair temp : mySubList) {
-					if (tempUser.getID().equals(temp.getID())) {
-						tempSC = temp;
+				for(SubProgramChair itrSC : mySubList) {
+					if (selectedUser.getID().equals(itrSC.getID())) {
+						createdSC = itrSC;
 						break;
 					}
 				}
 			}
 		}
-		return tempSC;
+		return createdSC;
 	}
 	
 	/**
@@ -156,7 +155,7 @@ public class ProgramChair implements Serializable {
 	}
 	
 	/**
-	 * Checks to see if the User ID matches a Current SC.
+	 * Checks to see if a User ID is already a SubProgramChair.
 	 * @author Jeremy Wolf
 	 * @param theUser the user we want to check, theUser has to be a registered user.
 	 * @return isPresent true if the user(theUser) is a present subprogram chair, false if not.

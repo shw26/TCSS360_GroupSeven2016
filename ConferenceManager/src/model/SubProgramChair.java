@@ -123,23 +123,23 @@ public class SubProgramChair implements Serializable {
 	 * 			new Reviewer is created.
 	 */
 	public Reviewer createReviewer(int theSelection) {
-		Reviewer tempReviewer = null;
-		User userTemp = myUsers.get(theSelection - 1);
+		Reviewer createdReviewer = null;
+		User selectedUser = myUsers.get(theSelection - 1);
 		boolean isPresent = false;
-		for (Reviewer rev : myRevList) {
-			if (rev.getID().equals(userTemp.getID())) {
+		for (Reviewer reviewerItr : myRevList) {
+			if (reviewerItr.getID().equals(selectedUser.getID())) {
 				isPresent = true;
-				tempReviewer = rev;
+				createdReviewer = reviewerItr;
 				break;
 			}
 		}
 		//If the User is not already a reviewer a new reviewer is created.
 		if (!isPresent) {
-			tempReviewer = new Reviewer(userTemp.getFirst(), 
-					userTemp.getLast(), userTemp.getID());
-			myRevList.add(tempReviewer);
+			createdReviewer = new Reviewer(selectedUser.getFirst(), 
+					selectedUser.getLast(), selectedUser.getID());
+			myRevList.add(createdReviewer);
 		}
-		return tempReviewer;
+		return createdReviewer;
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class SubProgramChair implements Serializable {
 	/**
 	 * Getter method for the collection of Reviewers. 
 	 * @author Jeremy Wolf
-	 * @return the Collection of Reviewers for the SubProgram Chair.
+	 * @return myRevList the Collection of Reviewers for the SubProgram Chair.
 	 */
 	public ArrayList<Reviewer> getReviewers() {
 		return myRevList;
