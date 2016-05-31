@@ -19,46 +19,46 @@ import java.util.Scanner;
 public class ProgramChair implements Serializable {
 	
 	
-	/** 
+	/*
 	 * Max number of Papers assigned to a SubProgramChair
 	 */
 	public static final int MAX_PAPERS = 4;
-	/**
+	/*
 	 * Serial Version ID for persistent storage use.
 	 */
 	private static final long serialVersionUID = -5029928592171799831L;
 
-	/**
+	/*
 	 * String representation the first name of the Program Chair.
 	 */
 	private String myFirstName;
 	
-	/**
+	/*
 	 * String representation of the Last of the Program Chair.
 	 */
 	private String myLastName;
 	
-	/**
+	/*
 	 * String representation of the ID of the Program Chair.
 	 */
 	private String myID;
 	
-	/**
+	/*
 	 * Collection containing a list of all papers under the Program Chair.
 	 */
 	private ArrayList<Paper> myPaperList;
 	
-	/**
+	/*
 	 * Collection containing a list of all SubProgramChairs under the Program Chair.
 	 */
 	private ArrayList<SubProgramChair> mySubList;
 	
-	/**
+	/*
 	 * Collection containing a list of all registered users.
 	 */
 	private ArrayList<User> myUserList;
 	
-	/**
+	/*
 	 * Collection containing a list of all Reviewers. 
 	 */
 	private ArrayList<Reviewer> myReviewers;
@@ -88,7 +88,7 @@ public class ProgramChair implements Serializable {
 	
 	
 	/**
-	 * Allows the Program Chair to select SubProgram Chairs
+	 * Allows the Program Chair to select SubProgram Chairs.
 	 * @author Jeremy Wolf
 	 */
 	public SubProgramChair createSubProgramChair(int theSelection) {		
@@ -115,9 +115,9 @@ public class ProgramChair implements Serializable {
 	}
 	
 	/**
-	 * This is called from a UI and assigns a paper to a subprogram chair.
+	 * This will be called from a UI and assigns a paper to a subprogram chair.
 	 * 
-	 * @param theSelection The selected paper from the list of papers for the SC
+	 * @param theSelection The selected paper from the list of papers for the subprogram chair(theSC)
 	 * @param theSC the subprogram chair being given a paper
 	 * @return boolean value, True if paper was assigned. 
 	 */
@@ -146,13 +146,13 @@ public class ProgramChair implements Serializable {
 			isTheAuthor = true;
 		}
 		return isTheAuthor;
-		
 	}
 	
 	/**
 	 * Checks to see if the User ID matches a Current SC.
-	 * @param theUser being checked
-	 * @return true if present, false if not.
+	 * @author Jeremy Wolf
+	 * @param theUser the user we want to check, theUser has to be a registered user.
+	 * @return isPresent true if the user(theUser) is a present subprogram chair, false if not.
 	 */
 	public boolean isPresent(User theUser) {
 		boolean isPresent = false; 
@@ -171,39 +171,39 @@ public class ProgramChair implements Serializable {
 	/**
 	 * Allows the Program Chair to make the final decision on a paper.
 	 * @author Jeremy Wolf
+	 * @param thePaper the paper we want to make accept/reject decision on.
+	 * @param theSelection 1 for yes, the paper(thePaper) is accepted, 2 for rejected.
 	 */
 	public void makeFinal(Paper thePaper, int theSelection) {
 		if (theSelection == 1) {
 			thePaper.setFinal(true);
 		} else if (theSelection == 2) {
 			thePaper.setFinal(false);
-
 		}
 	}
 	
 	
 	/**
-	 * Getter method for the myID field
+	 * Getter method for the myID field.
 	 * @author Jeremy Wolf
-	 * @return the String myID
+	 * @return myID the ID of this program chair.
 	 */
 	public String getID() {
 		return myID;
 	}
 	
 	/**
-	 * Getter method for the list of Papers
-	 * @return myPaperList;
+	 * Getter method for the list of Papers.
+	 * @return myPaperList a list contains all submitted paper under this program chair.
 	 */
 	public ArrayList<Paper> getPapers() {
-
 		return myPaperList;
 	}
 
 
 	/**
 	 * Getter method for the User list
-	 * @return myUserList
+	 * @return myUserList a list contains all registered users.
 	 */
 	public ArrayList<User> getUsers() {
 		return myUserList;
@@ -212,7 +212,7 @@ public class ProgramChair implements Serializable {
 
 	/**
 	 * Getter method for the SubProgram Chair list
-	 * @return mySubList
+	 * @return mySubList the list contains all subprogram chairs under this program chair.
 	 */
 	public ArrayList<SubProgramChair> getSCs() {
 		return mySubList;

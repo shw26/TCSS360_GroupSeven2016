@@ -91,22 +91,9 @@ public class ProgramChairTest {
 		theSCs.add(spc);
 		thePList.add(pa);
 		
-		assertEquals("AssignPaperToSC paperHasBeenAssigned fail", 1, pc.assignPaperToSC(1, spc));
+		assertEquals("AssignPaperToSC paperHasBeenAssigned fail", true, pc.assignPaperToSC(1, spc));
 	}
-	/**
-	 * the selected SC is the Author of the paper.
-	 */
-	@Test
-	public void testAssignPaperToSC_isTheAuthor() {
-		SubProgramChair spc = new SubProgramChair("so", "me", "some", null, null);
-		Paper pa = new Paper("some");
-		spc.addPaper(pa);
-		
-		theSCs.add(spc);
-		thePList.add(pa);
-		
-		assertEquals("AssignPaperToSC isTheAuthor fail", 2, pc.assignPaperToSC(1, spc));
-	}
+	
 	/**
 	 * sc already have 4 papers.
 	 */
@@ -124,8 +111,40 @@ public class ProgramChairTest {
 		theSCs.add(spc);
 		thePList.add(pa);
 		
-		assertEquals("AssignPaperToSC exceedMax fail", 3, pc.assignPaperToSC(1, spc));
+		assertEquals("AssignPaperToSC exceedMax fail", false, pc.assignPaperToSC(1, spc));
 	}
+	
+	/**
+	 * the selected SC is the Author of the paper.
+	 */
+	@Test
+	public void testIsAuthor_SCIsTheAuthor() {
+		SubProgramChair spc = new SubProgramChair("so", "me", "some", null, null);
+		Paper pa = new Paper("some");
+		spc.addPaper(pa);
+		
+		theSCs.add(spc);
+		thePList.add(pa);
+		
+		assertEquals("testIsAuthor SCIsTheAuthor fail", true, pc.isAuthor(1, spc));
+	}
+	
+	/**
+	 * the selected SC is not the Author of the paper.
+	 */
+	@Test
+	public void testIsAuthor_SCIsNotTheAuthor() {
+		SubProgramChair spc = new SubProgramChair("so", "me", "some", null, null);
+		Paper pa = new Paper("wifi");
+		spc.addPaper(pa);
+		
+		theSCs.add(spc);
+		thePList.add(pa);
+		
+		assertEquals("testIsAuthor SCIsNotTheAuthor fail", false, pc.isAuthor(1, spc));
+	}
+	
+	
 	
 	/**
 	 * When the List is empty.
