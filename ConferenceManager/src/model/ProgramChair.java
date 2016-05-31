@@ -151,7 +151,7 @@ public class ProgramChair implements Serializable {
 	
 	/**
 	 * Checks to see if the User ID matches a Current SC.
-	 * @param theUser being checked
+	 * @param theUser object being checked
 	 * @return true if present, false if not.
 	 */
 	public boolean isPresent(User theUser) {
@@ -177,7 +177,6 @@ public class ProgramChair implements Serializable {
 			thePaper.setFinal(true);
 		} else if (theSelection == 2) {
 			thePaper.setFinal(false);
-
 		}
 	}
 	
@@ -208,7 +207,6 @@ public class ProgramChair implements Serializable {
 	public ArrayList<User> getUsers() {
 		return myUserList;
 	}
-
 
 	/**
 	 * Getter method for the SubProgram Chair list

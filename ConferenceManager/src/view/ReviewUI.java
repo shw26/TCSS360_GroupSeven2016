@@ -74,7 +74,7 @@ public class ReviewUI implements Serializable{
 		System.out.println("Select your numerical rating (1 - 10) for "+ myReview.getPaperName());
 		selection = scannerRate.nextInt();
 		System.out.println("The Paper was rated at a: " + selection);
-		myReview.setRateing(selection);
+		myReview.setRating(selection);
 		System.out.println("___________________________________________________\n");
 		
 		

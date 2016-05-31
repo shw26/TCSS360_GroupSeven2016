@@ -121,11 +121,10 @@ public class SubProgramChair implements Serializable {
 	 * 
 	 * @author Jeremy Wolf
 	 * @param theUser theUser that is going to be a Reviewer.
-	 * @param thePaper the paper to be reviewed by the Reviewer.
 	 * @return if a Reviewer Object is found with the same ID then it is returned, otherwise a
 	 * 			new Reviewer is created.
 	 */
-	public Reviewer createReviewer(int theSelection, Paper thePaper ) {
+	public Reviewer createReviewer(int theSelection) {
 		Reviewer tempReviewer = null;
 		User userTemp = myUsers.get(theSelection - 1);
 		boolean isPresent = false;
@@ -204,6 +203,15 @@ public class SubProgramChair implements Serializable {
 	 */
 	public String getID() {
 		return myID;
+	}
+	
+	/**
+	 * Getter method for the collection of Reviewers. 
+	 * @author Jeremy Wolf
+	 * @return the Collection of Reviewers for the SubProgram Chair.
+	 */
+	public ArrayList<Reviewer> getReviewers() {
+		return myRevList;
 	}
 }
 

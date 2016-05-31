@@ -73,7 +73,7 @@ public class SubProgramChairUI implements Serializable{
 			if (status) {
 				cantReview();
 			} else {
-				tempRev = mySubProgramChair.createReviewer(selection, tempPaper); 
+				tempRev = mySubProgramChair.createReviewer(selection); 
 				boolean wasAdded = tempRev.addPaper(tempPaper);
 				
 				if (wasAdded) {

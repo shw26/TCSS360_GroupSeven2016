@@ -77,16 +77,16 @@ public class ConferenceUI implements Serializable{
 			
 			System.out.println("Select a Role or submit a paper");
 			
-			if(theConference.myCurrentPC != null){
+			if(theConference.getPC() != null){
 				System.out.println("1) Program Chair");
 			}
-			if(theConference.myCurrentSC != null){
+			if(theConference.getSC() != null){
 				System.out.println("2) Subprogram Chair");
 			}
-			if(theConference.myCurrentReviewer != null){
+			if(theConference.getReviewer() != null){
 				System.out.println("3) Reviewer");
 			}
-			if(theConference.myCurrentAuthor != null){
+			if(theConference.getAuthor() != null){
 				System.out.println("4) Author");
 			} 
 			
@@ -96,19 +96,19 @@ public class ConferenceUI implements Serializable{
 			
 			System.out.println("_________________________________________________\n");
 			if(selection == PROGRAMCHAIR){
-				ProgramChair pC = theConference.myCurrentPC;
+				ProgramChair pC = theConference.getPC();
 				myPCUI.pcMenu(theConference, pC);
 			}
 			if(selection == SUBPROGRAMCHAIR){
-				SubProgramChair sC = theConference.myCurrentSC;
+				SubProgramChair sC = theConference.getSC();
 				mySCUI.scMenu(theConference, sC);
 			}
 			if(selection == REVIEWER){
-				Reviewer reviewer = theConference.myCurrentReviewer;
+				Reviewer reviewer = theConference.getReviewer();
 				myReviewerUI.reviewerMenu(theConference, reviewer);
 			}
 			if(selection == AUTHOR){
-				Author author = theConference.myCurrentAuthor;
+				Author author = theConference.getAuthor();
 				myAuthorUI.authorMenu(author, theConference);
 			}
 
