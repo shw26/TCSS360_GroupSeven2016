@@ -87,6 +87,7 @@ public class Reviewer implements Serializable{
 			tPaper = myPaperList.get(theSelection - 1);
 
 			currentReview = new Review(tPaper, this);
+			tPaper.addReview(currentReview);
 		}
 		return currentReview;
 	}
