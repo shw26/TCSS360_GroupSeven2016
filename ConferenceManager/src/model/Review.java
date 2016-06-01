@@ -121,6 +121,13 @@ public class Review implements Serializable{
 		return myPaper.getTitle();
 	}
 	/**
+	 * Getter method that returns the Paper assigned to the review.
+	 * @return myPaper that is attached to the review.
+	 */
+	public Paper getPaper(){
+		return myPaper;
+	}
+	/**
 	 * Gets the rating of the paper.
 	 * @author Will Almond
 	 * @return an integer value for a the rating.
