@@ -60,6 +60,19 @@ public class ReviewTest {
 		assertEquals("the review in Reviewer and the submitted review should be the same!",
 				myReview, myRev1.getReview(0));
 	}
+	/**
+	 * @author Will Almond
+	 * @version 05/18/2016
+	 * Test method for {@link Review#setFile()}.
+	 */
+	@Test
+	public void testSetFile(){
+		String testFile = ".\\Assets\\Reviews\\This is the Title_bumdum@gmail.comReview.txt";
+		Paper testPaper = new Paper("SomeAuthor");
+		Review testReview = new Review(testPaper, myRev1);
+		testReview.getPaper().setTitle("This is the Title");
+		assertTrue("Did not write", testReview.setFile(testFile));
+	}
 
 
 }
