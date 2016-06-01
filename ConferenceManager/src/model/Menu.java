@@ -11,30 +11,25 @@ import view.MenuUI;
 
 public class Menu implements Serializable{
 	
-	/**
+	/*
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = 2219879119428317464L;
 
-	/**
+	/*
 	 * Collection of all System Users.
 	 */
 	private ArrayList<User> myUsers;
 	
-	/**
+	/*
 	 * Collection of all Conferences.
 	 */
 	private ArrayList<Conference> myConferences;
 	
-	/**
+	/*
 	 * Current Users
 	 */
 	private User myCurrentUser;
-	
-	/**
-	 * The MenuUI to start the program.
-	 */
-	//private MenuUI myMenuUI;
 	
 	/**
 	 * Menu object constructor.
@@ -42,7 +37,6 @@ public class Menu implements Serializable{
 	public Menu() {
 		myUsers = new ArrayList<User>();
 		myConferences = new ArrayList<Conference>();
-		//myMenuUI = new MenuUI(this);
 		myCurrentUser = null;
 	}
 	

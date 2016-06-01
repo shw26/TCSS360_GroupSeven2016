@@ -15,22 +15,22 @@ public class MenuUI implements Serializable{
 	private static final int LOGIN = 1;
 	private static final int REGISTER = 2;
 	
-	/**
+	/*
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = -3432974761649507264L;
 	
-	/**
+	/*
 	 * The Menu Model class.
 	 */
 	private Menu myMenu;
 	
-	/**
+	/*
 	 * The Conference UI
 	 */
 	private ConferenceUI myConferenceUI;
 	
-	/**
+	/*
 	 * Calendar object to determine date
 	 */
 	private Calendar myCalendar;
@@ -40,7 +40,7 @@ public class MenuUI implements Serializable{
 	 * @param theMenu the Menu Model class.
 	 */
 	public MenuUI() {
-		myMenu = new Menu();//= theMenu;
+		myMenu = new Menu();
 		myConferenceUI = new ConferenceUI();
 		myCalendar = Calendar.getInstance();
 	}
@@ -162,6 +162,10 @@ public class MenuUI implements Serializable{
 		}
 	}
 	
+	/**
+	 * setter for menu.
+	 * @param theMenu the main system.
+	 */
 	public void setMenu(Menu theMenu){
 		myMenu = theMenu; 
 	}

@@ -19,32 +19,32 @@ import view.PaperUI;
  * @version v2 5/11/2016
  */
 public class Author implements Serializable{
-	/**
+	/*
 	 * Serial Version ID for persistent storage use.
 	 */
 	private static final long serialVersionUID = 4146907723807800178L;
 
-	/**
+	/*
 	 * String representation the first name of the Sub Program Chair.
 	 */
 	private String myFirstName;
 	
-	/**
+	/*
 	 * String representation of the Last of the Sub Program Chair.
 	 */
 	private String myLastName;
 	
-	/**
+	/*
 	 * String representation of the ID of the Sub Program Chair.
 	 */
 	private String myID;
 	
-	/**
+	/*
 	 * Collection containing a list of all papers assigned to the Sub Program Chair.
 	 */
 	private ArrayList<Paper> myPaperList;
 	
-	/** The conference in which the author is held. */
+	/* The conference in which the author is held. */
 	private Conference myConference;
 
 	
