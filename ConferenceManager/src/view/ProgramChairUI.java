@@ -119,17 +119,20 @@ public class ProgramChairUI implements Serializable{
 					System.out.println("_________________________________________________\n");
 
 				} else {
-				System.out.println("SubProgram Chair can have no more the 4 papers");
+				System.out.println("SubProgram Chair can not be assigned this paper");
 				System.out.println("_________________________________________________\n");
 			}
 		}
 		}
 	}				
 	
+	/**
+	 * Method displays the final decision paper selection information. 
+	 */
 	public void makeFinal() {
 		printDetails();
 		System.out.println("Select a Paper:");
-		viewPapersWithOptions();
+		viewPapersReadyForFinal();
 		
 	}
 	
@@ -198,10 +201,15 @@ public class ProgramChairUI implements Serializable{
 		}
 	}
 	
+	/**
+	 * Final Decision menu option are displayed to the Console.
+	 * @param thePaper a Paper object that will be have a recommendation made on. 
+	 */
 	public void finalDecsionMenu(Paper thePaper) {
 		Scanner scanner = new Scanner(System.in);
-		
+		printDetails();
 		System.out.println("Paper: " + thePaper.getTitle());
+		System.out.println("SubProgram Chair Recommendation: " + thePaper.getFinal());
 		// Displays Options
 		System.out.println("Select Final Decision:\n");
 		System.out.println("1) Accept");

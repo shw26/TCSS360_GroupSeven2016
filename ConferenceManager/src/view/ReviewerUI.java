@@ -17,27 +17,27 @@ public class ReviewerUI implements Serializable{
 	private static final int REVIEW_PAPER = 2;
 	private static final int VIEW_REVIEWS = 3;
 	
-	/**
+	/*
 	 * Serial Version ID for persistent storage use
 	 */
 	private static final long serialVersionUID = -2724271279682667805L;
 	
-	/**
+	/*
 	 * The Reviewer model object
 	 */
 	private Reviewer myReviewer;
 	
-	/**
+	/*
 	 * The Current Conference
 	 */
 	private Conference myConference;
 	
-	/**
+	/*
 	 * The calendar to determine the date.
 	 */
 	private Calendar myCalendar;
 	
-	/**
+	/*
 	 * Displays the Menu options for the Reviewer.
 	 * @author Jeremy Wolf
 	 */
@@ -98,10 +98,13 @@ public class ReviewerUI implements Serializable{
 		selection = scanner.nextInt();
 		System.out.println("___________________________________________________\n");
 		currentReview = myReviewer.submitReview(selection);
+		myReviewer.getReviewList().add(currentReview);
 		currentReview.getReviewUI().reviewMenu();
 	}
 
 	public void viewReviews() {
+		printDetails();
+		System.out.println("Current Reviews:");
 		Scanner scanner = new Scanner(System.in);
 		if (!myReviewer.getReviewList().isEmpty()) {
 			for (Review rev : myReviewer.getReviewList()) {

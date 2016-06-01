@@ -24,10 +24,10 @@ public class driver {
 			User first = new User("Jeremy", "Wolf", "jwolf059@uw.edu");
 			User second = new User("Samson", "Gefofy", "Starliker123@yahoo.com");
 			User third = new User("Jacob", "Grey", "GreyJ@uw.edu");
-			User fourth = new User("Ubal", "Sakses", "ZB4LIFE@yahoo.com");
+
 			
 			system.createConference("SPIE Astronomical Telescopes + Instrumentation Annual Meeting", first, 10);
-			system.createConference("10th Annual Early Childhood Education Convention", second, 1);
+			system.createConference("10th Annual Early Childhood Education Convention", second, 0);
 			system.createConference("15th Annual meeting of Doctors in Orthopedics", third, 3);
 		}
 		newSystem.setMenu(system);

@@ -198,7 +198,7 @@ public class AuthorUI implements Serializable{
 		Scanner scanner = new Scanner(System.in);
 		
 		printDetails(theAuthor);
-		System.out.println("If no papers are displayed, they are still awaiting a decsion.");
+		System.out.println("If no papers are displayed, they are still awaiting a decsion. \n");
 		System.out.println("Selected a paper to view reviews: ");
 		selection = displayPapersThatAreReviewed(theAuthor);
 		System.out.println("___________________________________________________ \n");

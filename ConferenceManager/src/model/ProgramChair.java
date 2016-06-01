@@ -129,9 +129,10 @@ public class ProgramChair implements Serializable {
 	 */
 	public boolean assignPaperToSC(int theSelection, SubProgramChair theSC) {
 		boolean status = false;	
-		if (theSC.getPaperList().size() < MAX_PAPERS) {
-			Paper tPaper = myPaperList.get(theSelection - 1);
+		Paper tPaper = myPaperList.get(theSelection - 1);
+		if (theSC.getPaperList().size() < MAX_PAPERS && !tPaper.getAssigned()) {
 			theSC.addPaper(tPaper);
+			tPaper.setAssigned();
 			status = true;
 		}
 		return status;

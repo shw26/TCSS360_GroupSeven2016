@@ -44,6 +44,8 @@ public class Paper implements Serializable {
 	/* The Path for the Paper file. */
 	private String myFile;
 	
+	/* Boolean value for if the paper has already been assigned to a SubProgram Chair*/
+	private Boolean myAssigned; 
 	
 	// -- Constructors --
 	
@@ -57,6 +59,7 @@ public class Paper implements Serializable {
 		myReviews = new LinkedList<Review>();
 		myRecommendation = false;
 		myFinal = false;
+		myAssigned = false;
 	}
 	
 	/**
@@ -190,5 +193,21 @@ public class Paper implements Serializable {
 	 */
 	public String getFile() {
 		return myFile;
+	}
+	
+	/**
+	 * Sets the myAssigned field to true if the paper has been assigned to a subprogram chair 
+	 * already.
+	 */
+	public void setAssigned() {
+		myAssigned = true;
+	}
+	
+	/**
+	 * Gets the myAssigned field to evaluate if the paper has been assigned to a subprogram chair 
+	 * already.
+	 */
+	public boolean getAssigned() {
+		return myAssigned;
 	}
 }
